@@ -24,7 +24,7 @@
                     <button class="tablinks" onclick="openCity(event, 'Social')">Social</button>
                     <button class="tablinks" onclick="openCity(event, 'Church')">Church</button>
                 </div>
-                <form class="user" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>" method="post">
+                <form class="user" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="orgId" value="<?php echo $_SESSION['orgId']?>">
                     <input type="hidden" name="userId" value="<?php echo $_SESSION['userId']?>">
                     <!-- <input type="hidden" name="familyId" value="<?php //echo $_SESSION['familyId']?>"> -->
@@ -249,13 +249,13 @@
                                 <div class="form-group">
                                     <label>Are you Baptized? *</label><br>
                                     <label class="radio-inline">
-                                        <input type="radio" name="isBaptised" value="No">No
+                                        <input type="radio" name="isBaptised" value="0" id="isBaptised">No
                                     </label>
                                     <label class="radio-inline">
-                                        <input type="radio" name="isBaptised" value="Yes">Yes
+                                        <input type="radio" name="isBaptised" value="1" id="isBaptised">Yes
                                     </label>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" id="baptised">
                                     <label>Date of Baptism *</label>
                                     <input type="date" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Marriage Date..." required name="baptismDate">                            
                                 </div>                                
@@ -275,13 +275,13 @@
                                 <div class="form-group">
                                     <label>Are you Confirmed? *</label><br>
                                     <label class="radio-inline">
-                                        <input type="radio" name="isConfirmed" value="No">No
+                                        <input type="radio" name="isConfirmed" value="0" id="isConfirmed">No
                                     </label>
                                     <label class="radio-inline">
-                                        <input type="radio" name="isConfirmed" value="Yes">Yes
+                                        <input type="radio" name="isConfirmed" value="1" id="isConfirmed">Yes
                                     </label>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" id="confirmed">
                                     <label>Date of Confirmation *</label>
                                     <input type="date" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Marriage Date..." name="confirmationDate">                            
                                 </div>
@@ -301,6 +301,30 @@
         </div>
     </div>
 </div>
+
+<script>
+        //alert('hello');
+   
+        let isBaptised = $('#isBaptised');
+        let baptised = $('#baptised');
+        let isConfirmed = $('#isConfirmed');
+        let confirmed = $('#confirmed');
+
+        document.getElementById('isBaptised').addEventListener('click', hideDateBaptised);
+        isConfirmed.addEventListener('click', hideDate(isConfirmed, confirmed));
+
+        function hideDateBaptised(e){
+            alert('hi');
+            if(e.target.value == 'No')
+            {
+                $('#baptised').style.display = 'none';
+            }
+            else
+            {
+                $('#baptised').style.display = 'block';
+            }
+        }
+</script>
 
 <?php
     require ('../shared/_footer.php');

@@ -16,9 +16,15 @@ if(isset($_POST['newBranch']))
 
 if(isset($_POST['submit']))
 {
-    //echo 'hit <br>';
-    $d = $members->addMember($_POST);
-    //$x = $members->getAllMembers($_SESSION['orgId']);
-    var_dump($d);
-    //echo $d;
+    if($id = $members->addMember($_POST))
+    {
+        if($_POST['maritalStatus'] != 'Single' || $_POST['numberOfChildren'] > 0)
+        {
+            //echo $id['Id'];
+            $x=$id->getResults(); echo $x['Id'];
+            //header('location: childform.php');
+        }
+        header('location: ../mgt/index.php');
+    }
+
 }
