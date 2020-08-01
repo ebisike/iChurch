@@ -1,6 +1,10 @@
 <?php
     require ('../shared/_sidebar.php');
     require ('../shared/_topbar.php');
+
+    #unset form data sessions
+    unset($_SESSION['lastId']);
+    unset($_SESSION['familyId']);
 ?>
 <!-- Begin Page Content -->
 <div class="container-fluid">

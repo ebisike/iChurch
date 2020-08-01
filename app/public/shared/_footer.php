@@ -153,9 +153,22 @@
  <script src="../../bootstrap/js/mtabs-js.js"></script>
 
 <script type="text/javaScript">
-    var url = $(location).attr("href");
-    var logoutbaseurl = url+'/?logout';
-    document.getElementById('logoutx').setAttribute("href", logoutbaseurl);
+    document.getElementById('logoutx').addEventListener('click', setLogoutUrl);
+
+    function setLogoutUrl(){
+        var url = $(location).attr("href");
+        let x = url.split('?');
+        //alert(x.length);
+        if(x.length > 1)
+        {
+            x[0].
+            alert(x[0]);
+        }
+        //document.getElementById('logoutx').setAttribute("href", logoutbaseurl);
+    }
+    
+
+    document.getElementById('callbackurl').setAttribute("value", url);
 </script>
 
 <!-- <script>

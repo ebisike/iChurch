@@ -13,6 +13,7 @@ include 'Users.php';
 include 'AccountController.php';
 include 'FamilyTree.php';
 include 'Members.php';
+include 'Children.php';
 
 $db = new DB();
 $validate = new InputValidation();
@@ -24,6 +25,7 @@ $user = new Users();
 $account = new AccountController();
 $family = new FamilyTree();
 $members = new Members();
+$child = new Children();
 
 //$org->CreateOrganisation();
 //$x = $org->getOrgName(1);

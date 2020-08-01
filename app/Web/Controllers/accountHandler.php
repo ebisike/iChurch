@@ -28,5 +28,7 @@ if(isset($_GET['logout']))
 
 if($account->loggedIn())
 {
-    //header('location: '); //redirect to dashboard
+   // header('location: /ichurch/app/public/mgt/index.php'); //redirect to dashboard
+}else{
+    //header('location: /ichurch/index.html');
 }

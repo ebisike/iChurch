@@ -17,13 +17,22 @@
             </div>
             <form class="user" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>" method="post">
             <div class="form-group">
-                <input type="text" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Child's Fullname..." name="childname">
+                <input type="text" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Child's FirstName..." name="firstName">
                 <input type="hidden" name="orgId" value="<?php echo $_SESSION['orgId']?>">
+                <input type="hidden" name="memberId" value="<?php echo $_SESSION['lastId']?>">
+                <input type="hidden" name="userId" value="<?php echo $_SESSION['userId']?>">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Child's Other name Not Surname..." name="otherName">                
             </div>
             <div class="form-group">
                 <input type="date" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Child's Fullname..." name="dob">                
-            </div>  
-            <input type="submit" class="btn btn-primary btn-user btn-block" name="createrole" value="create">
+            </div>
+            <div class="form-group">
+                <input type="checkbox" name="new_child" value=1>
+                <p style="margin-top: -23px; margin-left: 18px">check this box to stay on this page to add more children</p>
+            </div>
+            <input type="submit" class="btn btn-primary btn-user btn-block" name="addChild" value="Add Child">
             </form>
             <hr>            
         </div>

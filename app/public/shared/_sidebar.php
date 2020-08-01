@@ -10,10 +10,121 @@
     //get current user details
     $currentuser = $user->getUser($_SESSION['userId'], $_SESSION['orgId']);
 
+    //function to get ToDateString
+    function toLongDateString($dateParameter)
+    {
+        $currentYear = date('Y');
+        $currentMonth = date('M');
+        $currentDay = date('D');
+
+        $date = strtotime($dateParameter);        
+        $day = date('d', $date);
+        $Day = date('D', $date);
+        $month = date('M', $date);
+        $year = date('Y', $date);
+
+        switch ($month) {
+            case 'Jan':
+                $month = 'January';
+                break;
+            case 'Feb':
+                $month = 'Febuary';
+                break;
+            case 'Mar':
+                $month = 'March';
+                break;
+            case 'Apr':
+                $month = 'April';
+                break;
+            case 'May':
+                $month = 'May';
+                break;
+            case 'Jun':
+                $month = 'June';
+                break;
+            case 'Jul':
+                $month = 'July';
+                break;
+            case 'Aug':
+                $month = 'August';
+                break;
+            case 'Sep':
+                $month = 'September';
+                break;
+            case 'Oct':
+                $month = 'October';
+                break;
+            case 'Nov':
+                $month = 'November';
+                break;
+            case 'Dec':
+                $month = 'December';
+                break;
+            
+            default:
+                # code...
+                break;
+        }
+
+        switch ($Day) {
+            case 'Sun':
+                $Day = 'Sunday';
+                break;
+            case 'Mon':
+                $Day = 'Monday';
+                break;
+            case 'Tue':
+                $Day = 'Tuesday';
+                break;
+            case 'Wed':
+                $Day = 'Wednesday';
+                break;
+            case 'Thu':
+                $Day = 'Thursday';
+                break;
+            case 'Fri':
+                $Day = 'Friday';
+                break;
+            case 'Sat':
+                $Day = 'Saturday';
+                break;
+            
+            default:
+                # code...
+                break;
+        }
+
+        return  $Day.' '.$day.' '.$month.', '.$year;
+    }
+
+    function toShortDateString($dateParameter)
+    {
+        $currentYear = date('Y');
+        $currentMonth = date('M');
+        $currentDay = date('D');
+
+        $date = strtotime($dateParameter);        
+        $day = date('d', $date);
+        $Day = date('D', $date);
+        $month = date('M', $date);
+        $year = date('Y', $date);
+
+        return  $Day.' '.$day.' '.$month.', '.$year;
+    }
+
+    function calculateAge($dateParameter)
+    {
+        $currentYear = date('Y');        
+        $date = strtotime($dateParameter);        
+        $year = date('Y', $date);
+        return  $currentYear - $year;
+    }
+
     //get current user role
     $userRoleSuperAdmin = $userInRole->isUserInRole("super-admin", $_SESSION['userId'], $_SESSION['orgId']);
     $userRoleSecretary = $userInRole->isUserInRole("secretary", $_SESSION['userId'], $_SESSION['orgId']);
     $userRoleVicar = $userInRole->isUserInRole("vicar", $_SESSION['userId'], $_SESSION['orgId']);
+    $userRoleCurate = $userInRole->isUserInRole("curate", $_SESSION['userId'], $_SESSION['orgId']);
 ?>
 
 <!DOCTYPE html>
@@ -151,7 +262,8 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Data Management Screens:</h6>
                         <a class="collapse-item" href="../members/familytree.php">Register Form</a>
-                        <a class="collapse-item" href="register.html">Register</a>
+                        <a class="collapse-item" href="../members/allmembers.php">Members List</a>
+                        <a class="collapse-item" href="../members/deathlist.php">Death List</a>
                         <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
                         <div class="collapse-divider"></div>
                         <h6 class="collapse-header">Finance Pages:</h6>
