@@ -77,6 +77,15 @@ class DB
         return $this->results;
     }
 
+    public static function count()
+    {
+        $count = 0;
+        while(getResults()){
+            ++$count;
+        }
+        return $count;
+    }
+
     public function isExist()
     {
         $this->results = mysqli_num_rows($this->_query);
