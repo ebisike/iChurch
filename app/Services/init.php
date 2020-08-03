@@ -14,6 +14,7 @@ include 'AccountController.php';
 include 'FamilyTree.php';
 include 'Members.php';
 include 'Children.php';
+include 'Notifications.php';
 
 $db = new DB();
 $validate = new InputValidation();
@@ -26,6 +27,7 @@ $account = new AccountController();
 $family = new FamilyTree();
 $members = new Members();
 $child = new Children();
+$notify = new Notifications();
 
 //$org->CreateOrganisation();
 //$x = $org->getOrgName(1);

@@ -1,6 +1,6 @@
 <?php
 
-interface INotification
+interface INotifications
 {
     public function countChildrenDailyBirthDay($orgId);
 

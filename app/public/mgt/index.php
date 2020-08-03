@@ -5,6 +5,7 @@
     #unset form data sessions
     unset($_SESSION['lastId']);
     unset($_SESSION['familyId']);
+    echo $notify->countChildrenWeeklyBirthday($_SESSION['orgId']);
 ?>
 <!-- Begin Page Content -->
 <div class="container-fluid">
