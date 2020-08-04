@@ -25,7 +25,7 @@
                 <input type="text" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Child's FirstName..." name="firstName" value="<?php echo $data['firstName']?>">
                 <input type="hidden" name="orgId" value="<?php echo $_SESSION['orgId']?>">                
                 <input type="hidden" name="id" value="<?php echo $data['Id']?>">
-                <input type="hidden" name="callbackURL" id="callbackurl">
+                <input type="hidden" name="callbackURL" id="callbackurl" value="">
             </div>
             <div class="form-group">
                 <input type="text" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Child's Other name Not Surname..." name="otherName" value="<?php echo $data['otherName']?>">                
@@ -42,6 +42,7 @@
     </div>
 </div>
 </div>
+<script src="../../bootstrap/js/custom/details-url.js"></script>
 
 <?php
     require ('../shared/_footer.php');

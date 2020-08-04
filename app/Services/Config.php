@@ -38,7 +38,7 @@ class Config extends DB
 
     private function createTableUsers()
     {
-        $sql = "CREATE TABLE `ichurch`.`Users` ( `Id` INT(10) NOT NULL AUTO_INCREMENT , `firstName` VARCHAR(255) NOT NULL , `lastName` VARCHAR(255) NOT NULL , `username` VARCHAR(255) NOT NULL , `isActive` BOOLEAN NOT NULL DEFAULT TRUE , `orgId` INT(255) NOT NULL , `passwords` VARCHAR(255) NOT NULL , PRIMARY KEY (`Id`)) ENGINE = InnoDB;";
+        $sql = "CREATE TABLE `ichurch`.`Users` ( `Id` INT(10) NOT NULL AUTO_INCREMENT , `firstName` VARCHAR(255) NOT NULL , `lastName` VARCHAR(255) NOT NULL , `username` VARCHAR(255) NOT NULL , `isActive` BOOLEAN NOT NULL DEFAULT TRUE , `orgId` INT(255) NOT NULL , `passwords` VARCHAR(255) NOT NULL , `imagepath` VARCHAR(255) NOT NULL , PRIMARY KEY (`Id`)) ENGINE = InnoDB;";
 
         $stmt = DB::DBInstance()->query($sql);
     }

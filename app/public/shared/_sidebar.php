@@ -9,6 +9,7 @@
 
     //get current user details
     $currentuser = $user->getUser($_SESSION['userId'], $_SESSION['orgId']);
+    $userImage_src = '../users/images/'. $currentuser['imagepath'];
 
     //function to get ToDateString
     function toLongDateString($dateParameter)
@@ -94,7 +95,7 @@
                 break;
         }
 
-        return  $Day.' '.$day.' '.$month.', '.$year;
+        return  $Day.', '.$day.' '.$month.', '.$year;
     }
 
     function toShortDateString($dateParameter)

@@ -53,9 +53,11 @@ if(isset($_POST['updateMember']))
 if(isset($_POST['updateChild']))
 {
     $url = $_POST['callbackURL'];
+    echo $url;
 
     if ($child->updateChild($_POST)) {
         # code...
         header("Location: ../mgt/index.php");
+        //header('Location: '.$url);
     }
 }

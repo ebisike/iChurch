@@ -163,7 +163,7 @@
         </div>
     </div>
 </div>
-
+<script src="../../bootstrap/js/custom/details-url.js"></script>
 <?php
      require ('../shared/_footer.php');
 ?>

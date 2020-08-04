@@ -21,23 +21,27 @@
             <h1 class="h4 text-gray-900 mb-2">Edit a  User</h1>
             <p class="mb-4">update users for your organisation</p>
             </div>
-            <form class="user" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>" method="post">
-            <div class="form-group">
-                <input type="text" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="<?php echo $result['firstName']?>" name="firstName" value="<?php echo $result['firstName']?>">
-                <input type="hidden" name="id" value="<?php echo $result['Id']?>">
-                <input type="hidden" name="orgId" value="<?php echo $_SESSION['orgId']?>">
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="<?php echo $result['lastName']?>" name="lastName" value="<?php echo $result['lastName']?>">                
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control form-control-user" id="username" aria-describedby="emailHelp" placeholder="<?php echo $result['username']?>" name="username" value="<?php echo $result['username']?>">                
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control form-control-user disabled" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="<?php echo $result['passwords']?>" name="passwords" value="<?php echo $result['passwords']?>">
-            </div>
-            <hr>
-            <input type="submit" class="btn btn-primary btn-user btn-block" name="update" value="update user">
+            <form class="user" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <input type="text" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="<?php echo $result['firstName']?>" name="firstName" value="<?php echo $result['firstName']?>">
+                    <input type="hidden" name="id" value="<?php echo $result['Id']?>">
+                    <input type="hidden" name="orgId" value="<?php echo $_SESSION['orgId']?>">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="<?php echo $result['lastName']?>" name="lastName" value="<?php echo $result['lastName']?>">                
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control form-control-user" id="username" aria-describedby="emailHelp" placeholder="<?php echo $result['username']?>" name="username" value="<?php echo $result['username']?>">                
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control form-control-user disabled" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="<?php echo $result['passwords']?>" name="passwords" value="<?php echo $result['passwords']?>">
+                </div>
+                <div class="form-group">
+                    <label>upload an Image</label>
+                    <input type="file" name="file" class="form-control" value="1.jpg">
+                </div>
+                <hr>
+                <input type="submit" class="btn btn-primary btn-user btn-block" name="update" value="update user">
             </form>
         </div>
         </div>
