@@ -34,7 +34,7 @@ class Notifications implements INotifications
 
         $addDays = $daypart + $num;
         $startday = $daypart;
-        $endday;
+        $endDay = '';
 
         //check for feb
         if($monthpart == 2 && $addDays > 29)
