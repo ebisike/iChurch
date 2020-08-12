@@ -87,7 +87,7 @@
                                 <tr class="text-danger">
                                     <td>'.++$count.'</td>
                                     <td>'.$result['stewardship'].'</td>
-                                    <td class="text-capitalize"><a class="text-danger" href=allmembers.php?find='.$result['Id'].'>'.$result['lastName'].' '.$result['otherName'].' '.$result['firstName'].'</a></td>
+                                    <td class="text-capitalize"><a class="text-danger" href=view.php?find='.$result['Id'].'>'.$result['lastName'].' '.$result['otherName'].' '.$result['firstName'].'</a></td>
                                     <td>'.$birthday.'</td>
                                     <td>'.$result['gender'].'</td>
                                     <td>'.$result['phone1'].'</td>

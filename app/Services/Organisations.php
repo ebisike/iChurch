@@ -8,15 +8,22 @@ class Organisations
     private $password;
     public $emailList;
 
-    public function CreateOrganisation()
+    public function CreateOrganisation($orgEmail, $orgName)
     {
+        $orgName = $this->validateForm($orgName);
+        $orgEmail = $this->validateForm($orgEmail);
+        
         //first we check that the email is not taken already
-        $result = $this->isEmailTaken($values['orgEmail']);
+        $result = $this->isEmailTaken($orgEmail);
         if (!$result)
         {
-            $sql = "INSERT INTO Organisation (OrgName, OrgEmail) VALUES ('".$values['orgName']."', '".$values['orgEmail']."')";
+            $sql = "INSERT INTO Organisation (OrgName, OrgEmail) VALUES ('".$orgName."', '".$orgEmail."')";
             //$sql = "INSERT INTO Organisation (OrgName, OrgEmail) VALUES ('femi kuti', 'femi@g.com')";
             $runsql = DB::DBInstance()->query($sql);
+            if($runsql)
+            {
+                return true;
+            }
         }
         return "Not Created";
         
@@ -69,5 +76,23 @@ class Organisations
             $x = $runsql->getResults();
             return $x['OrgEmail'];
         }
+    }
+
+    public function getOrgByEmail($email)
+    {
+        $sql = "SELECT * FROM organisation WHERE OrgEmail = '$email'";
+        $stmt = DB::DBInstance()->query($sql);
+        if($stmt->isExist())
+        {
+            return $stmt->getResults();
+        }
+    }
+
+    public function validateForm($data)
+    {
+        $data = addslashes($data);
+        $data = trim($data);
+        $data = htmlspecialchars($data);
+        return $data;
     }
 }

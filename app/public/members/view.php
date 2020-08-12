@@ -24,7 +24,7 @@
 
                     <div>
                         <div class="p-2 bg-light mb-2">
-                            Posted by: <?php echo  $userInfo['username']?>
+                            Posted by: <?php echo  $userInfo['firstName'].' '.$userInfo['lastName']?>
                         </div>                        
                         <img src="<?php echo $imgsrc ?>" alt="passport" class="img img-responsive img-thumbnail">
                         <label class="text-capitalize">
@@ -33,7 +33,7 @@
                         </label>
                     </div>
                     <div id="name">
-                        <p class="text-capitalize text-primary pb-2 border-bottom">
+                        <p class="text-capitalize text-dark font-weight-bold p-2 border-bottom bg-gradient-light">
                             <?php echo $data['firstName'].' '.$data['otherName'].' '.$data['lastName'] ?>
                             <span class="float-right">Age: <?php echo calculateAge($data['dateOfBirth']) .' Years' ?></span>
                         </p>
@@ -44,6 +44,11 @@
                             <i class="fa fa-phone-square-alt text-info"></i> <?php echo $data['phone2']?><br>
                             <i class="fa fa-envelope-square text-info"></i> <?php echo strtolower($data['email']) ?>                          
                         </p>
+                        <div class="p-3 bg-dark text-white">
+                            Action buttons | 
+                            <a href="editmember.php?edit=<?php echo $data['Id']?>"><i class="fa fa-pen text-white"></i></a>
+                            <a href="editmember.php?delete=<?php echo $data['Id']?>"><i class="fa fa-trash text-white"></i></a>                            
+                        </div>
                     </div>
                 </div>
             </div>

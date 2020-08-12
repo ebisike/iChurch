@@ -12,7 +12,6 @@ class Roles
         $run = DB::DBInstance()->query($sql);
         if ($run)
         {
-            # code...
             return true;
         }
         return false;
@@ -25,6 +24,9 @@ class Roles
         if ($run)
         {
             # code...
+            #DELETE ALL USERS FRON THE ROLE
+            $userRole = new UsersInRole();
+            $userRole->removeAllUsersFromRole($name, $orgId);
             return true;
         }
         return false;

@@ -34,7 +34,7 @@ class Notifications implements INotifications
 
         $addDays = $daypart + $num;
         $startday = $daypart;
-        $endday;
+        $endDay = '';
 
         //check for feb
         if($monthpart == 2 && $addDays > 29)
@@ -297,5 +297,27 @@ class Notifications implements INotifications
             $result = $stmt->getResults();
             return $result['COUNT(Id)'];
         }
+    }
+
+    public function avialableBalance($orgId)
+    {
+        $bal = new Balance($orgId, $_SESSION['userId']);
+        return $bal->getBalance();
+    }
+
+    public function countTotalMembers($orgId)
+    {
+        $sql = "SELECT COUNT(Id) FROM members WHERE orgId = '$orgId' AND isAlive = 1";
+        $run = DB::DBInstance()->query($sql);
+        $result = $run->getResults();
+        return $result['COUNT(Id)'];
+    }
+
+    public function countDeaths($orgId)
+    {
+        $sql = "SELECT COUNT(Id) FROM members WHERE orgId = '$orgId' AND isAlive = 0";
+        $run = DB::DBInstance()->query($sql);
+        $result = $run->getResults();
+        return $result['COUNT(Id)'];
     }
 }

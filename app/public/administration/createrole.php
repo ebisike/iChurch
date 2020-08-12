@@ -1,7 +1,7 @@
 <?php
     require ('../shared/_sidebar.php');
     require ('../shared/_topbar.php');
-    include '../../web/controllers/administrationcontroller.php';
+    //include '../../web/controllers/administrationcontroller.php';
 ?>
 
 <div class="mr-4 ml-4">

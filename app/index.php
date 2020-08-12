@@ -1,7 +1,5 @@
 <?php
-
   include 'Services/init.php';
-
 ?>
 
 <!DOCTYPE html>

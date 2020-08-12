@@ -104,10 +104,21 @@ class Users
 
     public function deleteUser($userId, $orgId)
     {
+        //delete user files in directory
+        // $user = $this->getUser($userId, $orgId);
+        // if(strtolower($user['imagepath']) != strtolower("fx_male_Avatar.png") || strtolower($user['imagepath']) != strtolower("fx_female_Avatar.png"))
+        // {
+        //     $path = "/app/public/users/images/".$user['imagepath'];
+        //     unlink($path);
+        // }
+
         $sql = "DELETE FROM users WHERE Id = '$userId' AND orgId = '$orgId'";
         $stmt = DB::DBInstance()->query($sql);
         if ($stmt) {
             # code...
+            #RMOVE DELETED USER FROM ROLE.
+            $userRole = new UsersInRole();
+            $userRole->removeUserFromRole($userId, $orgId);
             return true;
         }
         return false;
@@ -115,14 +126,34 @@ class Users
 
     public function getAllUsers($orgId)
     {
-        $sql = "SELECT * FROM users WHERE orgId = '$orgId' AND username != 'admin'";
-        $run = DB::DBInstance()->query($sql);
-        return $run;
+        //verify the user role first
+        #IF THE LOGGIN USER IS IN ROLE SUPER ADMIN, LIST ALL USERS
+        #ELSE LIST ALL USERS EXCLUDING THE SUPER USER
+        $userRole = new UsersInRole();
+        if($userRole->isUserInRole("superAdmin", $_SESSION['userId'], $orgId))
+        {
+            $sql = "SELECT * FROM users WHERE orgId = '$orgId' ORDER BY Id DESC";
+            $run = DB::DBInstance()->query($sql);
+            return $run;
+        }
+        else
+        {
+            $sql = "SELECT * FROM users WHERE orgId = '$orgId' AND username != 'georgefx' ORDER BY Id DESC";
+            $run = DB::DBInstance()->query($sql);
+            return $run;
+        }
     }
 
     public function getUser($id, $orgId)
     {
         $sql = "SELECT * FROM users WHERE orgId = '$orgId' AND Id = '$id'";
+        $run = DB::DBInstance()->query($sql);
+        return $run->getResults();
+    }
+
+    public function getUserByName($username, $orgId)
+    {
+        $sql = "SELECT * FROM users WHERE username='$username' AND orgId = '$orgId'";
         $run = DB::DBInstance()->query($sql);
         return $run->getResults();
     }

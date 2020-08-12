@@ -10,8 +10,11 @@ if(isset($_POST['oldBranch']))
 
 if(isset($_POST['newBranch']))
 {
-    $_SESSION['familyID'] = $family->generateFamilyID($_POST['branchName']);
-    header("Location: form.php");
+    $data = $family->createTreeBranch($_POST['branchName'], $_SESSION['orgId']);
+    $_SESSION['familyId'] = $data['familyId'];
+     var_dump($data);
+    //echo $_SESSION['familyId'];
+    //header("Location: forms.php");
 }
 
 if(isset($_POST['submit']))
@@ -20,7 +23,7 @@ if(isset($_POST['submit']))
     {
         if(strtolower($_POST['maritalStatus']) != 'single' || $_POST['numberOfChildren'] > 0)
         {
-            $_SESSION['lastId'] = $id;
+            $_SESSION['lastId'] = $id['Id'];
             header('location: childform.php');
         }
         else
@@ -47,7 +50,7 @@ if(isset($_POST['addChild']))
 if(isset($_POST['updateMember']))
 {
     $members->updateMember($_POST);
-    header('loaction: allmembers.php');
+    header('location: allmembers.php');
 }
 
 if(isset($_POST['updateChild']))
@@ -60,4 +63,10 @@ if(isset($_POST['updateChild']))
         header("Location: ../mgt/index.php");
         //header('Location: '.$url);
     }
+}
+
+if(isset($_GET['delete']))
+{
+    $memberId = $_GET['delete'];
+    $members->deleteMember($memberId, $_SESSION['orgId']);
 }

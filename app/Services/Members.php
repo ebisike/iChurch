@@ -77,7 +77,7 @@ class Members
         return false;
     }
 
-    private function getLastInput($orgId)
+    public function getLastInput($orgId)
     {
         //get the Id of the last record that was inserted into the members table.
         $sql = "SELECT * FROM members WHERE orgId = '$orgId' ORDER BY Id DESC";
@@ -85,7 +85,7 @@ class Members
         if($runsql)
         {
             $lastId = $runsql->getResults();
-            return $lastId['Id'];
+            return $lastId;
         }
         return false;
     }
@@ -134,17 +134,15 @@ class Members
     public function updateMember($value)
     {
         if(empty($_FILES['file']['name'])){
-            if($value['gender'] == 'MALE'){
-                $imageName = 'fx_male_Avatar.png';
-            }else{
-                $imageName = 'fx_female_Avatar.png';
-            }
+            #the user did not upload a new picture. use the existing one
+            $member = $this->getMember($value['memberId'], $value['orgId']);
+            $imageName = $member['imagepath'];            
         }
         else
         {
             #get the file name
             $imageName = basename($_FILES['file']['name']);
-            $fileSize = $_FILES['file']['size']; echo $fileSize/1048576 . '<br>';
+            $fileSize = $_FILES['file']['size']; //echo $fileSize/1048576 . '<br>';
             $imageName = $value['lastName'].'_'.$value['firstName'].'_'.$imageName;
             #create a directory for the image
             $targetDir = "passports/";

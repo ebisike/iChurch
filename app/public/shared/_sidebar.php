@@ -1,9 +1,11 @@
 <?php
-    require('../../Services/init.php');
+    require ('../../Services/init.php');
     include ('../../web/controllers/accounthandler.php');
     include ('../../web/controllers/usermanagement.php');
     include ('../../web/controllers/administrationController.php');
     include ('../../web/controllers/formshandler.php');
+    include ('../../web/controllers/finance-handlers.php');
+
 
     $account->isSignedIn();
 
@@ -122,7 +124,7 @@
     }
 
     //get current user role
-    $userRoleSuperAdmin = $userInRole->isUserInRole("super-admin", $_SESSION['userId'], $_SESSION['orgId']);
+    $userRoleSuperAdmin = $userInRole->isUserInRole("superadmin", $_SESSION['userId'], $_SESSION['orgId']);
     $userRoleSecretary = $userInRole->isUserInRole("secretary", $_SESSION['userId'], $_SESSION['orgId']);
     $userRoleVicar = $userInRole->isUserInRole("vicar", $_SESSION['userId'], $_SESSION['orgId']);
     $userRoleCurate = $userInRole->isUserInRole("curate", $_SESSION['userId'], $_SESSION['orgId']);
@@ -186,29 +188,26 @@
                 Interface
             </div>
 
-            <?php
-                if($userRoleSuperAdmin || $userRoleVicar)
-                {
-                    echo
-                    '
-                        <!-- Nav Item - Pages Collapse Menu -->
-                        <li class="nav-item">
-                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                                <i class="fas fa-fw fa-cog"></i>
-                                <span>Manage Users</span>
-                            </a>
-                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                                <div class="bg-white py-2 collapse-inner rounded">
-                                    <h6 class="collapse-header">Custom Components:</h6>
-                                    <a class="collapse-item" href="../users/create.php">create a user</a>
-                                    <a class="collapse-item" href="../users/listusers.php">list all users</a>
-                                    <a class="collapse-item" href="cards.html">Cards</a>
-                                </div>
-                            </div>
-                        </li>
-                    ';
-                }
-            ?>
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Manage Users</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Custom Components:</h6>
+                        <?php
+                            if($userRoleSuperAdmin || $userRoleVicar)
+                            {
+                                    echo '<a class="collapse-item" href="../users/create.php">create a user</a>';
+                            }
+                        ?>
+                        <a class="collapse-item" href="../users/listusers.php">list all users</a>
+                        <a class="collapse-item" href="cards.html">Cards</a>
+                    </div>
+                </div>
+            </li>
 
             <!-- Nav Item - Utilities Collapse Menu -->
             <?php
@@ -216,31 +215,32 @@
                 {
                     echo 
                     '
-                    <li class="nav-item">
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-                            <i class="fas fa-fw fa-wrench"></i>
-                            <span>Administration Utilities</span>
-                        </a>
-                        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-                            <div class="bg-white py-2 collapse-inner rounded">
-                                <h6 class="collapse-header">Custom Utilities:</h6>
-                                ';
-                                if($userRoleSuperAdmin)
-                                {
-                                    echo
-                                    '
-                                        <a class="collapse-item" href="../administration/createRole.php">Create Role</a>
-                                        <a class="collapse-item" href="../administration/deleteRole.php">Delete Role</a>
+                        <li class="nav-item">
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+                                <i class="fas fa-fw fa-wrench"></i>
+                                <span>Administration Utilities</span>
+                            </a>
+                            <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                                <div class="bg-white py-2 collapse-inner rounded">
+                                    <h6 class="collapse-header">Custom Utilities:</h6>
                                     ';
-                                }
-                                echo'
-                                <a class="collapse-item" href="../administration/addusertorole.php">Add Users To Role</a>
-                                <a class="collapse-item" href="../administration/removeUserFromRole.php">Remove User From Role</a>
-                                <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                                <a class="collapse-item" href="utilities-other.html">Other</a>
+                                    if($userRoleSuperAdmin)
+                                    {
+                                        echo
+                                        '
+                                            <a class="collapse-item" href="../administration/createRole.php">Create Role</a>
+                                            <a class="collapse-item" href="../administration/deleteRole.php">Delete Role</a>
+                                        ';
+                                    }
+                                    echo'
+                                    <a class="collapse-item" href="../administration/listrole.php">List Role</a>
+                                    <a class="collapse-item" href="../administration/addusertorole.php">Add Users To Role</a>
+                                    <a class="collapse-item" href="../administration/removeUserFromRole.php">Remove User From Role</a>
+                                    <a class="collapse-item" href="utilities-animation.html">Animations</a>
+                                    <a class="collapse-item" href="utilities-other.html">Other</a>
+                                </div>
                             </div>
-                        </div>
-                    </li>
+                        </li>
                     ';
                 }
             ?>
@@ -268,7 +268,7 @@
                         <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
                         <div class="collapse-divider"></div>
                         <h6 class="collapse-header">Finance Pages:</h6>
-                        <a class="collapse-item" href="404.html">404 Page</a>
+                        <a class="collapse-item" href="../finance/financerecords.php">Financial Records</a>
                         <a class="collapse-item" href="blank.html">Blank Page</a>
                     </div>
                 </div>

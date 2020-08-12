@@ -10,28 +10,44 @@ class FamilyTree
     public function createTreeBranch($branchName, $orgId)
     {
         //generate a branch
-        $this->$familyId = $this->generateFamilyID($branchName);
+        $this->familyId = $this->generateFamilyID($branchName,$orgId);
         $sql = "INSERT INTO familyTree (familyId, branchName, orgId) VALUES ('{$this->familyId}', '{$branchName}', '{$orgId}')";
-        //$run = DB::DBInstance()->query($sql);
-        if ($insertId = $run->getLastId($sql)) {
-            # code...
-            return $insertId;
+        $run = DB::DBInstance()->query($sql);
+        if ($run) {
+            return $this->getLastInput($orgId); //check if this returns 
         }
     }
 
-    private function generateFamilyID($branchName)
+    public function getLastInput($orgId)
     {
-        $familyID = $branchName.'_'.mt_rand(100000,999999);
-        if(!$this->isBranchTaken($familyID))
+        //get the Id of the last record that was inserted into the members table.
+        $sql = "SELECT * FROM familytree WHERE orgId = '$orgId' ORDER BY Id DESC limit 1";
+        $runsql = DB::DBInstance()->query($sql);
+        if($runsql)
         {
-            return $familyID;
+            $lastId = $runsql->getResults();
+            return $lastId;
         }
-        $this->generateFamilyID($branchName);
+        return false;
     }
 
-    public function isBranchTaken($number)
+    public function generateFamilyID($branchName, $orgId)
     {
-        $sql = "SELECT * FROM FamilyTree WHERE familyId = '{$number}' AND orgId = '{orgId}'";
+        $num = mt_rand(100000,999999);
+        $familyId = $branchName."/".$num;
+        if(!$this->isBranchTaken($familyId, $orgId))
+        {
+            return $familyId;
+        }
+        else
+        {
+            $this->generateFamilyID($branchName, $orgId);
+        }
+    }
+
+    public function isBranchTaken($number, $orgId)
+    {
+        $sql = "SELECT * FROM FamilyTree WHERE familyId = '{$number}' AND orgId = '{$orgId}'";
         $stmt = DB::DBInstance()->query($sql);
         if($stmt->isExist())
         {

@@ -1,3 +1,7 @@
+<?php
+  include 'Services/init.php';
+  include 'Web/Controllers/createorg.php';
+?>
 <!DOCTYPE html>
 <html  >
 <head>
@@ -47,13 +51,22 @@
                           ?>
                             <div class="dragArea row">
                                 <div class="col-md-12 form-group " data-for="name">
-                                    <input type="text" name="comp_name" placeholder="Company Name" data-form-field="Name" required="required" class="form-control px-3 display-7" id="name-header15-4">
+                                    <input type="text" name="orgName" placeholder="Organisation Name" data-form-field="Name" required="required" class="form-control px-3 display-7" id="name-header15-4">
                                 </div>
                                 <div class="col-md-12 form-group " data-for="email">
-                                    <input type="email" name="email" placeholder="Email" data-form-field="Email" required="required" class="form-control px-3 display-7" id="email-header15-4">
+                                    <input type="email" name="orgEmail" placeholder="Organisation Email" data-form-field="Email" required="required" class="form-control px-3 display-7" id="email-header15-4">
+                                </div>
+                                <div class="col-md-12 form-group " data-for="name">
+                                    <input type="text" name="firstName" placeholder="First Name" data-form-field="Name" required="required" class="form-control px-3 display-7" id="name-header15-4">
+                                </div>
+                                <div class="col-md-12 form-group " data-for="name">
+                                    <input type="text" name="lastName" placeholder="Last Name" data-form-field="Name" required="required" class="form-control px-3 display-7" id="name-header15-4">
+                                </div>
+                                <div class="col-md-12 form-group " data-for="name">
+                                    <input type="text" name="username" placeholder="User Name" data-form-field="Name" required="required" class="form-control px-3 display-7" id="name-header15-4">
                                 </div>
                                 <div class="col-md-12 form-group " data-for="password">
-                                    <input type="password" name="pwd" placeholder="password" data-form-field="Name" required="required" class="form-control px-3 display-7" id="name-header15-4">
+                                    <input type="password" name="passwords" placeholder="password" data-form-field="Name" required="required" class="form-control px-3 display-7" id="name-header15-4">
                                 </div>
                                 <div class="col-md-12 form-group " data-for="confirm_password">
                                     <input type="password" name="cpwd" placeholder="Retype password" data-form-field="Name" required="required" class="form-control px-3 display-7" id="name-header15-4">

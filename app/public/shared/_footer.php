@@ -152,6 +152,8 @@
  <script src="../../bootstrap/js/demo/datatables-demo.js"></script>
  <script src="../../bootstrap/js/mtabs-js.js"></script>
  <script src="../../bootstrap/js/custom/logout-url.js"></script>
+ <!-- set max date for input fields -->
+ <script src="../../bootstrap/js/custom/max-date.js"></script>
 
 <script type="text/javaScript">
     document.getElementById('callbackurl').setAttribute("value", url);

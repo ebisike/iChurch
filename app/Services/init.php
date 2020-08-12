@@ -15,6 +15,9 @@ include 'FamilyTree.php';
 include 'Members.php';
 include 'Children.php';
 include 'Notifications.php';
+include 'Balance.php';
+include 'Transactions.php';
+include 'SeedData.php';
 
 $db = new DB();
 $validate = new InputValidation();

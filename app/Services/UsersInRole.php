@@ -15,7 +15,7 @@ class UsersInRole
         if ($run->isExist())
         {
             $result = $run->getResults();
-            if($result['roleName'] == $name)
+            if(strtolower($result['roleName']) == strtolower($name))
             {
                 return true;
             }
@@ -30,6 +30,17 @@ class UsersInRole
         if($runsql->isExist())
         {
             return true;
+        }
+        return false;
+    }
+
+    public function getUserRole($userId, $orgId)
+    {
+        $sql = "SELECT * FROM usersInRole WHERE userId = '$userId' AND orgId = '$orgId'";
+        $runsql = DB::DBInstance()->query($sql);
+        if($runsql->isExist())
+        {
+            return $runsql->getResults();
         }
         return false;
     }
@@ -94,6 +105,13 @@ class UsersInRole
             return true;
         }
         return false;
+    }
+
+    public function removeAllUsersFromRole($roleName, $orgId)
+    {
+        $sql = "DELETE FROM usersinrole WHERE roleName = '$roleName' AND orgId = '$orgId'";
+        $run = DB::DBInstance()->query($sql);
+        $run ?  true : false;
     }
 
     public function allUsersInRole($orgId)

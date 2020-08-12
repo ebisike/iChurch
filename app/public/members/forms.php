@@ -27,8 +27,8 @@
                 <form class="user" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="orgId" value="<?php echo $_SESSION['orgId']?>">
                     <input type="hidden" name="userId" value="<?php echo $_SESSION['userId']?>">
-                    <!-- <input type="hidden" name="familyId" value="<?php //echo $_SESSION['familyId']?>"> -->
-                    <input type="hidden" name="familyId" value="10001">
+                    <input type="hidden" name="familyId" value="<?php echo $_SESSION['familyId']?>">
+                    <!-- <input type="hidden" name="familyId" value="10001"> -->
                     <div id="Basic" class="tabcontent m-3">
                         <div class="row">
                             <div class="col-md-8">
