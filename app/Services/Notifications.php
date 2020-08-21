@@ -320,4 +320,29 @@ class Notifications implements INotifications
         $result = $run->getResults();
         return $result['COUNT(Id)'];
     }
+
+    public function countFirstTimers($orgId)
+    {
+        $sql = "SELECT COUNT(Id) FROM firsttimers WHERE orgId = '$orgId'";
+        $run = DB::DBInstance()->query($sql);
+        $result = $run->getResults();
+        return $result['COUNT(Id)'];
+    }
+
+    public function calculateRetensionRate($orgId)
+    {
+        $allFirstTimers = 0;
+        $nonRetained = 0;
+        $retained = 0;
+
+        $firstTimer = new FirstTimers();
+        $result = $firstTimer->getAllFirstTimers($orgId);
+        while($data = $result->getResults())
+        {
+            ++$allFirstTimers;
+            $data['isRetained'] ? $retained+=1 : $nonRetained+=1;
+        }
+        $percentageRentension = ($retained * 100) / $allFirstTimers;
+        return $percentageRentension;
+    }
 }

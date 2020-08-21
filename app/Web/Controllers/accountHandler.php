@@ -2,6 +2,11 @@
 
 if(isset($_POST['signin']))
 {
+    foreach ($_POST as $key => $value)
+    {
+        $_POST[$key] = $validate->validateForm($value); //striping the user input            
+    }
+    
     if($result = $account->signin($_POST))
     {
         //check if user is suspended

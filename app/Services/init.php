@@ -18,6 +18,11 @@ include 'Notifications.php';
 include 'Balance.php';
 include 'Transactions.php';
 include 'SeedData.php';
+include 'AccountStatement.php';
+include 'Events.php';
+include 'FirstTimers.php';
+include 'HouseFellowship.php';
+include 'Units.php';
 
 $db = new DB();
 $validate = new InputValidation();

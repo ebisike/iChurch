@@ -69,7 +69,8 @@
             $sql = "SELECT * FROM transactions
                     INNER JOIN users
                     ON transactions.userId = users.Id
-                    WHERE transactions.orgId = '$orgId' AND transactions.transactiontype = 1";
+                    WHERE transactions.orgId = '$orgId' AND transactions.transactiontype = 1
+                    ORDER BY transactions.Id DESC";
             $stmt = DB::DBInstance()->query($sql);
             if($stmt)
             {
@@ -83,7 +84,8 @@
             $sql = "SELECT * FROM transactions
                     INNER JOIN users
                     ON transactions.userId = users.Id
-                    WHERE transactions.orgId = '$orgId' AND transactions.transactiontype = 0";
+                    WHERE transactions.orgId = '$orgId' AND transactions.transactiontype = 0
+                    ORDER BY transactions.Id DESC";
             $stmt = DB::DBInstance()->query($sql);
             if($stmt)
             {

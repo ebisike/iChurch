@@ -56,7 +56,7 @@
                                 </div>                                
                                 <div class="form-group">
                                     <label>Date of Birth *</label>
-                                    <input type="date" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Last Name..." required name="dateOfBirth">                            
+                                    <input type="date" class="form-control form-control-user" id="datefield" aria-describedby="emailHelp" placeholder="Enter Last Name..." required name="dateOfBirth">                            
                                 </div>
                                 <div class="form-group">
                                 <!-- <label>Stewardship number *</label> -->
@@ -159,7 +159,7 @@
                             <div class="col-md-8">
                                 <div class="form-group">
                                     <label>Marital Status *</label>
-                                    <select name="maritalStatus" id="" class="form-control" required>
+                                    <select name="maritalStatus" id="marital-status" class="form-control" required>
                                         <option value="single">single</option>
                                         <option value="marrried">marrried</option>
                                         <option value="separated">separated</option>
@@ -167,11 +167,11 @@
                                         <option value="widower">widower</option>
                                     </select>
                                 </div>                                    
-                                <div class="form-group">
+                                <div class="form-group" id="spouse-div">
                                 <!-- <label>Stewardship number *</label> -->
                                     <input type="text" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Name of Spouse..." name="nameOfSpouse" >                            
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" id="marriage-nature-div">
                                     <label>Nature of Marriage *</label>
                                     <select name="natureOfMarriage" id="" class="form-control" required>
                                         <option value="unmarried">unmarried</option>
@@ -180,11 +180,11 @@
                                         <option value="Blessing">Blessing</option>
                                     </select>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" id="marriage-date-div">
                                     <label>Date of Marriage *</label>
-                                    <input type="date" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Marriage Date..." name="dateOfMarriage">                            
+                                    <input type="date" class="form-control form-control-user" id="datefield" aria-describedby="emailHelp" placeholder="Enter Marriage Date..." name="dateOfMarriage">                            
                                 </div>
-                                <div class="form-group">                                    
+                                <div class="form-group" id="child-div">                                    
                                     <input type="number" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Number of Children..." name="numberOfChildren">                            
                                 </div>
                             </div>
@@ -249,10 +249,10 @@
                                 <div class="form-group">
                                     <label>Are you Baptized? *</label><br>
                                     <label class="radio-inline">
-                                        <input type="radio" name="isBaptised" value="0" id="isBaptised">No
+                                        <input type="radio" name="isBaptised" value="0" id="isBaptisedNo">No
                                     </label>
                                     <label class="radio-inline">
-                                        <input type="radio" name="isBaptised" value="1" id="isBaptised">Yes
+                                        <input type="radio" name="isBaptised" value="1" id="isBaptisedYes">Yes
                                     </label>
                                 </div>
                                 <div class="form-group" id="baptised">
@@ -275,10 +275,10 @@
                                 <div class="form-group">
                                     <label>Are you Confirmed? *</label><br>
                                     <label class="radio-inline">
-                                        <input type="radio" name="isConfirmed" value="0" id="isConfirmed">No
+                                        <input type="radio" name="isConfirmed" value="0" id="isConfirmedNo">No
                                     </label>
                                     <label class="radio-inline">
-                                        <input type="radio" name="isConfirmed" value="1" id="isConfirmed">Yes
+                                        <input type="radio" name="isConfirmed" value="1" id="isConfirmedYes">Yes
                                     </label>
                                 </div>
                                 <div class="form-group" id="confirmed">
@@ -329,3 +329,4 @@
 <?php
     require ('../shared/_footer.php');
 ?>
+<script src="../../bootstrap/js/custom/membershipformcontrols.js"></script>

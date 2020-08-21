@@ -12,6 +12,11 @@ class Config extends DB
        $this->createTableChildren();
        $this->createTableBalance();
        $this->createTableTransaction();
+       $this->createTableEvents();
+       $this->createTableFirstTimers();
+       $this->createTableHouseFellowship();
+       $this->createTableUnits();
+       $this->createTableHoseFellowshipMembers();
     }
 
     private function createTableOrganisation()
@@ -69,7 +74,7 @@ class Config extends DB
 
     private function createTableBalance()
     {
-        $sql = "CREATE TABLE `ichurch`.`Balance` ( `Id` INT(55) NOT NULL AUTO_INCREMENT , `currentbalance` DOUBLE NOT NULL , `orgId` INT(5) NOT NULL , `userId` INT(5) NOT NULL , `lastupdated` DATETIME(6) NOT NULL , PRIMARY KEY (`Id`)) ENGINE = InnoDB;";
+        $sql = "CREATE TABLE `ichurch`.`Balance` ( `Id` INT(40) NOT NULL AUTO_INCREMENT , `currentbalance` DOUBLE NOT NULL , `orgId` INT(3) NOT NULL , `userId` INT(3) NOT NULL , `lastupdated` DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP , PRIMARY KEY (`Id`)) ENGINE = InnoDB;";
         $run = DB::DBInstance()->query($sql);
     }
 
@@ -78,5 +83,40 @@ class Config extends DB
         $sql = "CREATE TABLE IF NOT EXISTS `ichurch`.`Transactions` ( `Id` INT(3) NOT NULL AUTO_INCREMENT , `transactiontype` BOOLEAN NOT NULL , `source` VARCHAR(225) NOT NULL , `transactiondescription` TEXT NOT NULL , `amount` DOUBLE NOT NULL , `transactiondate` DATE NOT NULL , `systemdate` DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP, `orgId` INT(3) NOT NULL , `userId` INT(3) NOT NULL , PRIMARY KEY (`Id`)) ENGINE = InnoDB;";
 
         $run = DB::DBInstance()->query($sql);
-    }   
+    }
+
+    private function createTableEvents()
+    {
+        $sql = "CREATE TABLE `ichurch`.`events` ( `Id` INT(12) NOT NULL AUTO_INCREMENT , `eventname` VARCHAR(255) NOT NULL , `eventdate` DATE NOT NULL , `numberofguests` INT(255) NOT NULL , `orgId` INT(8) NOT NULL , `userId` INT(8) NOT NULL , PRIMARY KEY (`Id`)) ENGINE = InnoDB;";
+
+        $run = DB::DBInstance()->query($sql);
+    }
+
+    private function createTableFirstTimers()
+    {
+        $sql = "CREATE TABLE `ichurch`.`firsttimers` ( `Id` INT(255) NOT NULL AUTO_INCREMENT , `firstname` VARCHAR(255) NOT NULL , `lastname` VARCHAR(255) NOT NULL , `othername` VARCHAR(255) NOT NULL , `phone` VARCHAR(15) NOT NULL , `addresss` VARCHAR(255) NOT NULL , `isRetained` BOOLEAN NOT NULL DEFAULT FALSE , `eventId` INT(255) NOT NULL , `orgId` INT(8) NOT NULL , `userId` INT(8) NOT NULL , PRIMARY KEY (`Id`)) ENGINE = InnoDB;";
+        
+        $run = DB::DBInstance()->query($sql);
+    }
+
+    private function createTableHouseFellowship()
+    {
+        $sql = "CREATE TABLE `ichurch`.`housefellowship` ( `Id` INT(255) NOT NULL AUTO_INCREMENT , `fellowshipname` VARCHAR(255) NOT NULL, `cordinatorId` INT(255) NOT NULL , `addresss` VARCHAR(255) NOT NULL , `meetingday` VARCHAR(23) NOT NULL , `meetingtime` TIME(6) NOT NULL , `orgId` INT(8) NOT NULL , `userId` INT(8) NOT NULL , `datecreated` DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP , PRIMARY KEY (`Id`)) ENGINE = InnoDB;";
+
+        $run = DB::DBInstance()->query($sql);
+    }
+
+    private function createTableUnits()
+    {
+        $sql = "CREATE TABLE `ichurch`.`units` ( `Id` INT(255) NOT NULL AUTO_INCREMENT , `unitheadId` INT(255) NOT NULL , `meetingvenue` VARCHAR(255) NOT NULL , `meetingday` VARCHAR(23) NOT NULL , `meetingtime` TIME(6) NOT NULL , `orgId` INT(8) NOT NULL , `userId` INT(8) NOT NULL , `datecreated` DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP , PRIMARY KEY (`Id`)) ENGINE = InnoDB;";
+
+        $run = DB::DBInstance()->query($sql);
+    }
+
+    private function createTableHoseFellowshipMembers()
+    {
+        $sql = "CREATE TABLE `ichurch`.`housefellowshipmembers` ( `Id` INT(255) NOT NULL AUTO_INCREMENT , `fellowshipId` INT(255) NOT NULL , `memberId` INT(255) NOT NULL , `orgId` INT(255) NOT NULL , `userId` INT(8) NOT NULL , PRIMARY KEY (`Id`)) ENGINE = InnoDB;";
+
+        $run = DB::DBInstance()->query($sql);
+    }
 }

@@ -26,3 +26,10 @@
         $transaction->postDebitTransaction($_POST);
         header('location: financerecords.php');
     }
+
+    if(isset($_POST['report']))
+    {
+        $startDate = $_POST['startdate'];
+        $endDate = $_POST['enddate'];
+        header("location: /ichurch/app/public/finance/statementofaccount.php?sd=".$startDate."&ed=".$endDate."");
+    }

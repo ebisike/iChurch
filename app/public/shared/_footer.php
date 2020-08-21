@@ -127,6 +127,44 @@
     </div>
 </div>
 
+<!-- Report Modal-->
+<div class="modal fade" id="report" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Generate Account Statement?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+            </div>
+            <div class="modal-body">
+                Select Start and End date to generate report.
+                <form class="user" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>" method="post">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-6">Start Date</label>
+                                <input type="date" name="startdate" class="form-control form-control-user col-md-6 datefield" placeholder="Enter Start Date" id="datefield">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-6">End Date</label>
+                                <input type="date" name="enddate" class="form-control form-control-user col-md-6 datefield" placeholder="Enter End Date" id="datefield">
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" value="<?php echo $_SESSION['orgId']?>" name="orgId" />
+                    <input type="submit" class="btn btn-primary float-lg-right" name="report" value="generate">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Bootstrap core JavaScript-->
 <script src="../../bootstrap/vendor/jquery/jquery.min.js"></script>
 <script src="../../bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

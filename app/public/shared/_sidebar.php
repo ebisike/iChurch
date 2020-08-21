@@ -227,12 +227,12 @@
                                     if($userRoleSuperAdmin)
                                     {
                                         echo
-                                        '
-                                            <a class="collapse-item" href="../administration/createRole.php">Create Role</a>
+                                        '                                            
                                             <a class="collapse-item" href="../administration/deleteRole.php">Delete Role</a>
                                         ';
                                     }
                                     echo'
+                                    <a class="collapse-item" href="../administration/createRole.php">Create Role</a>
                                     <a class="collapse-item" href="../administration/listrole.php">List Role</a>
                                     <a class="collapse-item" href="../administration/addusertorole.php">Add Users To Role</a>
                                     <a class="collapse-item" href="../administration/removeUserFromRole.php">Remove User From Role</a>
@@ -253,23 +253,82 @@
                 Addons
             </div>
 
-            <!-- Nav Item - Pages Collapse Menu -->
+            <!-- Membership -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#membership" aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-folder"></i>
-                    <span>Pages</span>
+                    <span>Membership</span>
                 </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div id="membership" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Data Management Screens:</h6>
                         <a class="collapse-item" href="../members/familytree.php">Register Form</a>
                         <a class="collapse-item" href="../members/allmembers.php">Members List</a>
-                        <a class="collapse-item" href="../members/deathlist.php">Death List</a>
-                        <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
+                        <a class="collapse-item" href="../members/deathlist.php">Death List</a>                       
+                    </div>
+                </div>
+            </li>
+            
+            <!-- Finance -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#finance" aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Finance</span>
+                </a>
+                <div id="finance" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Financial mgt Screens:</h6>                                                
+                        <a class="collapse-item" href="../finance/financerecords.php">Financial Records</a>                        
+                        <a class="collapse-item" href="../finance/credit-records.php">Credit Records</a>
+                        <a class="collapse-item" href="../finance/debit-records.php">Debit Records</a>
+                    </div>
+                </div>
+            </li>
+            
+            <!-- Events and First Timers -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#events" aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Events and First Timers</span>
+                </a>
+                <div id="events" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Events Screens:</h6>
+                        <a class="collapse-item" href="../Events/allevents.php">All Events</a>                        
                         <div class="collapse-divider"></div>
-                        <h6 class="collapse-header">Finance Pages:</h6>
-                        <a class="collapse-item" href="../finance/financerecords.php">Financial Records</a>
-                        <a class="collapse-item" href="blank.html">Blank Page</a>
+                        <h6 class="collapse-header">First Timers Pages:</h6>
+                        <a class="collapse-item" href="../First_Timers/allfirsttimers.php">All First Timers</a>
+                        <a class="collapse-item" href="../First_Timers/retainedfirsttimers.php">Retained First Timers</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- House Fellowship and Units -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#fellowshipDrop" aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>House Fellowships</span>
+                </a>
+                <div id="fellowshipDrop" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">House Fellowships Screens:</h6>
+                        <a class="collapse-item" href="../Fellowship/house-fellowships.php">All House Fellowships</a>
+                        <a class="collapse-item" href="../Fellowship/view-fellowship-members.php">Members List</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- House Fellowship and Units -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#units" aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Church Units</span>
+                </a>
+                <div id="units" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Units Pages:</h6>
+                        <a class="collapse-item" href="../Units/units.php">All Church Units</a>
+                        <a class="collapse-item" href="../Units/retainedfirsttimers.php">Retained First Timers</a>
                     </div>
                 </div>
             </li>

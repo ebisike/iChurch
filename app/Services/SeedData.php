@@ -14,7 +14,7 @@ class SeedData
 
     public $addUser2SuperAdminRole;
 
-    public function __construct($orgId)
+    public function __construct($orgId, $orgEmail)
     {
         //create roles needed for minimal processes
         $this->superAdminRole =
@@ -35,7 +35,7 @@ class SeedData
             "firstName" => "George",
             "lastName" => "Ebisike",
             "passwords" => "admin",
-            "username" => "georgefx",
+            "username" => "georgefx"."_".$orgEmail,
             "orgId" => $orgId
         ];
 

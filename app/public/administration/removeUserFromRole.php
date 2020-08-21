@@ -27,7 +27,7 @@
                         while ($users = $results->getResults())
                         {
                             //$ux = $user->getUser($users['userId'], $_SESSION['orgId']);
-                            if($users['roleName'] == "super-admin" && !$userRoleSuperAdmin)
+                            if($users['roleName'] == "superAdmin" && !$userRoleSuperAdmin)
                             {
                                 continue;
                             }

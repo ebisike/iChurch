@@ -33,4 +33,8 @@ interface INotifications
     public function countTotalMembers($orgId);
 
     public function countDeaths($orgId);
+
+    public function countFirstTimers($orgId);
+
+    public function calculateRetensionRate($orgId);
 }

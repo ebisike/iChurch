@@ -11,15 +11,7 @@
             $result = $org->getOrgByEmail($_POST['orgEmail']);
 
             #initialize SeedData
-            $seed = new SeedData($result['Id']);
-
-            #seed the superAdmin role and vicar role;
-            $seed->seedSuperAdminRoles();
-            $seed->seedVicarRole();
-
-            #add superadmin to role
-            $seed->seedSuperUser();
-            $seed->addSuperUserToRole();
+            $seed = new SeedData($result['Id'], $result['OrgEmail']);
 
             #add registered user to vicar role
             #build vicar object
@@ -40,21 +32,34 @@
             ];
 
             $new_user = new Users();
-            $new_user->createUser($vicarUser);
+            if($new_user->createUser($vicarUser))
+            {
+                #seed the superAdmin role and vicar role;
+                $seed->seedSuperAdminRoles();
+                $seed->seedVicarRole();
 
-            //assign new users to respective roles
-            $assignRole = new UsersInRole();
-            $assignRole->addUserToRole($addUser2VicarRole);
+                //assign new users to respective roles
+                $assignRole = new UsersInRole();
+                $assignRole->addUserToRole($addUser2VicarRole);
+
+                #add superadmin to role
+                $seed->seedSuperUser();
+                $seed->addSuperUserToRole();
 
 
-            #initialize organisation balance
-            $userResult = $new_user->getUserByName($vicarUser['username'], $vicarUser['orgId']);
-            //$initialBalance = 0.0;
-            $bal = new Balance($userResult['orgId'], $userResult['Id']);
-            $bal->initializeBalance();
+                #initialize organisation balance
+                $userResult = $new_user->getUserByName($vicarUser['username'], $vicarUser['orgId']);
+                //$initialBalance = 0.0;
+                $bal = new Balance($userResult['orgId'], $userResult['Id']);
+                $bal->initializeBalance();
 
-            //Redirect to login page/.
-            header('Location: signin.php');
+                //Redirect to login page/.
+                header('Location: signin.php');
+            }
+            else
+            {
+                echo "sorry username is taken";
+            }
 
             //ok when u get home, continue.
         }

@@ -10,12 +10,14 @@
         {
             $this->amount = 0.0;
             $this->orgId = $orgId;
-            $this->userId = $userId;            
+            $this->userId = $userId;
+
+            $this->balance = $this->getBalance(); #set the value of balance
         }
         public function initializeBalance()
         {
-            $sql = "INSERT INTO `balance` (`Id`, `currentbalance`, `orgId`, `userId`)
-                VALUES ('', '".$this->amount."', '".$this->orgId."', '".$this->userId."')";
+            $sql = "INSERT INTO `balance` (`currentbalance`, `orgId`, `userId`)
+                VALUES ('".$this->amount."', '".$this->orgId."', '".$this->userId."')";
 
             $runsql = DB::DBInstance()->query($sql);
             if($runsql)
@@ -50,7 +52,8 @@
             if($run)
             {
                 $result = $run->getResults();
-                $this->balance = $result['currentbalance'];
+                #$this->balance = $result['currentbalance'];
+                return $result['currentbalance'];
             }
         }
     }
