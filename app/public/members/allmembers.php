@@ -2,11 +2,8 @@
     require ('../shared/_sidebar.php');
     require ('../shared/_topbar.php');
 
-    if(isset($_GET['delete']))
-    {
-        $memberId = $_GET['delete'];
-        $members->deleteMember($memberId, $_SESSION['orgId']);
-    }
+    include ('../../web/controllers/formshandler.php');
+
 
     if(isset($_GET['dead']))
     {
@@ -54,7 +51,7 @@
                 <tbody>
                     <?php
                         $count = 0;
-                        $membersList = $members->getAllMembers($_SESSION['orgId']);
+                        $membersList = $members->getAllMembers($_SESSION['orgId']);                        
                         while($result = $membersList->getResults())
                         {
                             if($result['isAlive'])
@@ -71,9 +68,9 @@
                                     <td>'.$result['gender'].'</td>
                                     <td>'.$result['phone1'].'</td>
                                     <td>                                            
-                                        <a href="editmember.php?edit='.$result['Id'].'" class="btn btn-dark btn-sm">edit</a> |
-                                        <a href="allmembers.php?delete='.$result['Id'].'" class="btn btn-dark btn-sm">delete</a> |
-                                        <a href="allmembers.php?dead='.$result['Id'].'" class="btn btn-dark btn-sm">dead</a>
+                                        <a href="editmember.php?edit='.$result['Id'].'" class=""><i class="fa fa-pen text-primary"> </i></a> |
+                                        <a href="allmembers.php?delete='.$result['Id'].'" class=""><i class="fa fa-trash text-danger"></i></a> |
+                                        <a href="allmembers.php?dead='.$result['Id'].'" class=""><i class="fa fa-medkit text-danger"></i></a>
                                     </td>
                                 </tr>
                                 ';

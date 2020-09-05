@@ -1,3 +1,7 @@
+<?php
+  include 'Services/init.php';
+  include 'Web/Controllers/createorg.php';
+?>
 <!DOCTYPE html>
 <html  >
 <head>
@@ -9,7 +13,7 @@
   <link rel="shortcut icon" href="bootstrap/assets/images/spaco-icon3-128x109.png" type="image/x-icon">
   <meta name="description" content="Web Page Builder Description">
   
-  <title>registration</title>
+  <title>iChurch | signup</title>
   <link rel="stylesheet" href="bootstrap/assets/web/assets/mobirise-icons/mobirise-icons.css">
   <link rel="stylesheet" href="bootstrap/assets/tether/tether.min.css">
   <link rel="stylesheet" href="bootstrap/assets/bootstrap/css/bootstrap.min.css">
@@ -26,7 +30,7 @@
 
     
 
-    <div class="mbr-overlay" style="opacity: 0.5; background-color: rgb(127, 25, 51);"></div>
+    <div class="mbr-overlay" style="opacity: 0.8; background-color: rgb(127, 25, 51);"></div>
 
     <div class="container align-right">
         <div class="row">
@@ -47,13 +51,22 @@
                           ?>
                             <div class="dragArea row">
                                 <div class="col-md-12 form-group " data-for="name">
-                                    <input type="text" name="comp_name" placeholder="Company Name" data-form-field="Name" required="required" class="form-control px-3 display-7" id="name-header15-4">
+                                    <input type="text" name="orgName" placeholder="Organisation Name" data-form-field="Name" required="required" class="form-control px-3 display-7" id="name-header15-4">
                                 </div>
                                 <div class="col-md-12 form-group " data-for="email">
-                                    <input type="email" name="email" placeholder="Email" data-form-field="Email" required="required" class="form-control px-3 display-7" id="email-header15-4">
+                                    <input type="email" name="orgEmail" placeholder="Organisation Email" data-form-field="Email" required="required" class="form-control px-3 display-7" id="email-header15-4">
+                                </div>
+                                <div class="col-md-12 form-group " data-for="name">
+                                    <input type="text" name="firstName" placeholder="First Name" data-form-field="Name" required="required" class="form-control px-3 display-7" id="name-header15-4">
+                                </div>
+                                <div class="col-md-12 form-group " data-for="name">
+                                    <input type="text" name="lastName" placeholder="Last Name" data-form-field="Name" required="required" class="form-control px-3 display-7" id="name-header15-4">
+                                </div>
+                                <div class="col-md-12 form-group " data-for="name">
+                                    <input type="text" name="username" placeholder="User Name" data-form-field="Name" required="required" class="form-control px-3 display-7" id="name-header15-4">
                                 </div>
                                 <div class="col-md-12 form-group " data-for="password">
-                                    <input type="password" name="pwd" placeholder="password" data-form-field="Name" required="required" class="form-control px-3 display-7" id="name-header15-4">
+                                    <input type="password" name="passwords" placeholder="password" data-form-field="Name" required="required" class="form-control px-3 display-7" id="name-header15-4">
                                 </div>
                                 <div class="col-md-12 form-group " data-for="confirm_password">
                                     <input type="password" name="cpwd" placeholder="Retype password" data-form-field="Name" required="required" class="form-control px-3 display-7" id="name-header15-4">

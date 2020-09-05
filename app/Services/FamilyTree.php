@@ -10,31 +10,51 @@ class FamilyTree
     public function createTreeBranch($branchName, $orgId)
     {
         //generate a branch
-        $this->$familyId = $this->generateFamilyID($branchName);
+        $this->familyId = $this->generateFamilyID($branchName,$orgId);
         $sql = "INSERT INTO familyTree (familyId, branchName, orgId) VALUES ('{$this->familyId}', '{$branchName}', '{$orgId}')";
-        //$run = DB::DBInstance()->query($sql);
-        if ($insertId = $run->getLastId($sql)) {
-            # code...
-            return $insertId;
+        $run = DB::DBInstance()->query($sql);
+        if ($run) {
+            return $this->getLastInput($orgId); //check if this returns 
         }
     }
 
-    private function generateFamilyID($branchName)
+    public function getLastInput($orgId)
     {
-        $familyID = $branchName.'_'.mt_rand(100000,999999);
-        if(!$this->isBranchTaken($familyID))
+        //get the Id of the last record that was inserted into the members table.
+        $sql = "SELECT * FROM familytree WHERE orgId = '$orgId' ORDER BY Id DESC limit 1";
+        $runsql = DB::DBInstance()->query($sql);
+        if($runsql)
         {
-            return $familyID;
+            $lastId = $runsql->getResults();
+            return $lastId;
         }
-        $this->generateFamilyID($branchName);
+        return false;
     }
 
-    public function isBranchTaken($number)
+    public function generateFamilyID($branchName, $orgId)
     {
-        $sql = "SELECT * FROM FamilyTree WHERE familyId = '{$number}' AND orgId = '{orgId}'";
-        $stmt = DB::DBInstance()->query($sql);
+        $num = mt_rand(100000,999999);
+        //$familyId = $branchName."/".$num; var_dump($familyId);
+        $isTaken = $this->isBranchTaken($num, $orgId);
+        if($isTaken)
+        {
+            //echo 'exit'; exit();
+            $this->generateFamilyID($branchName, $orgId);
+        }
+        else
+        {
+            //echo 'new'; exit();
+            return $num;
+        }
+    }
+
+    public function isBranchTaken($number, $orgId)
+    {
+        $sql = "SELECT * FROM familytree WHERE familyId = '$number' AND orgId = '$orgId'";
+        $stmt = DB::DBInstance()->query($sql);        
         if($stmt->isExist())
         {
+            //var_dump($stmt->isExist());
             return true;
         }
         return false;

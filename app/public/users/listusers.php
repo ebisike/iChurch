@@ -17,75 +17,6 @@
     }
 ?>        
 
-<!-- DataTales Example -->
-<!-- <div class="pt-0 pl-3 pr-3">
-<div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
-        </div>
-        <div class="card-body">
-            <div class="table-responsive">
-            <table class="table table-striped table-hover" id="dataTable" width="100%" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Fullname</th>
-                        <th>Username</th>
-                        <th>Actions</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-                        <th>#</th>
-                        <th>Fullname</th>
-                        <th>Username</th>
-                        <th>Actions</th>
-                        <th></th>
-                    </tr>
-                </tfoot>
-                <tbody>
-                    <?php
-                        $count = 0;
-                        $usersList = $user->getAllUsers($_SESSION['orgId']);
-                        while($result = $usersList->getResults())
-                        {
-                            
-                            echo
-                                '
-                                <tr>
-                                    <td>'.++$count.'</td>
-                                    <td class="text-capitalize">'.$result['firstName'].' '.$result['lastName'].'</td>
-                                    <td>'.$result['username'].'</td>
-                                ';
-                                    if($result['isActive'])
-                                    {
-                                        echo
-                                        '<td>
-                                            <a href="listusers.php?suspend='.$result['Id'].'" class="btn btn-sm btn-danger">suspend</a> |
-                                            <a href="edit.php?edit='.$result['Id'].'" class="btn btn-sm btn-warning">edit</a> |
-                                            <a href="listusers.php?delete='.$result['Id'].'" class="btn btn-sm btn-danger">delete</a>
-                                        </td>';
-                                    }
-                                    else
-                                    {
-                                        echo
-                                        '<td>
-                                            <a href="listusers.php?suspend='.$result['Id'].'" class="btn btn-sm btn-success">unsuspend</a> |
-                                            <a href="edit.php?edit='.$result['Id'].'" class="btn btn-sm btn-warning">edit</a> |
-                                            <a href="listusers.php?delete='.$result['Id'].'" class="btn btn-sm btn-danger">delete</a>
-                                        </td>';
-                                    }echo '                                                 
-                                </tr>
-                                ';
-                        }
-                    ?>                                
-                </tbody>
-            </table>
-            </div>
-        </div>
-        </div>
-</div> -->
 <div class="mt-0 mr-4 ml-4">
     <div class="card o-hidden border-0 shadow-lg my-5">
         <div class="card-body p-5">
@@ -97,6 +28,8 @@
                         $usersList = $user->getAllUsers($_SESSION['orgId']);
                         while($result = $usersList->getResults())
                         {
+                            $userRole = new UsersInRole();
+                            //$res = $userRole->getUserRole($result['Id'], $result['orgId']);
                             
                             echo
                                 '
@@ -109,24 +42,32 @@
                                         <h6>Username: '.$result['username'].'</h6>
                                                                                                             
                                 ';
-                                    if($result['isActive'])
+                                    if($userRoleSuperAdmin || $userRoleLeadPastor)
                                     {
-                                        echo
-                                        '<p>
-                                            <a href="listusers.php?suspend='.$result['Id'].'" class="btn btn-sm btn-danger">suspend</a> |
-                                            <a href="edit.php?edit='.$result['Id'].'" class="btn btn-sm btn-warning">edit</a> |
-                                            <a href="listusers.php?delete='.$result['Id'].'" class="btn btn-sm btn-danger">delete</a>
-                                        </p>';
+                                        if($result['isActive'])
+                                        {
+                                            echo
+                                            '<p>
+                                                <a href="listusers.php?suspend='.$result['Id'].'" class="btn btn-sm btn-danger">suspend</a> |
+                                                <a href="edit.php?edit='.$result['Id'].'" class="btn btn-sm btn-warning">edit</a> |
+                                                <a href="listusers.php?delete='.$result['Id'].'" class="btn btn-sm btn-danger">delete</a>
+                                            </p>';
+                                        }
+                                        else
+                                        {
+                                            echo
+                                            '<p>
+                                                <a href="listusers.php?suspend='.$result['Id'].'" class="btn btn-sm btn-success">unsuspend</a> |
+                                                <a href="edit.php?edit='.$result['Id'].'" class="btn btn-sm btn-warning">edit</a> |
+                                                <a href="listusers.php?delete='.$result['Id'].'" class="btn btn-sm btn-danger">delete</a>
+                                            </p>';
+                                        }
                                     }
                                     else
                                     {
-                                        echo
-                                        '<p>
-                                            <a href="listusers.php?suspend='.$result['Id'].'" class="btn btn-sm btn-success">unsuspend</a> |
-                                            <a href="edit.php?edit='.$result['Id'].'" class="btn btn-sm btn-warning">edit</a> |
-                                            <a href="listusers.php?delete='.$result['Id'].'" class="btn btn-sm btn-danger">delete</a>
-                                        </p>';
-                                    }echo '
+                                        echo '<p class="text-capitalize text-white bg-info p-3">None Admin Users Can\'t Perform any Action</p>';
+                                    }
+                                    echo '
                                     </div>                                                
                                 </div>
                                 ';

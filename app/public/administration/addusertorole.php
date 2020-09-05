@@ -1,7 +1,7 @@
 <?php
     require ('../shared/_sidebar.php');
     require ('../shared/_topbar.php');
-    include '../../web/controllers/administrationcontroller.php';
+   // include '../../web/controllers/administrationcontroller.php';
 ?>
 
 <div class="pt-0 pl-5 pr-5">
@@ -25,7 +25,7 @@
                         $results = $role->listRoles($_SESSION['orgId']);
                         while($value = $results->getResults())
                         {
-                            if(!$userRoleSuperAdmin && $value['roleName'] == "super-admin")
+                            if(!$userRoleSuperAdmin && $value['roleName'] == "superAdmin")
                             {
                                 continue;
                                 //hide the role: SUPER-ADMIN from a user that doesn't belong to the role

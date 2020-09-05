@@ -27,4 +27,14 @@ interface INotifications
     public function getMemberWeeklyWeddingAnniversary($orgId);
 
     public function countFamilies($orgId);
+
+    public function avialableBalance($orgId);
+    
+    public function countTotalMembers($orgId);
+
+    public function countDeaths($orgId);
+
+    public function countFirstTimers($orgId);
+
+    public function calculateRetensionRate($orgId);
 }

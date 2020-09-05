@@ -31,39 +31,38 @@
                 $count = 0;
                 $daily = $notify->getMemberDailyWeddingAnniversary($_SESSION['orgId']);
                 
-                // foreach($childdata1 as ['firstName' => $fn, 'otherName' => $on, 'dateofbirth' => $dob, 'memberid' => $id])
-                // {
-                //     $dd = $members->getMember($id, $_SESSION['orgId']);
-                //     echo
-                //     '
-                //         <table class="table table-borderless table-striped table-hover">
-                //             <tbody>
-                //                 <tr>
-                //                     <td>'.++$count.'</td>
-                //                     <td>'.$dd['lastName'].' '.$fn.' '.$on.'</td>                                    
-                //                     <td>'.toLongDateString($dob).'</td>
-                //                     <td>'.calculateAge($dob).' years</td>
-                //                 </tr>
-                //             </tbody>
-                //         </table>
-                //     ';
-                // }
+                echo
+                '
+                    <table class="table table-borderless table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Full name</th>
+                                <th>Name of Spouse</th>
+                                <th>Date of Anniversary</th>
+                                <th>Number of years</th>
+                            </tr>
+                        </thead>
+                    <tbody>
+                ';
                 while($data = $daily->getResults())
                 {
                     echo
                     '
-                        <table class="table table-borderless table-striped table-hover">
-                            <tbody>
-                                <tr>
-                                    <td>'.++$count.'</td>
-                                    <td><a href="../members/view.php?find='.$data['Id'].'">'.$data['lastName'].' '.$data['firstName'].' '.$data['otherName'].'</a></td>                                    
-                                    <td>'.toLongDateString($data['dateofmarriage']).'</td>
-                                    <td>'.calculateAge($data['dateofmarriage']).' years</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <tr>
+                            <td>'.++$count.'</td>
+                            <td><a href="../members/view.php?find='.$data['Id'].'">'.$data['lastName'].' '.$data['firstName'].' '.$data['otherName'].'</a></td>
+                            <td>'.$data['nameofspouse'].'</td>
+                            <td>'.toLongDateString($data['dateofmarriage']).'</td>
+                            <td>'.calculateAge($data['dateofmarriage']).' years</td>
+                        </tr>
                     ';
                 }
+                echo
+                '
+                        </tbody>
+                    </table>
+                ';     
             }
             else
             {
@@ -79,23 +78,38 @@
                 {
                     $count = 0;                    
                     $weekly = $notify->getMemberWeeklyWeddingAnniversary($_SESSION['orgId']);
+                    echo
+                    '
+                        <table class="table table-borderless table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Full name</th>
+                                    <th>Name of Spouse</th>
+                                    <th>Date of Anniversary</th>
+                                    <th>Number of years</th>
+                                </tr>
+                            </thead>
+                        <tbody>
+                    ';
                     while($data = $weekly->getResults())
                     {
                         echo
                         '
-                            <table class="table table-borderless table-striped table-hover">
-                                <tbody>
-                                    <tr>
-                                        <td>'.++$count.'</td>
-                                        <td><a href="../members/view.php?find='.$data['Id'].'">'.$data['lastName'].' '.$data['firstName'].' '.$data['otherName'].'</a></td>                                 
-                                        <td>'.$data['nameofspouse'].'</td>                                 
-                                        <td>'.toLongDateString($data['dateofmarriage']).'</td>
-                                        <td>'.calculateAge($data['dateofmarriage']).' years anni.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <tr>
+                                <td>'.++$count.'</td>
+                                <td><a href="../members/view.php?find='.$data['Id'].'">'.$data['lastName'].' '.$data['firstName'].' '.$data['otherName'].'</a></td>                                 
+                                <td>'.$data['nameofspouse'].'</td>                                 
+                                <td>'.toLongDateString($data['dateofmarriage']).'</td>
+                                <td>'.calculateAge($data['dateofmarriage']).' years anni.</td>
+                            </tr>
                         ';
-                    }                    
+                    }
+                    echo
+                    '
+                            </tbody>
+                        </table>
+                    ';                      
                 }
                 else
                 {

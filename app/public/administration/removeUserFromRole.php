@@ -1,7 +1,7 @@
 <?php
     require ('../shared/_sidebar.php');
     require ('../shared/_topbar.php');
-    include '../../web/controllers/administrationcontroller.php';
+    //include '../../web/controllers/administrationcontroller.php';
 ?>
 
 <div class="pt-0 pl-5 pr-5">
@@ -27,7 +27,7 @@
                         while ($users = $results->getResults())
                         {
                             //$ux = $user->getUser($users['userId'], $_SESSION['orgId']);
-                            if($users['roleName'] == "super-admin" && !$userRoleSuperAdmin)
+                            if($users['roleName'] == "superAdmin" && !$userRoleSuperAdmin)
                             {
                                 continue;
                             }

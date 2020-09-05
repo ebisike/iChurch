@@ -58,7 +58,7 @@
                             <div class="col-md-4 bg-gradient-light p-2 m-0">
                                 <div class="form-group">
                                     <label>upload a passport</label>
-                                    <input type="file" name="file" class="form-control">
+                                    <input type="file" name="file" class="form-control" value="<?php echo $data['imagepath']?>">
                                 </div>                                
                                 <div class="form-group">
                                     <label>Date of Birth *</label>
@@ -281,10 +281,10 @@
                                 <div class="form-group">
                                     <label>Are you Confirmed? *</label><br>
                                     <label class="radio-inline">
-                                        <input type="radio" name="isConfirmed" value="0" id="isConfirmed">No
+                                        <input type="radio" name="isConfirmed" value="<?php echo $data['isbaptised']?>" id="isConfirmed">No
                                     </label>
                                     <label class="radio-inline">
-                                        <input type="radio" name="isConfirmed" value="1" id="isConfirmed">Yes
+                                        <input type="radio" name="isConfirmed" value="<?php echo $data['isconfirmed']?>" id="isConfirmed">Yes
                                     </label>
                                 </div>
                                 <div class="form-group" id="confirmed">

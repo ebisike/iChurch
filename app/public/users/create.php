@@ -29,7 +29,8 @@
                         <input type="text" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Last Name..." name="lastName">                
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control form-control-user" id="username" aria-describedby="emailHelp" placeholder="Enter username..." name="username" >                
+                        <input type="text" class="form-control form-control-user" id="username" aria-describedby="emailHelp" placeholder="Enter username..." name="username" >
+                        <span class="text-danger" id="username-error"></span>
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control form-control-user disabled" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Default password is: 12345" name="passwords" value="12345" readonly>
@@ -44,17 +45,37 @@
         </div>
     </div>
 </div>
-<script>
-    var username = document.getElementById('username').value();
-    document.getElementById('username').addEventListener('keyup', display);
 
-    function display(){
-        if(username == 'admin'){
-        alert('username: admin is a reserved word');
-    }
-    alert('username: admin is a reserved word');
-    }
-</script>
 <?php
     require ('../shared/_footer.php');
 ?>
+<script>
+    $(document).ready(function(){
+        let usernameInput = document.getElementById('username')
+
+        //get a list of all users.
+        $.ajax({
+                method: "GET",
+                url: "validate.php?orgId=<?php echo $_SESSION['orgId']?>",
+                success: function(resp){
+                    document.querySelector('#username').addEventListener('blur', validateInput(JSON.parse(resp)))
+                    //console.log(JSON.parse(resp));
+                },
+                error: function(error){
+                    console.log(error);
+                }
+
+            })        
+        
+        function validateInput(data){
+            console.log(data[1].username)
+
+            let userinput = data.filter(d => d.username.toLowerCase() === usernameInput.value.toLowerCase())
+            console.log(userinput)
+            if(userinput[0].username)
+            {
+                document.getElementById('username-error').textContent = "username is already taken"
+            }
+        }
+    })
+</script>

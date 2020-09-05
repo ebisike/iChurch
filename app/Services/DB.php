@@ -21,7 +21,7 @@ class DB
             if (!$this->query($sql))
             {
                 # code...
-                die('Could Not Create Database'. mysqli_error());
+                die('Could Not Create Database'. mysqli_connect_error());
             }
             else
             {
@@ -31,7 +31,7 @@ class DB
         }
         else
         {
-            die('Failed to Connect to Sever'. mysqli_error());
+            die('Failed to Connect to Sever'. mysqli_connect_error());
         }
     }
 
@@ -44,11 +44,11 @@ class DB
         }
     }
 
-    public function getLastId($sql)
-    {
-        $this->results = mysql_insert_id($this->con,$sql);
-			return $this->results;
-    }
+    // public function getLastId($sql)
+    // {
+    //     $this->results = mysql_insert_id($this->con,$sql);
+	// 		return $this->results;
+    // }
 
     public static function DBInstance()
     {
@@ -77,14 +77,14 @@ class DB
         return $this->results;
     }
 
-    public static function count()
-    {
-        $count = 0;
-        while(getResults()){
-            ++$count;
-        }
-        return $count;
-    }
+    // public static function count()
+    // {
+    //     $count = 0;
+    //     while(getResults()){
+    //         ++$count;
+    //     }
+    //     return $count;
+    // }
 
     public function isExist()
     {

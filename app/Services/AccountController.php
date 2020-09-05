@@ -2,7 +2,7 @@
 
 class AccountController
 {    
-    public function signin($values)
+    public function verifyOrganisation($values)
     {
         $sql = "SELECT * FROM users WHERE username = '".$values['username']."' AND passwords = '".$values['passwords']."'";
         $runsql = DB::DBInstance()->query($sql);
@@ -10,29 +10,47 @@ class AccountController
         if($runsql->isExist())
         {
             $result = $runsql->getResults();
-            //verify organisation
-            $org = $this->verifyOrganisation($result['orgId']);
-            if($org)
-            {
-                $this->setSessionVariables($result);
-                return $result;
+            //verify organisation            
+            if($this->checkActivationStatus($result['orgId']))
+            {                
+                return true;
             }
             return false;
         }
         return false;
     }
 
-    private function verifyOrganisation($orgId)
+    private function checkActivationStatus($orgId)
     {
-        $sql = "SELECT * FROM organisation WHERE id = '$orgId'";
+        $sql = "SELECT * FROM organisation WHERE Id = '$orgId'";
         $run = DB::DBInstance()->query($sql);
         if($run->isExist())
         {
-            return true;
+            $org = $run->getResults();
+            if($org['isActive'])
+            {
+                return true;
+            }
+        }
+        return false;
+    }    
+
+    public function signin($values)
+    {
+        $sql = "SELECT * FROM users WHERE username = '".$values['username']."' AND passwords = '".$values['passwords']."'";
+        $runsql = DB::DBInstance()->query($sql);
+        if($runsql)
+        {
+            $user = $runsql->getResults();
+            if($user['isActive'])
+            {
+                $this->setSessionVariables($user);
+                return true;
+            }
+            return false;
         }
         return false;
     }
-
     private function setSessionVariables($data)
     {
         $_SESSION['orgId'] = $data['orgId'];
@@ -48,12 +66,28 @@ class AccountController
         return false;
     }
 
-    public function isSignedIn(){
+    public function isSignedIn()
+    {
 		if(isset($_SESSION['orgId']) && isset($_SESSION['userId']))
         {
             return true;
         }
         header('Location: /ichurch/index.html');
+    }
+
+    public function isExpired($orgId)
+    {
+        $org = new Organisations();
+        $result = $org->getOrgById($orgId);
+        $today = date('Y-m-d');
+        if($result['expireyDate'] <= $today)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
     
     public function signout()

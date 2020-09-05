@@ -4,6 +4,7 @@ include ('INotifications.php');
 
 class Notifications implements INotifications
 {
+    
     private function day()
     {
         return date('d');
@@ -118,7 +119,7 @@ class Notifications implements INotifications
                 break;
         }
 
-        return $days = array($startDay, $endDay);
+        return array($startDay, $endDay);
     }
 
     public function countChildrenDailyBirthDay($orgId)
@@ -297,5 +298,56 @@ class Notifications implements INotifications
             $result = $stmt->getResults();
             return $result['COUNT(Id)'];
         }
+    }
+
+    public function avialableBalance($orgId)
+    {
+        $bal = new Balance($orgId, $_SESSION['userId']);
+        return $bal->getBalance();
+    }
+
+    public function countTotalMembers($orgId)
+    {
+        $sql = "SELECT COUNT(Id) FROM members WHERE orgId = '$orgId' AND isAlive = 1";
+        $run = DB::DBInstance()->query($sql);
+        $result = $run->getResults();
+        return $result['COUNT(Id)'];
+    }
+
+    public function countDeaths($orgId)
+    {
+        $sql = "SELECT COUNT(Id) FROM members WHERE orgId = '$orgId' AND isAlive = 0";
+        $run = DB::DBInstance()->query($sql);
+        $result = $run->getResults();
+        return $result['COUNT(Id)'];
+    }
+
+    public function countFirstTimers($orgId)
+    {
+        $sql = "SELECT COUNT(Id) FROM firsttimers WHERE orgId = '$orgId'";
+        $run = DB::DBInstance()->query($sql);
+        $result = $run->getResults();
+        return $result['COUNT(Id)'];
+    }
+
+    public function calculateRetensionRate($orgId)
+    {
+        $allFirstTimers = 0;
+        $nonRetained = 0;
+        $retained = 0;
+
+        $firstTimer = new FirstTimers();
+        $result = $firstTimer->getAllFirstTimers($orgId);
+        while($data = $result->getResults())
+        {
+            ++$allFirstTimers;
+            $data['isRetained'] ? $retained+=1 : $nonRetained+=1;
+        }
+        //var_dump($allFirstTimers); exit();
+        if($allFirstTimers == 0){
+            return 0;
+        }
+        $percentageRentension = ($retained * 100) / $allFirstTimers;
+        return $percentageRentension;
     }
 }

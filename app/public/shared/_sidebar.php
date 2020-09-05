@@ -1,15 +1,23 @@
 <?php
-    require('../../Services/init.php');
+    require ('../../Services/init.php');
     include ('../../web/controllers/accounthandler.php');
     include ('../../web/controllers/usermanagement.php');
     include ('../../web/controllers/administrationController.php');
     include ('../../web/controllers/formshandler.php');
+    include ('../../web/controllers/finance-handlers.php');
+
 
     $account->isSignedIn();
+    //$account->isExpired();
 
     //get current user details
     $currentuser = $user->getUser($_SESSION['userId'], $_SESSION['orgId']);
     $userImage_src = '../users/images/'. $currentuser['imagepath'];
+
+    //organisation
+    $organisation = new Organisations();
+    $orgname = $organisation->getOrgName($_SESSION['orgId']);
+    $orgemail = $organisation->getOrgEmail($_SESSION['orgId']);
 
     //function to get ToDateString
     function toLongDateString($dateParameter)
@@ -122,10 +130,11 @@
     }
 
     //get current user role
-    $userRoleSuperAdmin = $userInRole->isUserInRole("super-admin", $_SESSION['userId'], $_SESSION['orgId']);
+    $userRoleSuperAdmin = $userInRole->isUserInRole("superadmin", $_SESSION['userId'], $_SESSION['orgId']);
     $userRoleSecretary = $userInRole->isUserInRole("secretary", $_SESSION['userId'], $_SESSION['orgId']);
-    $userRoleVicar = $userInRole->isUserInRole("vicar", $_SESSION['userId'], $_SESSION['orgId']);
-    $userRoleCurate = $userInRole->isUserInRole("curate", $_SESSION['userId'], $_SESSION['orgId']);
+    $userRoleLeadPastor = $userInRole->isUserInRole("lead_pastor", $_SESSION['userId'], $_SESSION['orgId']);
+    $userRoleAsstPastor = $userInRole->isUserInRole("asst_pastor", $_SESSION['userId'], $_SESSION['orgId']);
+    $userRoleRegular = $userInRole->isUserInRole("regular", $_SESSION['userId'], $_SESSION['orgId']);
 ?>
 
 <!DOCTYPE html>
@@ -153,7 +162,11 @@
 </head>
 
 <body id="page-top">
-
+    <style>
+        .subscribe{
+            cursor: pointer !important;
+        }
+    </style>
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -165,7 +178,8 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">SB <?php echo $currentuser['username']?> <sup>2</sup></div>
+                <!-- <div class="sidebar-brand-text mx-3">SB <?php echo $currentuser['username']?> <sup>2</sup></div> -->
+                <div class="sidebar-brand-text mx-3 text-lowercase">iChurch <sup>2</sup></div>
             </a>
 
             <!-- Divider -->
@@ -186,61 +200,57 @@
                 Interface
             </div>
 
-            <?php
-                if($userRoleSuperAdmin || $userRoleVicar)
-                {
-                    echo
-                    '
-                        <!-- Nav Item - Pages Collapse Menu -->
-                        <li class="nav-item">
-                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                                <i class="fas fa-fw fa-cog"></i>
-                                <span>Manage Users</span>
-                            </a>
-                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                                <div class="bg-white py-2 collapse-inner rounded">
-                                    <h6 class="collapse-header">Custom Components:</h6>
-                                    <a class="collapse-item" href="../users/create.php">create a user</a>
-                                    <a class="collapse-item" href="../users/listusers.php">list all users</a>
-                                    <a class="collapse-item" href="cards.html">Cards</a>
-                                </div>
-                            </div>
-                        </li>
-                    ';
-                }
-            ?>
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Manage Users</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Custom Components:</h6>
+                        <?php
+                            if($userRoleSuperAdmin || $userRoleLeadPastor)
+                            {
+                                    echo '<a class="collapse-item" href="../users/create.php">create a user</a>';
+                            }
+                        ?>
+                        <a class="collapse-item" href="../users/listusers.php">list all users</a>
+                        <!-- <a class="collapse-item" href="cards.html">Cards</a> -->
+                    </div>
+                </div>
+            </li>
 
             <!-- Nav Item - Utilities Collapse Menu -->
             <?php
-                if($userRoleSuperAdmin || $userRoleVicar)
+                if($userRoleSuperAdmin || $userRoleLeadPastor)
                 {
                     echo 
                     '
-                    <li class="nav-item">
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-                            <i class="fas fa-fw fa-wrench"></i>
-                            <span>Administration Utilities</span>
-                        </a>
-                        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-                            <div class="bg-white py-2 collapse-inner rounded">
-                                <h6 class="collapse-header">Custom Utilities:</h6>
-                                ';
-                                if($userRoleSuperAdmin)
-                                {
-                                    echo
-                                    '
-                                        <a class="collapse-item" href="../administration/createRole.php">Create Role</a>
-                                        <a class="collapse-item" href="../administration/deleteRole.php">Delete Role</a>
+                        <li class="nav-item">
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+                                <i class="fas fa-fw fa-wrench"></i>
+                                <span>Administration Utilities</span>
+                            </a>
+                            <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                                <div class="bg-white py-2 collapse-inner rounded">
+                                    <h6 class="collapse-header">Custom Utilities:</h6>
                                     ';
-                                }
-                                echo'
-                                <a class="collapse-item" href="../administration/addusertorole.php">Add Users To Role</a>
-                                <a class="collapse-item" href="../administration/removeUserFromRole.php">Remove User From Role</a>
-                                <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                                <a class="collapse-item" href="utilities-other.html">Other</a>
+                                    if($userRoleSuperAdmin)
+                                    {
+                                        echo
+                                        '                                            
+                                            <a class="collapse-item" href="../administration/deleteRole.php">Delete Role</a>
+                                            <a class="collapse-item" href="../administration/createRole.php">Create Role</a>
+                                        ';
+                                    }
+                                    echo'
+                                    <a class="collapse-item" href="../administration/listrole.php">List Role</a>
+                                    <a class="collapse-item" href="../administration/addusertorole.php">Add Users To Role</a>
+                                    <a class="collapse-item" href="../administration/removeUserFromRole.php">Remove User From Role</a>
+                                </div>
                             </div>
-                        </div>
-                    </li>
+                        </li>
                     ';
                 }
             ?>
@@ -253,40 +263,113 @@
                 Addons
             </div>
 
-            <!-- Nav Item - Pages Collapse Menu -->
+            <!-- Membership -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#membership" aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-folder"></i>
-                    <span>Pages</span>
+                    <span>Membership</span>
                 </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div id="membership" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Data Management Screens:</h6>
                         <a class="collapse-item" href="../members/familytree.php">Register Form</a>
                         <a class="collapse-item" href="../members/allmembers.php">Members List</a>
-                        <a class="collapse-item" href="../members/deathlist.php">Death List</a>
-                        <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-                        <div class="collapse-divider"></div>
-                        <h6 class="collapse-header">Finance Pages:</h6>
-                        <a class="collapse-item" href="404.html">404 Page</a>
-                        <a class="collapse-item" href="blank.html">Blank Page</a>
+                        <a class="collapse-item" href="../members/deathlist.php">Death List</a>                       
+                    </div>
+                </div>
+            </li>
+            
+             <!-- Attendance -->
+             <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#attendance" aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Attendance</span>
+                </a>
+                <div id="attendance" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Attendance Register:</h6>                                                
+                        <a class="collapse-item" href="../Attendance/viewall.php">View Attendance</a>                        
                     </div>
                 </div>
             </li>
 
-            <!-- Nav Item - Charts -->
+            <!-- Finance -->
             <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#finance" aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Finance</span>
+                </a>
+                <div id="finance" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Financial mgt Screens:</h6>                                                
+                        <a class="collapse-item" href="../finance/financerecords.php">Financial Records</a>                        
+                        <a class="collapse-item" href="../finance/credit-records.php">Credit Records</a>
+                        <a class="collapse-item" href="../finance/debit-records.php">Debit Records</a>
+                    </div>
+                </div>
+            </li>
+            
+            <!-- Events and First Timers -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#events" aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Events and First Timers</span>
+                </a>
+                <div id="events" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Events Screens:</h6>
+                        <a class="collapse-item" href="../Events/allevents.php">All Events</a>                        
+                        <div class="collapse-divider"></div>
+                        <h6 class="collapse-header">First Timers Pages:</h6>
+                        <a class="collapse-item" href="../First_Timers/allfirsttimers.php">All First Timers</a>
+                        <a class="collapse-item" href="../First_Timers/retainedfirsttimers.php">Retained First Timers</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- House Fellowship and Units -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#fellowshipDrop" aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>House Fellowships</span>
+                </a>
+                <div id="fellowshipDrop" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">House Fellowships Screens:</h6>
+                        <a class="collapse-item" href="../Fellowship/house-fellowships.php">All House Fellowships</a>
+                        <a class="collapse-item" href="../Fellowship/view-fellowship-members.php">Members List</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- House Fellowship and Units -->
+            <!-- <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#units" aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Church Units</span>
+                </a>
+                <div id="units" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Units Pages:</h6>
+                        <a class="collapse-item" href="../Units/units.php">All Church Units</a>
+                        <a class="collapse-item" href="../Units/retainedfirsttimers.php">Retained First Timers</a>
+                    </div>
+                </div>
+            </li> -->
+
+            <!-- Nav Item - Charts -->
+            <!-- <li class="nav-item">
                 <a class="nav-link" href="charts.html">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Charts</span></a>
-            </li>
+            </li> -->
 
             <!-- Nav Item - Tables -->
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link" href="tables.html">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Member Records Table</span></a>
-            </li>
+            </li> -->
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
