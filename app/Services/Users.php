@@ -17,10 +17,11 @@ class Users
         $this->password = $values['passwords'];
         $this->orgId = $values['orgId'];
         $this->username = $values['username'];
+        //var_dump($this->username); die();
 
         if(!$this->isUsernameTaken($this->username))
         {
-
+            //die("username is free");
             if(empty($_FILES['file']['name'])){
                 $imageName = 'fx_male_Avatar.png';
             }
@@ -56,17 +57,21 @@ class Users
                 return true;
             }
         }
+        die("server error");
         return false;
     }
 
     private function isUsernameTaken($username)
     {
+        $username = stripslashes($username);
         $sql = "SELECT * FROM users WHERE username = '$username'";
         $stmt = DB::DBInstance()->query($sql);
+        
         if($stmt->isExist())
-        {
+        {            
             return true;
         }
+        //var_dump($stmt->isExist()); exit();
         return false;
     }
     public function suspendUser($userId, $orgId)
@@ -127,6 +132,9 @@ class Users
 
     public function getAllUsers($orgId)
     {
+        $org = new Organisations();
+        $orgEmail = $org->getOrgEmail($orgId);
+        $ignore = 'georgefx_'.$orgEmail;
         //verify the user role first
         #IF THE LOGGIN USER IS IN ROLE SUPER ADMIN, LIST ALL USERS
         #ELSE LIST ALL USERS EXCLUDING THE SUPER USER
@@ -139,7 +147,7 @@ class Users
         }
         else
         {
-            $sql = "SELECT * FROM users WHERE orgId = '$orgId' AND username != 'georgefx' ORDER BY Id DESC";
+            $sql = "SELECT * FROM users WHERE orgId = '$orgId' AND username != '$ignore' ORDER BY Id DESC";
             $run = DB::DBInstance()->query($sql);
             return $run;
         }

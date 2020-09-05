@@ -13,7 +13,7 @@
   <link rel="shortcut icon" href="bootstrap/assets/images/spaco-icon3-128x109.png" type="image/x-icon">
   <meta name="description" content="Web Page Builder Description">
   
-  <title>registration</title>
+  <title>iChurch | signup</title>
   <link rel="stylesheet" href="bootstrap/assets/web/assets/mobirise-icons/mobirise-icons.css">
   <link rel="stylesheet" href="bootstrap/assets/tether/tether.min.css">
   <link rel="stylesheet" href="bootstrap/assets/bootstrap/css/bootstrap.min.css">
@@ -30,7 +30,7 @@
 
     
 
-    <div class="mbr-overlay" style="opacity: 0.5; background-color: rgb(127, 25, 51);"></div>
+    <div class="mbr-overlay" style="opacity: 0.8; background-color: rgb(127, 25, 51);"></div>
 
     <div class="container align-right">
         <div class="row">

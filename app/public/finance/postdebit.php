@@ -24,11 +24,12 @@
             <div class="form-group">
                 <input list="source" class="form-control form-control-user" placeholder="Enter Debit Source" name="source" required>
                     <datalist id="source">
-                        <option value="Thanksgiving">
-                        <option value="Sunday Collections">
-                        <option value="Tithe">
-                        <option value="Donations">
-                        <option value="Harvest Leve">
+                        <option value="Utility Bills">
+                        <option value="Staff Salary">
+                        <option value="Transportation">
+                        <option value="Entertainment">
+                        <option value="Diseal">
+                        <option value="Fuel">
                     </datalist>                
             </div>
             <div class="form-group">
@@ -39,7 +40,7 @@
                 <input type="number" name="amount" class="form-control form-control-user" placeholder="Enter Amount">                
             </div>
             <div class="form-group">
-                <input type="date" name="transactiondate" class="form-control form-control-user" id="datefield">                
+                <input type="date" name="transactiondate" class="form-control form-control-user datefield" id="">                
             </div>
             <input type="submit" class="btn btn-info btn-user btn-block" name="postdebit" value="Post">
             </form>

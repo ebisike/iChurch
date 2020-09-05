@@ -4,6 +4,7 @@ include ('INotifications.php');
 
 class Notifications implements INotifications
 {
+    
     private function day()
     {
         return date('d');
@@ -118,7 +119,7 @@ class Notifications implements INotifications
                 break;
         }
 
-        return $days = array($startDay, $endDay);
+        return array($startDay, $endDay);
     }
 
     public function countChildrenDailyBirthDay($orgId)
@@ -341,6 +342,10 @@ class Notifications implements INotifications
         {
             ++$allFirstTimers;
             $data['isRetained'] ? $retained+=1 : $nonRetained+=1;
+        }
+        //var_dump($allFirstTimers); exit();
+        if($allFirstTimers == 0){
+            return 0;
         }
         $percentageRentension = ($retained * 100) / $allFirstTimers;
         return $percentageRentension;

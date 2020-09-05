@@ -23,6 +23,11 @@ include 'Events.php';
 include 'FirstTimers.php';
 include 'HouseFellowship.php';
 include 'Units.php';
+include 'AdminUser.php';
+include 'Attendance.php';
+include 'Subscriptions.php';
+include 'PaymentPackages.php';
+include 'SeedPaymentPackages.php';
 
 $db = new DB();
 $validate = new InputValidation();

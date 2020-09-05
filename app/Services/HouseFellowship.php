@@ -12,7 +12,7 @@ class HouseFellowship
         $sql = "INSERT INTO housefellowship (Id, fellowshipname, cordinatorId, addresss, meetingday, meetingtime, orgId, userId)
                 VALUES (NULL, '".$values['fellowshipname']."', '".$values['cordinatorId']."', '".$values['addresss']."', '".$values['meetingday']."', '".$values['meetingtime']."', '".$values['orgId']."', '".$values['userId']."')";
         $run = DB::DBInstance()->query($sql);
-        var_dump($sql);
+        //var_dump($sql);
         if($run)
         {
             return true;
@@ -82,6 +82,7 @@ class HouseFellowship
         $run = DB::DBInstance()->query($sql);
         if($run)
         {
+            $this->deleteAllMembersFromFellowship($Id, $orgId);
             return true;
         }
         return false;
@@ -118,6 +119,18 @@ class HouseFellowship
                 WHERE Id = '".$values['Id']."' AND memberId = '".$values['memberId']."' AND orgId = '".$values['orgId']."'";
         $stmt = DB::DBInstance()->query($sql);
         return true;
+    }
+
+    public function deleteAllMembersFromFellowship($fellowshipId,$orgId)
+    {
+        $sql = "DELETE FROM housefellowshipmembers
+                WHERE fellowshipId = '$fellowshipId' AND orgId = '$orgId'";
+        $stmt = DB::DBInstance()->query($sql);
+        if($stmt)
+        {
+            return true;
+        }
+        return false;
     }
 
     public function getAllHouseFellowshipMembers($fellowshipId, $orgId)

@@ -8,10 +8,16 @@
 
 
     $account->isSignedIn();
+    //$account->isExpired();
 
     //get current user details
     $currentuser = $user->getUser($_SESSION['userId'], $_SESSION['orgId']);
     $userImage_src = '../users/images/'. $currentuser['imagepath'];
+
+    //organisation
+    $organisation = new Organisations();
+    $orgname = $organisation->getOrgName($_SESSION['orgId']);
+    $orgemail = $organisation->getOrgEmail($_SESSION['orgId']);
 
     //function to get ToDateString
     function toLongDateString($dateParameter)
@@ -126,8 +132,9 @@
     //get current user role
     $userRoleSuperAdmin = $userInRole->isUserInRole("superadmin", $_SESSION['userId'], $_SESSION['orgId']);
     $userRoleSecretary = $userInRole->isUserInRole("secretary", $_SESSION['userId'], $_SESSION['orgId']);
-    $userRoleVicar = $userInRole->isUserInRole("vicar", $_SESSION['userId'], $_SESSION['orgId']);
-    $userRoleCurate = $userInRole->isUserInRole("curate", $_SESSION['userId'], $_SESSION['orgId']);
+    $userRoleLeadPastor = $userInRole->isUserInRole("lead_pastor", $_SESSION['userId'], $_SESSION['orgId']);
+    $userRoleAsstPastor = $userInRole->isUserInRole("asst_pastor", $_SESSION['userId'], $_SESSION['orgId']);
+    $userRoleRegular = $userInRole->isUserInRole("regular", $_SESSION['userId'], $_SESSION['orgId']);
 ?>
 
 <!DOCTYPE html>
@@ -155,7 +162,11 @@
 </head>
 
 <body id="page-top">
-
+    <style>
+        .subscribe{
+            cursor: pointer !important;
+        }
+    </style>
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -167,7 +178,8 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">SB <?php echo $currentuser['username']?> <sup>2</sup></div>
+                <!-- <div class="sidebar-brand-text mx-3">SB <?php echo $currentuser['username']?> <sup>2</sup></div> -->
+                <div class="sidebar-brand-text mx-3 text-lowercase">iChurch <sup>2</sup></div>
             </a>
 
             <!-- Divider -->
@@ -198,20 +210,20 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Components:</h6>
                         <?php
-                            if($userRoleSuperAdmin || $userRoleVicar)
+                            if($userRoleSuperAdmin || $userRoleLeadPastor)
                             {
                                     echo '<a class="collapse-item" href="../users/create.php">create a user</a>';
                             }
                         ?>
                         <a class="collapse-item" href="../users/listusers.php">list all users</a>
-                        <a class="collapse-item" href="cards.html">Cards</a>
+                        <!-- <a class="collapse-item" href="cards.html">Cards</a> -->
                     </div>
                 </div>
             </li>
 
             <!-- Nav Item - Utilities Collapse Menu -->
             <?php
-                if($userRoleSuperAdmin || $userRoleVicar)
+                if($userRoleSuperAdmin || $userRoleLeadPastor)
                 {
                     echo 
                     '
@@ -229,15 +241,13 @@
                                         echo
                                         '                                            
                                             <a class="collapse-item" href="../administration/deleteRole.php">Delete Role</a>
+                                            <a class="collapse-item" href="../administration/createRole.php">Create Role</a>
                                         ';
                                     }
                                     echo'
-                                    <a class="collapse-item" href="../administration/createRole.php">Create Role</a>
                                     <a class="collapse-item" href="../administration/listrole.php">List Role</a>
                                     <a class="collapse-item" href="../administration/addusertorole.php">Add Users To Role</a>
                                     <a class="collapse-item" href="../administration/removeUserFromRole.php">Remove User From Role</a>
-                                    <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                                    <a class="collapse-item" href="utilities-other.html">Other</a>
                                 </div>
                             </div>
                         </li>
@@ -269,6 +279,20 @@
                 </div>
             </li>
             
+             <!-- Attendance -->
+             <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#attendance" aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Attendance</span>
+                </a>
+                <div id="attendance" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Attendance Register:</h6>                                                
+                        <a class="collapse-item" href="../Attendance/viewall.php">View Attendance</a>                        
+                    </div>
+                </div>
+            </li>
+
             <!-- Finance -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#finance" aria-expanded="true" aria-controls="collapsePages">
@@ -319,7 +343,7 @@
             </li>
 
             <!-- House Fellowship and Units -->
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#units" aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Church Units</span>
@@ -331,21 +355,21 @@
                         <a class="collapse-item" href="../Units/retainedfirsttimers.php">Retained First Timers</a>
                     </div>
                 </div>
-            </li>
+            </li> -->
 
             <!-- Nav Item - Charts -->
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link" href="charts.html">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Charts</span></a>
-            </li>
+            </li> -->
 
             <!-- Nav Item - Tables -->
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link" href="tables.html">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Member Records Table</span></a>
-            </li>
+            </li> -->
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">

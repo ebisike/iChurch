@@ -23,9 +23,27 @@ class SeedData
             "orgId" => $orgId
         ];
 
-        $this->vicarRole = 
+        $this->LeadPastor = 
         [
-            "roleName" => "vicar",
+            "roleName" => "lead_pastor",
+            "orgId" => $orgId
+        ];
+
+        $this->AsstPastor = 
+        [
+            "roleName" => "asst_pastor",
+            "orgId" => $orgId
+        ];
+
+        $this->ChurchSec = 
+        [
+            "roleName" => "secretary",
+            "orgId" => $orgId
+        ];
+
+        $this->regular = 
+        [
+            "roleName" => "regular",
             "orgId" => $orgId
         ];
 
@@ -44,7 +62,10 @@ class SeedData
             "users" => $this->superUser['username'],
             "roleName" => $this->superAdminRole['roleName'],
             "orgId" => $orgId
-        ];        
+        ];
+
+        //create subscription packages
+
 
         $this->role = new Roles();
         $this->user = new Users();
@@ -55,9 +76,24 @@ class SeedData
         $this->role->createRole($this->superAdminRole);        
     }
 
-    public function seedVicarRole()
+    public function seedLeadPastorRole()
     {
-        $this->role->createRole($this->vicarRole);
+        $this->role->createRole($this->LeadPastor);
+    }
+
+    public function seedAsstPastorRole()
+    {
+        $this->role->createRole($this->AsstPastor);
+    }
+
+    public function seedChurchSecRole()
+    {
+        $this->role->createRole($this->ChurchSec);
+    }
+
+    public function seedRegularRole()
+    {
+        $this->role->createRole($this->regular);
     }
 
     public function seedSuperUser()

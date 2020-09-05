@@ -93,7 +93,7 @@ class Members
     public function getAllMembers($orgId)
     {
         $sql = "SELECT * FROM members WHERE orgId = '$orgId' ORDER BY Id DESC";
-        $runsql = DB::DBInstance()->query($sql);
+        $runsql = DB::DBInstance()->query($sql);        
         return $runsql;
     }
 

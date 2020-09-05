@@ -34,23 +34,27 @@ class FamilyTree
     public function generateFamilyID($branchName, $orgId)
     {
         $num = mt_rand(100000,999999);
-        $familyId = $branchName."/".$num;
-        if(!$this->isBranchTaken($familyId, $orgId))
+        //$familyId = $branchName."/".$num; var_dump($familyId);
+        $isTaken = $this->isBranchTaken($num, $orgId);
+        if($isTaken)
         {
-            return $familyId;
+            //echo 'exit'; exit();
+            $this->generateFamilyID($branchName, $orgId);
         }
         else
         {
-            $this->generateFamilyID($branchName, $orgId);
+            //echo 'new'; exit();
+            return $num;
         }
     }
 
     public function isBranchTaken($number, $orgId)
     {
-        $sql = "SELECT * FROM FamilyTree WHERE familyId = '{$number}' AND orgId = '{$orgId}'";
-        $stmt = DB::DBInstance()->query($sql);
+        $sql = "SELECT * FROM familytree WHERE familyId = '$number' AND orgId = '$orgId'";
+        $stmt = DB::DBInstance()->query($sql);        
         if($stmt->isExist())
         {
+            //var_dump($stmt->isExist());
             return true;
         }
         return false;

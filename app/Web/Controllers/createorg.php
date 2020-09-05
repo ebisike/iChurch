@@ -1,21 +1,26 @@
 <?php
+
+    $validate = new InputValidation();
     if(isset($_POST['register']))
     {
+        $orgName = $validate->validateForm( $_POST['orgName']);
         $orgName = $_POST['orgName'];
+        //$orgEmail = $validate->validateForm($_POST['orgEmail']);
         $orgEmail = $_POST['orgEmail'];
 
         $org = new Organisations();
         $create = $org->CreateOrganisation($orgEmail, $orgName);
         if($create)
         {
-            $result = $org->getOrgByEmail($_POST['orgEmail']);
+            $result = $org->getOrgByEmail($orgEmail);
 
+            //var_dump($result['OrgEmail']); exit();
             #initialize SeedData
             $seed = new SeedData($result['Id'], $result['OrgEmail']);
 
             #add registered user to vicar role
             #build vicar object
-            $vicarUser = 
+            $leadPastor = 
             [
                 "firstName" => $_POST['firstName'],
                 "lastName" => $_POST['lastName'],
@@ -26,17 +31,20 @@
 
             $addUser2VicarRole = 
             [
-                "roleName" => "vicar",
-                "users" => $vicarUser['username'],
+                "roleName" => "lead_pastor",
+                "users" => $leadPastor['username'],
                 "orgId" => $result['Id'],
             ];
 
             $new_user = new Users();
-            if($new_user->createUser($vicarUser))
+            if($new_user->createUser($leadPastor))
             {
                 #seed the superAdmin role and vicar role;
                 $seed->seedSuperAdminRoles();
-                $seed->seedVicarRole();
+                $seed->seedLeadPastorRole();
+                $seed->seedRegularRole();
+                $seed->seedAsstPastorRole();
+                $seed->seedChurchSecRole();
 
                 //assign new users to respective roles
                 $assignRole = new UsersInRole();
@@ -48,7 +56,7 @@
 
 
                 #initialize organisation balance
-                $userResult = $new_user->getUserByName($vicarUser['username'], $vicarUser['orgId']);
+                $userResult = $new_user->getUserByName($leadPastor['username'], $leadPastor['orgId']);
                 //$initialBalance = 0.0;
                 $bal = new Balance($userResult['orgId'], $userResult['Id']);
                 $bal->initializeBalance();

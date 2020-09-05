@@ -24,7 +24,7 @@
                         while ($branch = $results->getResults())
                         {
                             echo '<option value="'.$branch['Id'].'">'.$branch['branchName'].'_'.$branch['familyId'].'</option>';
-                        }                     
+                        }
                     ?>
                     </select>  
                     <input type="checkBox" id="newFamily" class="famhide" />

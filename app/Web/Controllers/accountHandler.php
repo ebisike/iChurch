@@ -7,25 +7,26 @@ if(isset($_POST['signin']))
         $_POST[$key] = $validate->validateForm($value); //striping the user input            
     }
     
-    if($result = $account->signin($_POST))
+    if($account->verifyOrganisation($_POST))
     {
         //check if user is suspended
         //echo $result['isActive'];
-       if( $result['isActive'])
-       {           
+        $user = $account->signin($_POST);
+        if($user)
+        {
             header('location: public/mgt/index.php'); //redirect to dashboard            
-       }
-       else
-       {
-        echo "<script>alert('account suspended')</script>";
-       }
+        }
+        else
+        {
+            echo "<script>alert('account suspended')</script>";
+        }
     }
     else
     {
-        echo "<script>alert('Invalid Login Details')</script>";
+        $admin = "<a maito='georgefx.creativecompany@gmail.com'>Admin</a>";
+        echo '<script>alert("Sorry Account Suspened. Please contact the admin for more info")</script>';
     }
 }
-
 if(isset($_GET['logout']))
 {
     $account->signout();

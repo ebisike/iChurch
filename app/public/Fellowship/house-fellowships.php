@@ -6,7 +6,7 @@
     
     if(isset($_GET['del']))
     {
-        $phone = $_GET['del'];
+        $Id = $_GET['del'];
         $houseFellowship->deleteFellowshipUnit($Id, $_SESSION['orgId']);
     }
 
@@ -58,9 +58,10 @@
                     <?php
                         $count = 0;
                         $results = $houseFellowship->getAllFellowshipUnits($_SESSION['orgId']);
+                        //echo (json_encode($results->getResults()));
                         $time = strtotime($result['meetingtime']);
-                        $h = date('j', $time);
-                        $m = date('m', $time);
+                        $h = date('H:i:s', $time);
+                        $m = date('i', $time);
                         while($result = $results->getResults())
                         {
                             $date = toLongDateString($result['datecreated']);
@@ -70,14 +71,13 @@
                                 <tr class="text-dark">
                                     <td>'.++$count.'</td>
                                     <td>'.$result['fellowshipname'].'</td>
-                                    <td class="text-uppercase">'.$fullname.'</td>
+                                    <td class="text-uppercase"><a href="../members/view.php?find='.$result['Id'].'">'.$fullname.'</a></td>
                                     <td>'.$result['addresss'].'</td>
                                     <td>'.$result['meetingtime'].'</td>
                                     <td>'.$result['meetingday'].'</td>
                                     <td>'.$date.'</td>
-                                    <td>                                         
-                                        <a href="allfirsttimers.php?retain='.$result['Id'].'"><i class="fa fa-check-circle fa-1x text-success"></i></a> | 
-                                        <a href="allfirsttimers.php?del='.$result['Id'].'"><i class="fa fa-trash fa-1x text-danger"></i></a> |
+                                    <td>                                        
+                                        <a href="house-fellowships.php?del='.$result['Id'].'"><i class="fa fa-trash fa-1x text-danger"></i></a> |
                                     </td>
                                 </tr>
                             ';

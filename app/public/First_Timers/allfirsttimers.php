@@ -55,6 +55,7 @@
                     <?php
                         $count = 0;
                         $results = $firstTimer->getAllFirstTimers($_SESSION['orgId']);
+                        //echo json_encode($results->getResults());
                         while($result = $results->getResults())
                         {
                             $date = toLongDateString($result['eventdate']);

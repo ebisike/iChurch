@@ -53,6 +53,9 @@
             {
                 $result = $run->getResults();
                 #$this->balance = $result['currentbalance'];
+                if($result['currentbalance'] == NULL){
+                    return 0;
+                }
                 return $result['currentbalance'];
             }
         }

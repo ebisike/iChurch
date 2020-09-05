@@ -42,7 +42,7 @@
                     </div>                    
                     <hr>
                     <input type="submit" class="btn btn-primary btn-user btn-block" name="add_first_timer" value="Add">
-                </form><a href="allevents.php">back to list</a>
+                </form><a href="allfirsttimers.php">back to list</a>
             </div>
             </div>
         </div>

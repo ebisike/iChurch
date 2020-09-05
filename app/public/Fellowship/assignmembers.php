@@ -50,21 +50,9 @@
         let fellowship = document.getElementById('fellowship');
         let member = document.getElementById('member');
 
-        // cordinator.addEventListener('change', function(e){
-        //     if(e.target.value != ""){
-        //         document.getElementById("meetingday").style.display = "block"
-        //         document.getElementById("meetingtime").style.display = "block"
-        //         document.getElementById("address").style.display = "block"
-        //     }else{
-        //         document.getElementById("meetingday").style.display = "none"
-        //         document.getElementById("meetingtime").style.display = "none"
-        //         document.getElementById("address").style.display = "none"    
-        //     }
-        // })
-
         $.ajax({
             method: "GET",
-            url: "ajax-housefellowship.php?fetchFellowship=<?php echo $_SESSION['orgId']?>",            
+            url: "ajax/assignmembers.php?fetchFellowship=<?php echo $_SESSION['orgId']?>",            
             success: function(resp){
                 console.log(JSON.parse(resp))
                 load(JSON.parse(resp), fellowship)
@@ -76,7 +64,7 @@
 
         $.ajax({
             method: "GET",
-            url: "ajax-housefellowship.php?fetchMember=<?php echo $_SESSION['orgId']?>",            
+            url: "ajax/assignmembers.php?fetchMember=<?php echo $_SESSION['orgId']?>",            
             success: function(resp){
                 //console.log(resp)
                 if(JSON.parse(resp) == "")

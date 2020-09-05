@@ -33,6 +33,7 @@
                         {
                             if(strtolower($result['roleName']) == strtolower("superAdmin") && !$userRoleSuperAdmin)
                             {
+                                #if the role name is = superadmin, and the currently logged in user is not in role: superAdmin... skip
                                 continue;
                             }
                             echo
@@ -50,3 +51,6 @@
         </div>
     </div>
 </div>
+<?php
+    require ('../shared/_footer.php');
+?>

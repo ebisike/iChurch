@@ -1,14 +1,22 @@
 var today = new Date();
-var dd = today.getDate();
-var mm = today.getMonth() + 1; //January is 0!
-var yyyy = today.getFullYear();
-if (dd < 10) {
-    dd = '0' + dd
-}
-if (mm < 10) {
-    mm = '0' + mm
-}
+var day = today.getDate();
+var month = today.getMonth() + 1; //January is 0!
+var year = today.getFullYear();
+if (day < 10)
+    day = '0' + day
+if (month < 10)
+    month = '0' + month
 
-today = yyyy + '-' + mm + '-' + dd;
-document.getElementById("datefield").setAttribute("max", today);
-//document.getElementsByClassName("datefield").setAttribute("max", today);
+today = year + '-' + month + '-' + day;
+
+let dates = document.querySelectorAll('.datefield')
+let arr = Array.from(dates)
+for (let index = 0; index < arr.length; index++) {
+    dates[index].setAttribute("max", today)
+}
+//set min date for end date picker when generating reports
+let startDate = document.getElementById('startDate')
+startDate.addEventListener('change', (e) => {
+    document.getElementById('endDate').disabled = false
+    document.getElementById('endDate').setAttribute("min", startDate.value)
+})

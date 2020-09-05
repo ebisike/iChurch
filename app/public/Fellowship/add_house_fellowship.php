@@ -86,7 +86,7 @@
 
         $.ajax({
             method: "GET",
-            url: "ajax-housefellowship.php?id=<?php echo $_SESSION['orgId']?>",            
+            url: "ajax/add_fellowship.php?id=<?php echo $_SESSION['orgId']?>",            
             success: function(resp){
                 console.log(resp)
 

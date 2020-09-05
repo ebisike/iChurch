@@ -1,7 +1,7 @@
 <?php
     require ('../shared/_sidebar.php');
     require ('../shared/_topbar.php');
-    $org = new Organisations();   
+    $org = new Organisations();    
 ?>
 
 <div class="p-3">

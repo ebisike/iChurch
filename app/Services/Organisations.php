@@ -17,7 +17,8 @@ class Organisations
         $result = $this->isEmailTaken($orgEmail);
         if (!$result)
         {
-            $sql = "INSERT INTO Organisation (OrgName, OrgEmail) VALUES ('".$orgName."', '".$orgEmail."')";
+            $today = date('Y-m-d');
+            $sql = "INSERT INTO Organisation (OrgName, OrgEmail, expirydate) VALUES ('".$orgName."', '".$orgEmail."', '".$today."')";
             //$sql = "INSERT INTO Organisation (OrgName, OrgEmail) VALUES ('femi kuti', 'femi@g.com')";
             $runsql = DB::DBInstance()->query($sql);
             if($runsql)
@@ -25,7 +26,7 @@ class Organisations
                 return true;
             }
         }
-        return "Not Created";
+        return "Not Created"; //0779475243
         
     }
 
@@ -80,11 +81,19 @@ class Organisations
 
     public function getOrgByEmail($email)
     {
-        $sql = "SELECT * FROM organisation WHERE OrgEmail = '$email'";
+        //$email = stripslashes($email);
+        $email = addslashes($email);
+        $sql = "SELECT * FROM organisation WHERE OrgEmail = '{$email}'";
         $stmt = DB::DBInstance()->query($sql);
-        if($stmt->isExist())
+        //var_dump($sql); exit();
+        if($stmt)
         {
             return $stmt->getResults();
+            // var_dump(json_encode($x)); exit();
+            // //echo 'yh: '.$x; exit();
+        }else{
+            var_dump(json_encode($stmt));
+            echo "not found"; exit();
         }
     }
 
@@ -94,5 +103,35 @@ class Organisations
         $data = trim($data);
         $data = htmlspecialchars($data);
         return $data;
+    }
+
+    public function getOrgById($orgId)
+    {
+        $sql = "SELECT * FROM organisation WHERE Id = '$orgId'";
+        $stmt = DB::DBInstance()->query($sql);
+        if($stmt->isExist())
+        {
+            $data = $stmt->getResults();
+            return $data;
+        }
+    }
+    public function updateActivationStatus($orgId)
+    {
+        $sql = "UPDATE organisation
+                SET isActive = 1
+                WHERE Id = '$orgId'";
+        $run = DB::DBInstance()->query($sql);
+        if($run)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public function calculateExpiryDate($orgId)
+    {
+        $today = date('Y-m-d');
+        $org = $this->getOrgById($orgId);
+        $orgExpiryDate = $org['expirydate'];
     }
 }

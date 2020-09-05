@@ -41,7 +41,7 @@
                 </div>
                 <div class="col-md-12" id="fellowship-info">
                     <h4 class="text-dark bg-info font-weight-bold p-2">Fellowship Info: <span class="text-white" id="fellowshipname"></span></h4>
-                    <p class="font-weight-bold text-uppercase">Co-ordinator: <span id="cordinator"></span></p>
+                    <p class="font-weight-bold text-uppercase">Co-ordinator: <a id="link"><span id="cordinator"></span></a></p>
                     <p class="font-weight-bold">Meeting Day: <span id="meetingDay"></span></p>
                     <p class="font-weight-bold">Meeting Venue: <span id="meetingVenue"></span></p>
                     <p class="font-weight-bold">Meeting Time: <span id="meetingTime"></span></p>
@@ -95,7 +95,7 @@
         
         $.ajax({
             method: "GET",
-            url: "ajax-housefellowship.php?fellowshipList=<?php echo $_SESSION['orgId']?>",
+            url: "ajax/view_fellowship.php?fellowshipList=<?php echo $_SESSION['orgId']?>",
             success: function(resp){
                 //console.log(JSON.parse(resp))
                 loadSelectList(JSON.parse(resp), fellowship)
@@ -107,16 +107,18 @@
         {
             $.ajax({
             method: "GET",
-            url: "ajax-housefellowship.php?fellowshipID="+e.target.value+"&orgId=<?php echo $_SESSION['orgId']?>",
+            url: "ajax/view_fellowship.php?fellowshipID="+e.target.value+"&orgId=<?php echo $_SESSION['orgId']?>",
             success:function(resp){
-                    console.log(tableBody)
+                    //console.log(tableBody)
                     loadTable(JSON.parse(resp), tableBody)
                     //load the fellowship cordinator details
                     $.ajax({
                             method: "GET",
-                            url: "ajax-housefellowship.php?fetchCordinator="+e.target.value+"&orgId=<?php echo $_SESSION['orgId']?>",
+                            url: "ajax/view_fellowship.php?fetchCordinator="+e.target.value+"&orgId=<?php echo $_SESSION['orgId']?>",
                             success: function(resp){
-                                let obj = JSON.parse(resp)                                
+                                let obj = JSON.parse(resp)
+                                let link = document.getElementById('link')
+                                link.setAttribute("href", '../members/view.php?find='+obj.Id)
                                 cordinator.appendChild(document.createTextNode(obj.firstName + ' ' + obj.otherName + ' ' + obj.lastName))
                                 meetingDay.appendChild(document.createTextNode(obj.meetingday))
                                 meetingVenue.appendChild(document.createTextNode(obj.addresss))
@@ -130,6 +132,7 @@
 
         function loadSelectList(arr, DOMelement)
         {
+            DOMelement.textContent = ""
             for (let index = 0; index < arr.length; index++)
             {
                 var option = document.createElement('option');
@@ -141,30 +144,28 @@
         }
         function loadTable(arr, DOMelement)
         {
+            DOMelement.textContent = ""
+            let i=0
             for (let index = 0; index < arr.length; index++)
             {
                 var tRow = document.createElement('tr');
-                for (let i = 0; i < 1; i++)
-                {
-                    var tData1 = document.createElement("td");
-                    var tData2 = document.createElement("td");
-                    var tData3 = document.createElement('td');
-
-                    tData1.appendChild(document.createTextNode(++i))
-                    tData2.appendChild(document.createTextNode(arr[index].firstName + ' ' + arr[index].otherName + ' ' + arr[index].lastName))
-                    tData3.appendChild(document.createTextNode(arr[index].phone1))
-                    tRow.appendChild(tData1)
-                    tRow.appendChild(tData2)
-                    tRow.appendChild(tData3)
-                }   
                 
+                var tData1 = document.createElement("td");
+                var tData2 = document.createElement("td");
+                var tData3 = document.createElement('td');
+                let link = document.createElement("a");
+
+                tData1.appendChild(document.createTextNode(++i))
+                link.setAttribute("href", '../members/view.php?find='+arr[index].Id)
+                link.appendChild(document.createTextNode(arr[index].firstName + ' ' + arr[index].otherName + ' ' + arr[index].lastName))
+                tData2.appendChild(link)
+                tData3.appendChild(document.createTextNode(arr[index].phone1))
+                tRow.appendChild(tData1)
+                tRow.appendChild(tData2)
+                tRow.appendChild(tData3)
+                 
                 DOMelement.appendChild(tRow);
             }
-        }
-
-        function loadCordinator(arr, DOMelement)
-        {
-
         }
     })
 </script>

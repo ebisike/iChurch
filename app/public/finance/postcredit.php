@@ -28,7 +28,7 @@
                         <option value="Sunday Collections">
                         <option value="Tithe">
                         <option value="Donations">
-                        <option value="Harvest Leve">
+                        <option value="Harvest Levy">
                     </datalist>                
             </div>
             <div class="form-group">
@@ -39,7 +39,7 @@
                 <input type="number" name="amount" class="form-control form-control-user" placeholder="Enter Amount">                
             </div>
             <div class="form-group">
-                <input type="date" name="transactiondate" class="form-control form-control-user" id="datefield">                
+                <input type="date" name="transactiondate" class="form-control form-control-user datefield" id="">                
             </div>
             <input type="submit" class="btn btn-primary btn-user btn-block" name="postcredit" value="Post">
             </form>

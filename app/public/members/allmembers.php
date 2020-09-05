@@ -2,6 +2,9 @@
     require ('../shared/_sidebar.php');
     require ('../shared/_topbar.php');
 
+    include ('../../web/controllers/formshandler.php');
+
+
     if(isset($_GET['dead']))
     {
         $memberId = $_GET['dead'];
@@ -48,7 +51,7 @@
                 <tbody>
                     <?php
                         $count = 0;
-                        $membersList = $members->getAllMembers($_SESSION['orgId']);
+                        $membersList = $members->getAllMembers($_SESSION['orgId']);                        
                         while($result = $membersList->getResults())
                         {
                             if($result['isAlive'])

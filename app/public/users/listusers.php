@@ -42,7 +42,7 @@
                                         <h6>Username: '.$result['username'].'</h6>
                                                                                                             
                                 ';
-                                    if($userRoleSuperAdmin || $userRoleVicar)
+                                    if($userRoleSuperAdmin || $userRoleLeadPastor)
                                     {
                                         if($result['isActive'])
                                         {

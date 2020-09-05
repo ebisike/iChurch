@@ -39,8 +39,8 @@
                                 <th>#</th>
                                 <th>Full name</th>
                                 <th>Name of Spouse</th>
-                                <th>Date of Birth</th>
-                                <th>Age</th>
+                                <th>Date of Anniversary</th>
+                                <th>Number of years</th>
                             </tr>
                         </thead>
                     <tbody>
@@ -86,8 +86,8 @@
                                     <th>#</th>
                                     <th>Full name</th>
                                     <th>Name of Spouse</th>
-                                    <th>Date of Birth</th>
-                                    <th>Age</th>
+                                    <th>Date of Anniversary</th>
+                                    <th>Number of years</th>
                                 </tr>
                             </thead>
                         <tbody>
