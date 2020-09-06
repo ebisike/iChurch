@@ -11,6 +11,9 @@
             $imgsrc = 'passports/'. $data['imagepath'];
             //fectch the details of the user that add the member
             $userInfo = $user->getUser($data['userId'], $data['orgId']);
+
+            //get the family tree
+            $fam = $family->getFamilyBranch($data['familyId'], $data['orgId']);
         }
     }
 
@@ -29,7 +32,7 @@
                         <img src="<?php echo $imgsrc ?>" alt="passport" class="img img-responsive img-thumbnail">
                         <label class="text-capitalize">
                             stewardship: <?php echo $data['stewardship']?><br>
-                            family ID: <?php echo $data['familyId']?>
+                            family ID: <?php echo $fam['branchName'].'_'.$data['familyId']?>
                         </label>
                     </div>
                     <div id="name">

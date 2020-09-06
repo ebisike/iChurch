@@ -33,26 +33,14 @@
     }
 
     //single updates
-    if(isset($_POST['updateFirstName']))
+    if(isset($_POST['updateUser']))
     {
         foreach ($_POST as $key => $value)
         {
             $_POST[$key] = $validate->validateForm($value); //striping the user input            
         }
 
-        if($user->updateFirstName($_POST)){
-            header('location: ../mgt/index.php');
-        }
-    }
-
-    if(isset($_POST['updateLastName']))
-    {
-        foreach ($_POST as $key => $value)
-        {
-            $_POST[$key] = $validate->validateForm($value); //striping the user input            
-        }
-        
-        if($user->updateLastName($_POST)){
+        if($user->updateUser($_POST)){
             header('location: ../mgt/index.php');
         }
     }

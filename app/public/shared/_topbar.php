@@ -1,13 +1,10 @@
 <?php
 
-    $date = toLongDateString(date('Y-m-d'));
-    $org = new Organisations();
-    $orginfo = $org->getOrgById($_SESSION['orgId']);
-    $expDay = date('d', strtotime($orginfo['expirydate']));
-    $day = date('d', strtotime($date));
-    $daysLeft = $expDay - $day;
+    $date = toLongDateString(date('Y-m-d'));    
+    $org = new Organisations();    
+    $daysLeft = $org->calculateExpiryDate($_SESSION['orgId']);
     $color = $daysLeft > 10 ? "bg-info":"bg-danger";
-    //die($daysLeft);
+    
     #get notigications
     $childrenWeeklyBirthdayCount =  $notify->countChildrenWeeklyBirthday($_SESSION['orgId']);
     //$childrenWeeklyBirthdayCount =  $notify->getChildrenWeeklyBirthday($_SESSION['orgId']);

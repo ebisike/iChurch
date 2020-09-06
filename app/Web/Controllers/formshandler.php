@@ -17,9 +17,9 @@ if(isset($_POST['newBranch']))
 
     $data = $family->createTreeBranch($_POST['branchName'], $_SESSION['orgId']);
     $_SESSION['familyId'] = $data['familyId'];
-     var_dump($data);
+    //var_dump($data);
     //echo $_SESSION['familyId'];
-    //header("Location: forms.php");
+    header("Location: forms.php");
 }
 
 if(isset($_POST['submit']))

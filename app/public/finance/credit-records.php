@@ -24,7 +24,7 @@
                         <th>Amount</th>
                         <th>Source</th>
                         <th>Description</th>
-                        <th>Date Posted</th>
+                        <th>Value Date</th>
                         <th>Posted by</th>
                     </tr>
                 </thead>
@@ -34,7 +34,7 @@
                         <th>Amount</th>
                         <th>Source</th>
                         <th>Description</th>
-                        <th>Date Posted</th>
+                        <th>Value Date</th>
                         <th>Posted by</th>
                     </tr>
                 </tfoot>

@@ -23,7 +23,7 @@
                         $results = $family->getAllTreeBranch($_SESSION['orgId']);                     
                         while ($branch = $results->getResults())
                         {
-                            echo '<option value="'.$branch['Id'].'">'.$branch['branchName'].'_'.$branch['familyId'].'</option>';
+                            echo '<option value="'.$branch['familyId'].'">'.$branch['branchName'].'_'.$branch['familyId'].'</option>';
                         }
                     ?>
                     </select>  

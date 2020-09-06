@@ -51,7 +51,7 @@
                     <p>Account Name: GEORGE CHIGOZIE EBISIKE</p>
                     <p>Account Number: 0036231862</p>
                 </div>
-                <div class="row bg-danger" style="margin: auto auto;" id="category">
+                <div class="row" style="margin: auto auto;" id="category">
                 <?php
                     foreach ($packagelist as $value)
                     {
@@ -261,75 +261,31 @@
             </div>
             <div class="modal-body">
                 Select a textbox to edit your information and click the button.
-                <div class="row">
-                    <div class="col-md-6">
-                        <!-- firstName Edit -->
-                        <label class="mb-0">first name</label>
-                        <form class="inline-block form-inline pt-2" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>">
-                            <div class="input-group">
-                                <input type="text" class="form-control bg-light border-0 small" name="firstName"
-                                placeholder="<?php echo $currentuser['firstName']?>" value="<?php echo $currentuser['firstName']?>">
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary" type="submit" name="updateFirstName">
-                                    <i class="fas fa-paper-plane fa-sm"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <input type="hidden" name="id" value="<?php echo $currentuser['Id']?>">
-                            <input type="hidden" name="orgId" value="<?php echo $_SESSION['orgId']?>">
-                        </form>
-
-                        <!-- lastName Edit -->
-                        <label class="mb-0">last name</label>
-                        <form class="inline-block form-inline pt-2" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>">
-                            <div class="input-group">
-                                <input type="text" class="form-control bg-light border-0 small" name="lastName"
-                                placeholder="<?php echo $currentuser['lastName']?>" value="<?php echo $currentuser['lastName']?>">
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary" type="submit" name="updateLastName">
-                                    <i class="fas fa-paper-plane fa-sm"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <input type="hidden" name="id" value="<?php echo $currentuser['Id']?>">
-                            <input type="hidden" name="orgId" value="<?php echo $_SESSION['orgId']?>">
-                        </form>
+                <form class="pt-2 user" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>" enctype="multipart/form-data">
+                    <!-- firstName Edit -->
+                    <div class="form-group">
+                        <label class="">first name</label>
+                        <input type="text" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Update your first name" name="firstName" value="<?php echo $currentuser['firstName']?>">
+                        <input type="hidden" name="id" value="<?php echo $currentuser['Id']?>">
+                        <input type="hidden" name="orgId" value="<?php echo $_SESSION['orgId']?>">
                     </div>
-
-                    <div class="col-md-6">
-                        <!-- username Edit -->
-                        <label class="mb-0">username</label>
-                        <form class="inline-block form-inline pt-2" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>">
-                            <div class="input-group">
-                                <input type="text" class="form-control bg-light border-0 small" name="username"
-                                placeholder="<?php echo $currentuser['username']?>" value="<?php echo $currentuser['username']?>">
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary" type="submit" name="updateUsername">
-                                    <i class="fas fa-paper-plane fa-sm"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <input type="hidden" name="id" value="<?php echo $currentuser['Id']?>">
-                            <input type="hidden" name="orgId" value="<?php echo $_SESSION['orgId']?>">
-                        </form>
-
-                        <!-- password Edit -->
-                        <label class="mb-0">password</label>
-                        <form class="inline-block form-inline pt-2" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>">
-                            <div class="input-group">
-                                <input type="text" class="form-control bg-light border-0 small" name="passwords"
-                                placeholder="<?php echo $currentuser['passwords']?>" value="<?php echo $currentuser['passwords']?>">
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary" type="submit" name="updatePasswords">
-                                    <i class="fas fa-paper-plane fa-sm"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <input type="hidden" name="id" value="<?php echo $currentuser['Id']?>">
-                            <input type="hidden" name="orgId" value="<?php echo $_SESSION['orgId']?>">
-                        </form>
+                    <div class="form-group">
+                        <label for="">Last Name</label>
+                        <input type="text" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Update your Last Name" name="lastName" value="<?php echo $currentuser['lastName']?>">                
                     </div>
-                </div>                
+                    <div class="form-group">
+                        <label for="">Username</label>
+                        <input type="text" class="form-control form-control-user" id="username" aria-describedby="emailHelp" placeholder="Enter a new Username" name="username" value="<?php echo $currentuser['username']?>">                
+                    </div>                
+                    <div class="form-group">
+                        <label>upload an Image</label>
+                        <input type="file" name="file" class="form-control">
+                    </div>
+                    <hr>
+                    <button class="btn btn-primary shadow" type="submit" name="updateUser">
+                        <i class="fas fa-paper-plane fa-sm"></i>
+                    </button>
+                </form>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>

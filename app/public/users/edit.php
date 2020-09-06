@@ -1,7 +1,7 @@
 <?php
     require ('../shared/_sidebar.php');
     require ('../shared/_topbar.php');
-    include '../../web/controllers/usermanagement.php';
+    //include '../../web/controllers/usermanagement.php';
 
     if(isset($_GET['edit']))
     {
@@ -23,22 +23,29 @@
             </div>
             <form class="user" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>" method="post" enctype="multipart/form-data">
                 <div class="form-group">
-                    <input type="text" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="<?php echo $result['firstName']?>" name="firstName" value="<?php echo $result['firstName']?>">
+                    <label for="">First Name</label>
+                    <input type="text" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Update your first name" name="firstName" value="<?php echo $result['firstName']?>">
                     <input type="hidden" name="id" value="<?php echo $result['Id']?>">
                     <input type="hidden" name="orgId" value="<?php echo $_SESSION['orgId']?>">
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="<?php echo $result['lastName']?>" name="lastName" value="<?php echo $result['lastName']?>">                
+                    <label for="">Last Name</label>
+                    <input type="text" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Update your Last Name" name="lastName" value="<?php echo $result['lastName']?>">                
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control form-control-user" id="username" aria-describedby="emailHelp" placeholder="<?php echo $result['username']?>" name="username" value="<?php echo $result['username']?>">                
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control form-control-user disabled" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="<?php echo $result['passwords']?>" name="passwords" value="<?php echo $result['passwords']?>">
-                </div>
-                <div class="form-group">
-                    <label>upload an Image</label>
-                    <input type="file" name="file" class="form-control" value="1.jpg">
+                    <label for="">Username</label>
+                    <input type="text" class="form-control form-control-user" id="username" aria-describedby="emailHelp" placeholder="Enter a new Username" name="username" value="<?php echo $result['username']?>">                
+                </div>                
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="images/<?php echo $result['imagepath']?>" class="img img-responsive img-circle img-thumbnail" alt="" width="50%">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>upload an Image</label>
+                            <input type="file" name="file" class="form-control">
+                        </div>
+                    </div>
                 </div>
                 <hr>
                 <input type="submit" class="btn btn-primary btn-user btn-block" name="update" value="update user">

@@ -66,7 +66,8 @@
                                 </div>
                                 <div class="form-group">
                                 <!-- <label>Stewardship number *</label> -->
-                                    <select name="gender" id="" class="form-control" required value="<?php echo $data['gender']?>">
+                                    <select name="gender" id="" class="form-control" required>
+                                        <option value="<?php echo $data['gender']?>"><?php echo $data['gender']?></option>
                                         <option value="0">---Gender---</option>
                                         <option value="Male">Male</option>
                                         <option value="Female">Female</option>
@@ -102,7 +103,8 @@
                             <div class="col-md-4 p-2 bg-gradient-dark">
                                 <div class="form-group">
                                     <label>State of origin *</label>
-                                    <select class="form-control" name="stateOfOrigin" required value="<?php echo $data['stateoforigin']?>">
+                                    <select class="form-control" name="stateOfOrigin" required>
+                                        <option value="<?php echo $data['stateoforigin']?>"><?php echo $data['stateoforigin']?></option>
                                         <option value="Abia">Abia</option>
                                         <option value="Adamawa">Adamawa</option>
                                         <option value="Akwa Ibom">Akwa Ibom</option>
@@ -165,7 +167,7 @@
                             <div class="col-md-8">
                                 <div class="form-group">
                                     <label>Marital Status *</label>
-                                    <select name="maritalStatus" id="" class="form-control" required value="<?php echo $data['maritalstatus']?>">
+                                    <select name="maritalStatus" id="marital-status" class="form-control" required value="<?php echo $data['maritalstatus']?>">
                                         <option value="single">single</option>
                                         <option value="marrried">marrried</option>
                                         <option value="separated">separated</option>
@@ -173,24 +175,25 @@
                                         <option value="widower">widower</option>
                                     </select>
                                 </div>                                    
-                                <div class="form-group">
+                                <div class="form-group" id="spouse-div">
                                 <!-- <label>Stewardship number *</label> -->
                                     <input type="text" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Name of Spouse..." name="nameOfSpouse" value="<?php echo $data['nameofspouse']?>">                            
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" id="marriage-nature-div">
                                     <label>Nature of Marriage *</label>
-                                    <select name="natureOfMarriage" id="" class="form-control" required value="<?php echo $data['natureofmarriage']?>">
+                                    <select name="natureOfMarriage" id="" class="form-control" required>
+                                    <option value="<?php echo $data['natureofmarriage']?>"><?php echo $data['natureofmarriage']?></option>
                                         <option value="unmarried">unmarried</option>
                                         <option value="Traditional">Traditional</option>
                                         <option value="Ordinance">Ordinance</option>
                                         <option value="Blessing">Blessing</option>
                                     </select>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" id="marriage-date-div">
                                     <label>Date of Marriage *</label>
                                     <input type="date" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Marriage Date..." name="dateOfMarriage" value="<?php echo $data['dateofmarriage']?>">                            
                                 </div>
-                                <div class="form-group">                                    
+                                <div class="form-group" id="child-div">                                    
                                     <input type="number" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Number of Children..." name="numberOfChildren" value="<?php echo $data['numberofchildren']?>">                            
                                 </div>
                             </div>
@@ -211,7 +214,8 @@
                             <div class="col-md-8 p-2">
                                 <div class="form-group">
                                     <label>Highest Academic Qualification *</label>
-                                    <select class="form-control" required name="academic" value="<?php echo $data['academicqualification']?>">
+                                    <select class="form-control" required name="academic">
+                                        <option value="<?php echo $data['academicqualification']?>"><?php echo $data['academicqualification']?></option>
                                         <option value="FSLC">FSLC</option>
                                         <option value="O level">O level</option>
                                         <option value="ND">ND</option>
@@ -267,7 +271,8 @@
                                 </div>                                
                                 <div class="form-group">
                                     <label>Group *</label>
-                                    <select class="form-control" name="group" value="<?php echo $data['group']?>">
+                                    <select class="form-control" name="group">
+                                        <option value="<?php echo $data['group']?>"><?php echo $data['group']?></option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>
@@ -335,3 +340,4 @@
 <?php
     require ('../shared/_footer.php');
 ?>
+<script src="../../bootstrap/js/custom/membershipformcontrols.js"></script>

@@ -66,4 +66,11 @@ class FamilyTree
         $stmt = DB::DBInstance()->query($sql);
         return $stmt;
     }
+
+    public function getFamilyBranch($familyId, $orgId)
+    {
+        $sql = "SELECT * FROM familytree WHERE familyId = '$familyId' AND orgId = '$orgId'";
+        $run = DB::DBInstance()->query($sql);       
+        return $run->getResults();
+    }
 }
