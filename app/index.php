@@ -2,11 +2,11 @@
   include 'Services/init.php';
 
   $package = new SeedPaymentPackages();
-  $package->seedFreePackage();
-  $package->seedMonthlyPackage();
-  $package->seedQuaterlyPackage();
-  $package->seedSemiAnnualPackage();
-  $package->seedAnnualPackage();
+  // $package->seedFreePackage();
+  // $package->seedMonthlyPackage();
+  // $package->seedQuaterlyPackage();
+  // $package->seedSemiAnnualPackage();
+  // $package->seedAnnualPackage();
 
 ?>
 

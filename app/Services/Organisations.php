@@ -130,8 +130,9 @@ class Organisations
 
     public function calculateExpiryDate($orgId)
     {
-        $today = date('Y-m-d');
+        $today = strtotime(date('Y-m-d'));
         $org = $this->getOrgById($orgId);
-        $orgExpiryDate = $org['expirydate'];
+        $orgExpiryDate = strtotime($org['expirydate']);
+        return ($orgExpiryDate - $today)/60/60/24;
     }
 }
