@@ -19,7 +19,7 @@
                 </div>
                 <form class="user" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>" method="post">
                     <div class="form-group">
-                        <select name="cordinatorId" id="cordinator" class="form-control">
+                        <select name="cordinatorId" id="cordinator" class="form-control searchuser">
                             <option value="">Pick a Co-ordinator for the Fellowship Cell</option>
                         </select>
                     </div>
@@ -63,6 +63,8 @@
 <script>
     $(document).ready(function(){
 
+        $('.searchuser').select2()
+
         document.getElementById("meetingday").style.display = "none"
         document.getElementById("meetingtime").style.display = "none"
         document.getElementById("address").style.display = "none"
@@ -88,7 +90,7 @@
             method: "GET",
             url: "ajax/add_fellowship.php?id=<?php echo $_SESSION['orgId']?>",            
             success: function(resp){
-                console.log(resp)
+                //console.log(resp)
 
                 load(JSON.parse(resp), cordinator)
             },

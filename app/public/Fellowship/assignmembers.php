@@ -19,12 +19,12 @@
                 </div>
                 <form class="user" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>" method="post">
                     <div class="form-group">
-                        <select name="fellowshipId" id="fellowship" class="form-control">
+                        <select name="fellowshipId" id="fellowship" class="form-control searchuser">
                             <option value="">Pick a Fellowship Cell</option>
                         </select>
                     </div>
                     <div class="form-group" id="">
-                        <select name="memberId" id="member" class="form-control">
+                        <select name="memberId" id="member" class="form-control searchuser">
                             <option value="">Pick a Member</option>                            
                         </select>
                         <input type="hidden" name="orgId" value="<?php echo $_SESSION['orgId']?>">
@@ -47,6 +47,7 @@
 <script>
     $(document).ready(function(){       
 
+        $('.searchuser').select2()
         let fellowship = document.getElementById('fellowship');
         let member = document.getElementById('member');
 

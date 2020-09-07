@@ -158,6 +158,7 @@
     <!-- Custom styles for this template-->
     <link href="../../bootstrap/css/sb-admin-2.min.css" rel="stylesheet">
     <link href="../../bootstrap/css/mtabs.css" rel="stylesheet">
+    <link href="../../bootstrap/vendor/select2/select2.min.css" rel="stylesheet">
 
 </head>
 

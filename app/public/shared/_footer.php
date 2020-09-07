@@ -353,6 +353,9 @@
 <script src="../../bootstrap/vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="../../bootstrap/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
+<script src="../../bootstrap/vendor/select2/select2.min.js"></script>
+
+
 <!-- Page level custom scripts -->
  <script src="../../bootstrap/js/demo/datatables-demo.js"></script>
  <script src="../../bootstrap/js/mtabs-js.js"></script>
