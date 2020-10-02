@@ -265,13 +265,13 @@
                     <!-- firstName Edit -->
                     <div class="form-group">
                         <label class="">first name</label>
-                        <input type="text" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Update your first name" name="firstName" value="<?php echo $currentuser['firstName']?>">
+                        <input type="text" class="form-control form-control-user" aria-describedby="emailHelp" placeholder="Update your first name" name="firstName" value="<?php echo $currentuser['firstName']?>">
                         <input type="hidden" name="id" value="<?php echo $currentuser['Id']?>">
                         <input type="hidden" name="orgId" value="<?php echo $_SESSION['orgId']?>">
                     </div>
                     <div class="form-group">
                         <label for="">Last Name</label>
-                        <input type="text" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Update your Last Name" name="lastName" value="<?php echo $currentuser['lastName']?>">                
+                        <input type="text" class="form-control form-control-user" aria-describedby="emailHelp" placeholder="Update your Last Name" name="lastName" value="<?php echo $currentuser['lastName']?>">                
                     </div>
                     <div class="form-group">
                         <label for="">Username</label>
@@ -306,24 +306,147 @@
             </div>
             <div class="modal-body">
                 Select Start and End date to generate report.
-                <form class="user" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>" method="post">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label class="col-md-6">Start Date</label>
-                                <input type="date" name="startdate" class="form-control form-control-user col-md-6 datefield" placeholder="Enter Start Date" id="startDate">
-                            </div>
+                <form class="user mt-3" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>" method="post">
+                    <div class="form-group row">
+                        <label class="col-md-4">Start Date</label>
+                        <div class="col-md-8">
+                            <input type="date" name="startdate" class="form-control form-control-user datefield" placeholder="Enter Start Date" id="startDate">
                         </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label class="col-md-6">End Date</label>
-                                <input type="date" name="enddate" class="form-control form-control-user col-md-6 datefield" placeholder="Enter End Date" id="endDate" disabled="true">
-                            </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-4">End Date</label>
+                        <div class="col-md-8">
+                            <input type="date" name="enddate" class="form-control form-control-user datefield" placeholder="Enter End Date" id="endDate" disabled="true">
                         </div>
                     </div>
                     <input type="hidden" value="<?php echo $_SESSION['orgId']?>" name="orgId" />
-                    <input type="submit" class="btn btn-primary float-lg-right" name="report" value="generate">
+                    <input type="submit" class="btn btn-primary float-lg-left offset-4" name="report" value="generate">
                 </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Search Birthday-->
+<div class="modal fade" id="quickSearchBirthday" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Search for a range of birthdays?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="user" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>" method="post">
+                    <div class="form-group row">
+                        <label class="col-md-4 text-dark font-weight-bold">Start Date</label>
+                        <div class="col-md-8">
+                            <input type="date" name="startdate" class="form-control form-control-user" placeholder="Enter Start Date">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-4 text-dark font-weight-bold">End Date</label>
+                        <div class="col-md-8">
+                            <input type="date" name="enddate" class="form-control form-control-user" placeholder="Enter End Date">
+                        </div>
+                    </div>
+                    <input type="hidden" value="<?php echo $_SESSION['orgId']?>" name="orgId" />
+                    <button type="submit" class="btn btn-primary float-lg-left offset-4" name="searchBirthday"> <i class="fas fa-search"></i> SEARCH</button>
+                    <!-- <input type="submit" class="btn btn-primary float-lg-left offset-4" name="report" value="generate"> -->
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Search Anniversary-->
+<div class="modal fade" id="quickSearchAnniversary" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" >Search for a range of wedding Anniversaries?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="user" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>" method="post">
+                    <div class="form-group row">
+                        <label class="col-md-4 text-dark font-weight-bold">Start Date</label>
+                        <div class="col-md-8">
+                            <input type="date" name="startdate" class="form-control form-control-user" placeholder="Enter Start Date">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-4 text-dark font-weight-bold">End Date</label>
+                        <div class="col-md-8">
+                            <input type="date" name="enddate" class="form-control form-control-user" placeholder="Enter End Date">
+                        </div>
+                    </div>
+                    <input type="hidden" value="<?php echo $_SESSION['orgId']?>" name="orgId" />
+                    <button type="submit" class="btn btn-primary float-lg-left offset-4" name="searchAnniversary"> <i class="fas fa-search"></i> SEARCH</button>
+                    <!-- <input type="submit" class="btn btn-primary float-lg-left offset-4" name="report" value="generate"> -->
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Search Family Tree-->
+<div class="modal fade" id="familyTree" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Search for a range of wedding Anniversaries?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="user" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>" method="post">
+                    <div class="form-group row">
+                        <label class="col-md-4 text-dark font-weight-bold">Family Id</label>
+                        <div class="col-md-8">
+                            <input type="text" name="familyId" class="form-control form-control-user" placeholder="Enter a Family Id">
+                        </div>
+                    </div>
+                    <input type="hidden" value="<?php echo $_SESSION['orgId']?>" name="orgId" />
+                    <button type="submit" class="btn btn-primary float-lg-left offset-4" name="searchFamily"> <i class="fas fa-search"></i> SEARCH</button>
+                    <!-- <input type="submit" class="btn btn-primary float-lg-left offset-4" name="report" value="generate"> -->
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Calendar Popup-->
+<div class="modal fade" id="calendarPopUp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="exampleModalLabel">Search Result for Calendar Event</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body" id="calendarDetails">
+                <h3 class="text-uppercase text-primary text-center" id="title"></h3>
+                <p class="text-center" id="des"></p>
+                <p class="text-center" id="org"> Organised By: </p>
+                <p class="text-center" id="calDate"></p>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
@@ -362,7 +485,7 @@
  <script src="../../bootstrap/js/custom/logout-url.js"></script>
  <!-- set max date for input fields -->
  <script src="../../bootstrap/js/custom/max-date.js"></script>
- <!-- <script src="../../bootstrap/js/custom/expiry.js"></script> -->
+ <script src="../../bootstrap/vendor/jquery/jQuery.print.js"></script>
 
 <script type="text/javaScript">
     //document.getElementById('callbackurl').setAttribute("value", url);

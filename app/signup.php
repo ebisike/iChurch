@@ -50,12 +50,15 @@
                             }
                           ?>
                             <div class="dragArea row">
+                                <label for="" class="ml-3 p-2 text-uppercase font-weight-bold border-bottom">Organisation Details</label>
                                 <div class="col-md-12 form-group " data-for="name">
                                     <input type="text" name="orgName" placeholder="Organisation Name" data-form-field="Name" required="required" class="form-control px-3 display-7" id="name-header15-4">
                                 </div>
                                 <div class="col-md-12 form-group " data-for="email">
                                     <input type="email" name="orgEmail" placeholder="Organisation Email" data-form-field="Email" required="required" class="form-control px-3 display-7" id="email-header15-4">
                                 </div>
+                                <hr>
+                                <label for="" class="ml-3 p-2 text-uppercase font-weight-bold border-bottom">Admin User Details</label>
                                 <div class="col-md-12 form-group " data-for="name">
                                     <input type="text" name="firstName" placeholder="First Name" data-form-field="Name" required="required" class="form-control px-3 display-7" id="name-header15-4">
                                 </div>

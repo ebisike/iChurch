@@ -28,6 +28,8 @@ include 'Attendance.php';
 include 'Subscriptions.php';
 include 'PaymentPackages.php';
 include 'SeedPaymentPackages.php';
+include 'Calendar.php';
+include 'QuickActions.php';
 
 $db = new DB();
 $validate = new InputValidation();
@@ -41,6 +43,7 @@ $family = new FamilyTree();
 $members = new Members();
 $child = new Children();
 $notify = new Notifications();
+$calendar = new Calendar();
 
 //$org->CreateOrganisation();
 //$x = $org->getOrgName(1);

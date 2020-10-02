@@ -7,36 +7,19 @@
         public $endDate;
         public $orgId;
         
-        // public function __construct()
-        // {
-        //     #constructor            
-        // }
-        
-        public function getStatement($values)
+        public function __construct($values)
         {
-            $startDate = strtotime($values['startdate']);
-            $startDay = date('d', $startDate);
-            $startMonth = date('m', $startDate);
-            $startYear = date('Y', $startDate);
-
-            $endDate = strtotime($values['enddate']);
-            $endDay = date('d', $endDate);
-            $endMonth = date('m', $endDate);
-            $endYear = date('Y', $endDate);
-
-            // $sql = "SELECT * FROM transactions WHERE
-            //         (DAY(transactiondate) BETWEEN $startDay AND $endDay) AND
-            //         (MONTH(transactiondate) BETWEEN $startMonth AND $endMonth) AND
-            //         (YEAR(transactiondate) BETWEEN $startYear AND $endYear) AND orgId = '".$values['orgId']."'
-            //         ORDER BY transactiondate DESC";
-
-            // $sql = "SELECT * FROM transactions WHERE
-            //     transactiondate BETWEEN '".$values['startdate']."' AND '".$values['enddate']."' AND orgId = '".$values['orgId']."'";
-
+            $this->startDate = $values['startdate'];
+            $this->endDate = $values['enddate'];
+            $this->orgId = $values['orgId'];
+        }
+        
+        public function getStatement()
+        {
             $sql = "SELECT * FROM transactions
                     INNER JOIN users
                     ON transactions.userId = users.Id
-                    WHERE transactions.transactiondate BETWEEN '".$values['startdate']."' AND '".$values['enddate']."' AND transactions.orgId = '".$values['orgId']."'";
+                    WHERE transactions.transactiondate BETWEEN '".$this->startDate."' AND '".$this->endDate."' AND transactions.orgId = '".$this->orgId."'";
             //var_dump($sql);
 
             $stmt = DB::DBInstance()->query($sql);
@@ -47,7 +30,7 @@
             return false;
         }
 
-        public function getOpenningBalance($values)
+        public function getOpenningBalance()
         {
             #THOUGHT
             #1 - Get the total credited amount before the start date of the statement request
@@ -57,7 +40,7 @@
                 #1
             /***************************************************************** */
             $sql = "SELECT SUM(amount) AS credit FROM transactions
-                    WHERE transactiontype = 1 AND transactiondate < '{$values['startdate']}' AND orgId = '{$values['orgId']}'";
+                    WHERE transactiontype = 1 AND transactiondate < '{$this->startDate}' AND orgId = '{$this->orgId}'";
             //var_dump($sql);
 
             $stmt = DB::DBInstance()->query($sql);
@@ -68,7 +51,7 @@
                 #2
             /***************************************************************** */
             $sql = "SELECT sum(amount) AS debit FROM transactions
-                    WHERE transactiontype = 0 AND transactiondate < '{$values['startdate']}' AND orgId = '{$values['orgId']}'";
+                    WHERE transactiontype = 0 AND transactiondate < '{$this->startDate}' AND orgId = '{$this->endDate}'";
             $stmt = DB::DBInstance()->query($sql);
             $result = $stmt->getResults();
             $TotalDebit = $result['debit'];
@@ -81,29 +64,30 @@
             return $diff;
         }
 
-        public function getCLosingBalance($values)
+        public function getCLosingBalance()
         {
             $creditBalance = 0;
             $debitBalance = 0;
             $closingBalance = 0;
-            $statementData = $this->getStatement($values);
+            $statementData = $this->getStatement();
             while($result = $statementData->getResults())
             {
                 $result['transactiontype'] ? $creditBalance += $result['amount'] : $debitBalance += $result['amount'];
             }
 
-            $closingBalance = ($creditBalance - $debitBalance) + $this->getOpenningBalance($values);
+            $closingBalance = ($creditBalance - $debitBalance) + $this->getOpenningBalance();
             //echo $closingBalance;
             return $closingBalance;
         }
 
-        private function getSourceList($orgId)
+        private function getSourceList()
         {
             #THOUGHT
             # GET ALL DISTINCT TRANSACTION SOURCE IN AN ARRAY
             #ITRATE THROUGH THE ARRAY AND GET SUM OF EACH AMOUNT FOR EACH PARTICULAR SOURCE
             $sourceList = array();
-            $sql = "SELECT DISTINCT source FROM transactions WHERE orgId = '$orgId'";
+            $sql = "SELECT DISTINCT source FROM transactions
+                    WHERE orgId = '$this->orgId' AND transactiondate BETWEEN '".$this->startDate."' AND '".$this->endDate."'";
             $stmt = DB::DBInstance()->query($sql);
             if($stmt)
             {
@@ -117,15 +101,15 @@
             }
         }
 
-        public function getIncomeSourceSummary($orgId)
+        public function getIncomeSourceSummary()
         {
             $data = array();
-            $sourceList = $this->getSourceList($orgId); //get distinct sources for transactions
+            $sourceList = $this->getSourceList(); //get distinct sources for transactions
             //var_dump($sourceList);
             for ($i=0; $i < count($sourceList); $i++)
             { 
                 $sql = "SELECT source, amount FROM transactions
-                        WHERE source = '{$sourceList[$i]['source']}' AND orgId = '$orgId' AND transactiontype=1";
+                        WHERE source = '{$sourceList[$i]['source']}' AND orgId = '$this->orgId' AND transactiontype=1";
                 $run = DB::DBInstance()->query($sql);
                 $temp = array("source"=>"","amount"=>0);
                 while ($r = $run->getResults())
@@ -140,15 +124,15 @@
             return $data;
         }
 
-        public function getExpenditureSourceSummary($orgId)
+        public function getExpenditureSourceSummary()
         {
             $data = array();
-            $sourceList = $this->getSourceList($orgId); //get distinct sources for transactions
+            $sourceList = $this->getSourceList(); //get distinct sources for transactions
             //var_dump($sourceList);
             for ($i=0; $i < count($sourceList); $i++)
             { 
                 $sql = "SELECT source, amount FROM transactions
-                        WHERE source = '{$sourceList[$i]['source']}' AND orgId = '$orgId' AND transactiontype=0";
+                        WHERE source = '{$sourceList[$i]['source']}' AND orgId = '$this->orgId' AND transactiontype=0";
                 $run = DB::DBInstance()->query($sql);
                 $temp = array("source"=>"","amount"=>0);
                 while ($r = $run->getResults())
@@ -179,12 +163,12 @@
             }
         }
 
-        public function getIncomeSourceSummaryDetails($source, $sDate, $eDate, $orgId)
+        public function getIncomeSourceSummaryDetails($source)
         {
             $sql = "SELECT * FROM transactions
                     INNER JOIN users
                     ON transactions.userId = users.Id
-                    WHERE transactions.transactiondate BETWEEN '".$sDate."' AND '".$eDate."' AND transactions.transactiontype = 1 AND transactions.orgId = '$orgId' AND transactions.source = '$source'";
+                    WHERE transactions.transactiondate BETWEEN '".$this->startDate."' AND '".$this->endDate."' AND transactions.transactiontype = 1 AND transactions.orgId = '$this->orgId' AND transactions.source = '$source'";
             $stmt = DB::DBInstance()->query($sql);
             if($stmt)
             {
@@ -192,12 +176,12 @@
             }
         }
 
-        public function getExpenseSourceSummaryDetails($source, $sDate, $eDate, $orgId)
+        public function getExpenseSourceSummaryDetails($source)
         {
             $sql = "SELECT * FROM transactions
                     INNER JOIN users
                     ON transactions.userId = users.Id
-                    WHERE transactions.transactiondate BETWEEN '".$sDate."' AND '".$eDate."' AND transactions.transactiontype = 0 AND transactions.orgId = '$orgId' AND transactions.source = '$source'";
+                    WHERE transactions.transactiondate BETWEEN '".$this->startDate."' AND '".$this->endDate."' AND transactions.transactiontype = 0 AND transactions.orgId = '$this->orgId' AND transactions.source = '$source'";
             $stmt = DB::DBInstance()->query($sql);
             if($stmt)
             {

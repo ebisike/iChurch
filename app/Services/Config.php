@@ -21,6 +21,7 @@ class Config extends DB
        $this->createTableAttendance();
        $this->createTablePaymentPackages();
        $this->createTableSubscriptionRequests();
+       $this->createTableCalendar();
     }
 
     private function createTableOrganisation()
@@ -146,6 +147,13 @@ class Config extends DB
     private function createTableSubscriptionRequests()
     {
         $sql = "CREATE TABLE IF NOT EXISTS `ichurch`.`subscriptionrequests` ( `Id` INT(255) NOT NULL AUTO_INCREMENT , `orgId` INT(255) NOT NULL , `paymentpackageId` INT(255) NOT NULL , `daterequested` DATE NOT NULL , `isTreated` BOOLEAN NOT NULL DEFAULT FALSE , PRIMARY KEY (`Id`)) ENGINE = InnoDB;";
+        DB::DBInstance()->query($sql);
+    }
+
+    private function createTableCalendar()
+    {
+        $sql = "CREATE TABLE `ichurch`.`Calendar` ( `Id` INT(12) NOT NULL AUTO_INCREMENT , `EventDate` DATE NOT NULL , `Title` VARCHAR(255) NOT NULL , `Descriptions` VARCHAR(255) NOT NULL , `Organizers` VARCHAR(255) NOT NULL , `orgId` INT(9) NOT NULL , `userId` INT(9) NOT NULL , PRIMARY KEY (`Id`)) ENGINE = InnoDB;";
+
         DB::DBInstance()->query($sql);
     }
 }

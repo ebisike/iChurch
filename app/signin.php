@@ -57,7 +57,7 @@
                           ?> -->
                             <div class="dragArea row">
                                 <div class="col-md-12 form-group " data-for="email">
-                                    <input type="text" name="username" placeholder="Email" data-form-field="Email" required="required" class="form-control px-3 display-7" id="email-header15-4">
+                                    <input type="text" name="username" placeholder="Username" data-form-field="Email" required="required" class="form-control px-3 display-7" id="email-header15-4">
                                 </div>
                                 <div class="col-md-12 form-group " data-for="password">
                                     <input type="password" name="passwords" placeholder="password" data-form-field="Name" required="required" class="form-control px-3 display-7" id="name-header15-4">

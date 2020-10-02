@@ -107,6 +107,14 @@ class Members
         }
     }
 
+    public function getFamilyMembers($familyId, $orgId)
+    {
+        $sql = "SELECT * FROM members WHERE orgId = '$orgId' AND familyId = '$familyId' ORDER BY Id DESC";
+        $runsql = DB::DBInstance()->query($sql);
+        //var_dump($runsql); die();
+        return $runsql;
+    }
+
     public function deleteMember($memberId, $orgId)
     {
         $sql = "DELETE FROM members WHERE orgId = '$orgId' AND Id = '$memberId'";

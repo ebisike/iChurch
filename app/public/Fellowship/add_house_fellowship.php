@@ -62,8 +62,8 @@
 
 <script>
     $(document).ready(function(){
+        //$('.searchuser').select2()
 
-        $('.searchuser').select2()
 
         document.getElementById("meetingday").style.display = "none"
         document.getElementById("meetingtime").style.display = "none"
@@ -84,6 +84,7 @@
                 document.getElementById("address").style.display = "none"
                 document.getElementById("name").style.display = "none"
             }
+            console.log(e.target.value)
         })
 
         $.ajax({
@@ -98,6 +99,8 @@
                 console.log(ed);
             }
         })
+
+
         function load(arr, element){
             //console.log(typeof arr)
             for (let index = 0; index < arr.length; index++) {

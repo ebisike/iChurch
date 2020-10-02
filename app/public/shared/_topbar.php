@@ -144,7 +144,7 @@
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="mr-3">
                                         <div class="icon-circle bg-primary">                                            
-                                            <img src="../users/images/'.$result['imagepath'].'" class="img img-responsive img-thumbnail" />
+                                            <img src="../members/passports/'.$result['imagepath'].'" class="img img-responsive img-thumbnail" style="border-radius: 50px" />
                                         </div>
                                     </div>
                                     <div>

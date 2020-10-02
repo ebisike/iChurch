@@ -5,6 +5,7 @@
     include ('../../web/controllers/administrationController.php');
     include ('../../web/controllers/formshandler.php');
     include ('../../web/controllers/finance-handlers.php');
+    include ('../../web/controllers/QuickSearch.php');
 
 
     $account->isSignedIn();
@@ -203,6 +204,28 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#calendar" aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Church Calendar</span>
+                </a>
+                <div id="calendar" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Custom Components:</h6>
+                        <?php
+                            if($userRoleSuperAdmin || $userRoleLeadPastor)
+                            {
+                                    echo '<a class="collapse-item" href="../Calendar/calendar.php">Calendar Event</a>';
+                            }
+                        ?>
+                        <a class="collapse-item" href="../Calendar/AllEvents.php">list all users</a>
+                        <!-- <a class="collapse-item" href="cards.html">Cards</a> -->
+                    </div>
+                </div>
+            </li>
+
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Manage Users</span>
@@ -264,6 +287,23 @@
                 Addons
             </div>
 
+            <!-- Quick search -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#quicksearch" aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-search"></i>
+                    <span>Quick Search</span>
+                </a>
+                <div id="quicksearch" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Search for future events:</h6>
+                        <a class="collapse-item" href="#" data-toggle="modal" data-target="#quickSearchBirthday">Birthdays</a>
+                        <a class="collapse-item" href="#" data-toggle="modal" data-target="#quickSearchAnniversary">Wedding Anniversary</a>
+                        <a class="collapse-item" href="#" data-toggle="modal" data-target="#familyTree">Family Tree</a>
+                        <!-- <a class="collapse-item" href="../members/deathlist.php">Death List</a>                        -->
+                    </div>
+                </div>
+            </li>
+
             <!-- Membership -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#membership" aria-expanded="true" aria-controls="collapsePages">
@@ -275,6 +315,7 @@
                         <h6 class="collapse-header">Data Management Screens:</h6>
                         <a class="collapse-item" href="../members/familytree.php">Register Form</a>
                         <a class="collapse-item" href="../members/allmembers.php">Members List</a>
+                        <a class="collapse-item" href="../members/familymembers.php">Family Tree</a>
                         <a class="collapse-item" href="../members/deathlist.php">Death List</a>                       
                     </div>
                 </div>

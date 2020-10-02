@@ -14,6 +14,7 @@ let arr = Array.from(dates)
 for (let index = 0; index < arr.length; index++) {
     dates[index].setAttribute("max", today)
 }
+
 //set min date for end date picker when generating reports
 let startDate = document.getElementById('startDate')
 startDate.addEventListener('change', (e) => {
