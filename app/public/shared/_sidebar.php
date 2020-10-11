@@ -217,7 +217,7 @@
                                     echo '<a class="collapse-item" href="../Calendar/calendar.php">Calendar Event</a>';
                             }
                         ?>
-                        <a class="collapse-item" href="../Calendar/AllEvents.php">list all users</a>
+                        <!-- <a class="collapse-item" href="../Calendar/AllEvents.php">list all users</a> -->
                         <!-- <a class="collapse-item" href="cards.html">Cards</a> -->
                     </div>
                 </div>
