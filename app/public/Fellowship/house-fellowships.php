@@ -17,51 +17,61 @@
     }
 ?>
 
-<div class="p-3">
-<a href="add_house_fellowship.php" class="btn btn-primary p-1 font-weight-bold"> <i class="fa fa-plus fa-1x bg-primary p-1 text-white"></i> Add House Fellowship</a>
-<a href="assignmembers.php" class="btn btn-info p-1 font-weight-bold"> <i class="fa fa-plus fa-1x bg-info p-1 text-white"></i> Add Members to House Fellowship</a>
-</div>
+<?php
+    if(!$userRoleRegular)
+    {
+        echo 
+        '
+            <div class="p-3">
+                <a href="add_house_fellowship.php" class="btn btn-primary p-1 font-weight-bold"> <i
+                        class="fa fa-plus fa-1x bg-primary p-1 text-white"></i> Add House Fellowship</a>
+                <a href="assignmembers.php" class="btn btn-info p-1 font-weight-bold"> <i
+                        class="fa fa-plus fa-1x bg-info p-1 text-white"></i> Add Members to House Fellowship</a>
+            </div>
+        ';
+    }
+?>
 
 
 <!-- DataTales Example -->
 <div class="pt-0 pl-3 pr-3">
-<div class="card shadow mb-4">
+    <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">All House Fellowships</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
-            <table class="table table-striped table-hover" id="dataTable" width="100%" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Fellowship Name</th>
-                        <th>Co-ordinator Name</th>
-                        <th>Address</th>
-                        <th>Meeting Time</th>
-                        <th>Meeting Day</th>
-                        <th>Date Created</th>
-                    </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-                        <th>#</th>
-                        <th>Fellowship Name</th>
-                        <th>Co-ordinator Name</th>
-                        <th>Address</th>
-                        <th>Meeting Time</th>
-                        <th>Meeting Day</th>
-                        <th>Date Created</th>
-                    </tr>
-                </tfoot>
-                <tbody class="text-dark">
-                    <?php
+                <table class="table table-striped table-hover" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Fellowship Name</th>
+                            <th>Co-ordinator Name</th>
+                            <th>Address</th>
+                            <th>Meeting Time</th>
+                            <th>Meeting Day</th>
+                            <th>Date Created</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>#</th>
+                            <th>Fellowship Name</th>
+                            <th>Co-ordinator Name</th>
+                            <th>Address</th>
+                            <th>Meeting Time</th>
+                            <th>Meeting Day</th>
+                            <th>Date Created</th>
+                        </tr>
+                    </tfoot>
+                    <tbody class="text-dark">
+                        <?php
                         $count = 0;
                         $results = $houseFellowship->getAllFellowshipUnits($_SESSION['orgId']);
                         //echo (json_encode($results->getResults()));
-                        $time = strtotime($result['meetingtime']);
-                        $h = date('H:i:s', $time);
-                        $m = date('i', $time);
+                        // $time = strtotime($result['meetingtime']);
+                        // $h = date('H:i:s', $time);
+                        // $m = date('i', $time);
                         while($result = $results->getResults())
                         {
                             $date = toLongDateString($result['datecreated']);
@@ -82,12 +92,12 @@
                                 </tr>
                             ';
                         }
-                    ?>                                
-                </tbody>
-            </table>
+                    ?>
+                    </tbody>
+                </table>
             </div>
         </div>
-        </div>
+    </div>
 </div>
 <?php
     require ('../shared/_footer.php');

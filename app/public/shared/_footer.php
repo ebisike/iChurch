@@ -261,7 +261,7 @@
             </div>
             <div class="modal-body">
                 Select a textbox to edit your information and click the button.
-                <form class="pt-2 user" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>" enctype="multipart/form-data">
+                <form class="pt-2 user" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>" method="post" enctype="multipart/form-data">
                     <!-- firstName Edit -->
                     <div class="form-group">
                         <label class="">first name</label>
@@ -282,9 +282,11 @@
                         <input type="file" name="file" class="form-control">
                     </div>
                     <hr>
-                    <button class="btn btn-primary shadow" type="submit" name="updateUser">
+                    <!-- <button class="btn btn-primary shadow" type="submit" name="updateUser">
                         <i class="fas fa-paper-plane fa-sm"></i>
-                    </button>
+                    </button> -->
+                    <input type="submit" class="btn btn-primary btn-user btn-block" name="updateUsers" value="update user">
+
                 </form>
             </div>
             <div class="modal-footer">
@@ -490,6 +492,10 @@
 <script type="text/javaScript">
     //document.getElementById('callbackurl').setAttribute("value", url);
 </script>
+
+<!-- Canvasjs Charts Plugin -->
+<script src="../../bootstrap/vendor/chart.js/canvasjs.min.js"></script>
+
 
 <script>
     $(document).ready(function() {

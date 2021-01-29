@@ -33,7 +33,7 @@
     }
 
     //single updates
-    if(isset($_POST['updateUser']))
+    if(isset($_POST['updateUsers']))
     {
         foreach ($_POST as $key => $value)
         {

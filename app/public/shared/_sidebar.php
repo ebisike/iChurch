@@ -161,6 +161,9 @@
     <link href="../../bootstrap/css/mtabs.css" rel="stylesheet">
     <link href="../../bootstrap/vendor/select2/select2.min.css" rel="stylesheet">
 
+    <!-- CHARTS PUGLIN CDN -->
+    <!-- <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script> -->
+
 </head>
 
 <body id="page-top">
@@ -305,21 +308,29 @@
             </li>
 
             <!-- Membership -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#membership" aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Membership</span>
-                </a>
-                <div id="membership" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Data Management Screens:</h6>
-                        <a class="collapse-item" href="../members/familytree.php">Register Form</a>
-                        <a class="collapse-item" href="../members/allmembers.php">Members List</a>
-                        <a class="collapse-item" href="../members/familymembers.php">Family Tree</a>
-                        <a class="collapse-item" href="../members/deathlist.php">Death List</a>                       
-                    </div>
-                </div>
-            </li>
+            <?php
+                if(!$userRoleRegular)
+                {
+                    echo
+                    '
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#membership" aria-expanded="true" aria-controls="collapsePages">
+                            <i class="fas fa-fw fa-folder"></i>
+                            <span>Membership</span>
+                        </a>
+                        <div id="membership" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Data Management Screens:</h6>
+                                <a class="collapse-item" href="../members/familytree.php">Register Form</a>
+                                <a class="collapse-item" href="../members/allmembers.php">Members List</a>
+                                <a class="collapse-item" href="../members/familymembers.php">Family Tree</a>
+                                <a class="collapse-item" href="../members/deathlist.php">Death List</a>                       
+                            </div>
+                        </div>
+                    </li>
+                    ';
+                }
+            ?>            
             
              <!-- Attendance -->
              <li class="nav-item">
@@ -336,20 +347,29 @@
             </li>
 
             <!-- Finance -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#finance" aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Finance</span>
-                </a>
-                <div id="finance" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Financial mgt Screens:</h6>                                                
-                        <a class="collapse-item" href="../finance/financerecords.php">Financial Records</a>                        
-                        <a class="collapse-item" href="../finance/credit-records.php">Credit Records</a>
-                        <a class="collapse-item" href="../finance/debit-records.php">Debit Records</a>
-                    </div>
-                </div>
-            </li>
+            <?php
+                if(!$userRoleRegular)
+                {
+                    echo 
+                    '
+                        <li class="nav-item">
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#finance" aria-expanded="true" aria-controls="collapsePages">
+                                <i class="fas fa-fw fa-folder"></i>
+                                <span>Finance</span>
+                            </a>
+                            <div id="finance" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                                <div class="bg-white py-2 collapse-inner rounded">
+                                    <h6 class="collapse-header">Financial mgt Screens:</h6>                                                
+                                    <a class="collapse-item" href="../finance/financerecords.php">Financial Records</a>                        
+                                    <a class="collapse-item" href="../finance/credit-records.php">Credit Records</a>
+                                    <a class="collapse-item" href="../finance/debit-records.php">Debit Records</a>
+                                </div>
+                            </div>
+                        </li>
+                    ';
+                }
+            ?>    
+            
             
             <!-- Events and First Timers -->
             <li class="nav-item">

@@ -45,7 +45,7 @@
                         while($result = $list->getResults())
                         {
                             //the if condition does nothing really.
-                            #just left cos of laziness.
+                            #just left cos of laziness.                            
                             if(1)
                             {                                
                                 $date = toLongDateString($result['transactiondate']);

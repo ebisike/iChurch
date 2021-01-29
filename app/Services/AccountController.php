@@ -35,6 +35,8 @@ class AccountController
         return false;
     }    
 
+    
+    /*THIS METHOD IS USED TO SIGN THE USER IN*/
     public function signin($values)
     {
         $sql = "SELECT * FROM users WHERE username = '".$values['username']."' AND passwords = '".$values['passwords']."'";
@@ -51,6 +53,7 @@ class AccountController
         }
         return false;
     }
+    
     private function setSessionVariables($data)
     {
         $_SESSION['orgId'] = $data['orgId'];

@@ -5,6 +5,7 @@
     #unset form data sessions
     unset($_SESSION['lastId']);
     unset($_SESSION['familyId']);
+
 ?>
 <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -76,7 +77,6 @@
         }
     ?>
     
-
     <!-- Content Row -->
 
     <div class="row">
@@ -102,9 +102,13 @@
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                    <div class="chart-area">
+                    <!-- <div class="chart-area">
+                        <input type="hidden" value="" id="fintec-report" data-report>
                         <canvas id="myAreaChart"></canvas>
-                    </div>
+                    </div> -->
+                    <input type="hidden" id="fintec-report-revenue" data-report>
+                    <input type="hidden" id="fintec-report-title-revenue" data-report>
+                    <div id="chartContainer" style="height: 300px; width: 100%;"></div>
                 </div>
             </div>
         </div>
@@ -130,24 +134,104 @@
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                    <div class="chart-pie pt-4 pb-2">
+                    <!-- <div class="chart-pie pt-4 pb-2">
                         <canvas id="myPieChart"></canvas>
-                    </div>
-                    <div class="mt-4 text-center small">
+                    </div> -->
+                    <input type="hidden" id="source-list" data-report>
+                    <div id="myPieChart" style="height: 300px; width: 100%;"></div>
+                    <!-- <div class="mt-4 text-center small">
                         <span class="mr-2">
-                      <i class="fas fa-circle text-primary"></i> Direct
-                    </span>
+                        <i class="fas fa-circle text-primary"></i> Direct
+                        </span>
                         <span class="mr-2">
-                      <i class="fas fa-circle text-success"></i> Social
-                    </span>
+                        <i class="fas fa-circle text-success"></i> Social
+                        </span>
                         <span class="mr-2">
-                      <i class="fas fa-circle text-info"></i> Referral
-                    </span>
-                    </div>
+                        <i class="fas fa-circle text-info"></i> Referral
+                        </span>
+                    </div> -->
                 </div>
             </div>
         </div>
     </div>
+    
+    <!-- Content Row -->
+    <div class="row">
+
+        <!-- Area Chart Expenditure -->
+        <div class="col-xl-8 col-lg-7">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Expenditure Overview</h6>
+                    <div class="dropdown no-arrow">
+                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                            <div class="dropdown-header">Dropdown Header:</div>
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <!-- <div class="chart-area">
+                        <input type="hidden" value="" id="fintec-report" data-report>
+                        <canvas id="myAreaChart"></canvas>
+                    </div> -->
+                    <input type="hidden" id="fintec-report-expenditure" data-report>
+                    <input type="hidden" id="fintec-report-title-expenditure" data-report>
+                    <div id="exchartContainer" style="height: 300px; width: 100%;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pie Chart -->
+        <div class="col-xl-4 col-lg-5">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Expenditure Sources</h6>
+                    <div class="dropdown no-arrow">
+                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                            <div class="dropdown-header">Dropdown Header:</div>
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <!-- <div class="chart-pie pt-4 pb-2">
+                        <canvas id="myPieChart"></canvas>
+                    </div> -->
+                    <input type="hidden" id="source-list-expenditure" data-report>
+                    <div id="exMyPieChart" style="height: 300px; width: 100%;"></div>
+                    <!-- <div class="mt-4 text-center small">
+                        <span class="mr-2">
+                        <i class="fas fa-circle text-primary"></i> Direct
+                        </span>
+                        <span class="mr-2">
+                        <i class="fas fa-circle text-success"></i> Social
+                        </span>
+                        <span class="mr-2">
+                        <i class="fas fa-circle text-info"></i> Referral
+                        </span>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Content Row -->
     <div class="row">
@@ -156,7 +240,7 @@
         <div class="col-lg-6 mb-4">
 
             <!-- Project Card Example -->
-            <div class="card shadow mb-4">
+            <!-- <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Projects</h6>
                 </div>
@@ -182,10 +266,10 @@
                         <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <!-- Color System -->
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-lg-6 mb-4">
                     <div class="card bg-primary text-white shadow">
                         <div class="card-body">
@@ -234,14 +318,14 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
         </div>
 
         <div class="col-lg-6 mb-4">
 
             <!-- Illustrations -->
-            <div class="card shadow mb-4">
+            <!-- <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
                 </div>
@@ -254,10 +338,10 @@
                     </p>
                     <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations on unDraw &rarr;</a>
                 </div>
-            </div>
+            </div> -->
 
             <!-- Approach -->
-            <div class="card shadow mb-4">
+            <!-- <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Development Approach</h6>
                 </div>
@@ -265,7 +349,7 @@
                     <p>SB Admin 2 makes extensive use of Bootstrap 4 utility classes in order to reduce CSS bloat and poor page performance. Custom CSS classes are used to create custom components and custom utility classes.</p>
                     <p class="mb-0">Before working with this theme, you should become familiar with the Bootstrap framework, especially the utility classes.</p>
                 </div>
-            </div>
+            </div> -->
 
         </div>
     </div>
@@ -275,7 +359,171 @@
 
 </div>
 <!-- End of Main Content -->
+<script>
+    //let v = document.querySelector('#datas')
+    //console.log("elelmt",v)
+</script>
+
+
 
 <?php
     require ('../shared/_footer.php');
 ?>
+
+<!-- SCRIPT TAG FOR GET REPORTS -->
+<script src="../../bootstrap/js/custom/charts/line-chart.js"></script>
+<script src="../../bootstrap/js/custom/charts/pie-chart.js"></script>
+
+<script>
+    $(document).ready(function(){
+        let v = document.querySelector('#fintec-report-revenue')
+        let w = document.querySelector('#source-list')
+
+        let title = document.querySelector('#fintec-report-title-revenue')
+        let title2 = document.querySelector('#fintec-report-title-expenditure')
+        title.value = "Revenue Financial graph for the year"
+        title2.value = "Expenditure graph for the year"
+        
+
+        let arr = [];
+        $.ajax({
+            method: "GET",
+            url: "../api/reports.php?lineChart",
+            success: function(resp){
+                //console.log("You darat",JSON.parse(resp));                
+                let reportObj = JSON.parse(resp)
+                //console.log(reportObj)
+                let graphData = buildLineChartData(reportObj)
+                //console.log("ertyujh", graphData)
+                v.setAttribute('value', graphData)
+                revenueLineChart()
+                
+            },
+            error: function(resp){
+                console.log('hereee')
+            }
+        })
+
+        $.ajax({
+            method: "GET",
+            url: "../api/reports.php?pieChart",
+            success: function(resp){
+                let respObj = JSON.parse(resp)
+                //console.log("gotten",respObj)
+                let graphData = buildPieData(respObj)
+                w.setAttribute('value', graphData)
+                console.log(w)
+                revenuePieChart()
+            }
+        })
+
+        let expenditureGraphDiv = document.getElementById('fintec-report-expenditure')
+        let expenditurePieDiv = document.getElementById('source-list-expenditure');
+
+        $.ajax({
+            method: "GET",
+            url: "../api/reports.php?expenseGraph",
+            success: function(resp){
+                let reportObj = JSON.parse(resp);
+                //console.log("Expenditure", reportObj)
+                let obj = buildLineChartData(reportObj)
+                expenditureGraphDiv.setAttribute('value', obj)
+                expenditureLineChart()
+
+            },
+            error: function(resp){
+                alert('Failed to get data for graph')
+            }
+        })
+
+        //make asynchronous call to get data for expenditure pie chart
+        $.ajax({
+            method: "GET",
+            url: "../api/reports.php?expensePieGraph",
+            success: function(resp){
+                let reportObj = JSON.parse(resp);
+                console.log("Expenditure Pie", reportObj)
+                let obj = buildPieData(reportObj)
+                expenditurePieDiv.setAttribute('value', obj)
+                console.log(expenditurePieDiv)
+                expenditurePieChart()
+
+            },
+            error: function(resp){
+                alert('Failed to get data for graph')
+            }
+        })
+
+        function buildLineChartData(obj){
+            if(!obj) return 
+            let max = getMax(obj);
+            let min = getMin(obj)
+            let arr = [];
+
+            obj.forEach(i => {
+                if(!i.total){
+                    arr.push({y: 0, label: i.month})                    
+                }else{
+                    if(i.total == max) {
+                        arr.push({y: parseInt(i.total, 10), label: i.month, indexLabel: "\u2191 highest", markerColor: "red", markerType: "triangle"})
+                    }
+                    else if(i.total == min){
+                        arr.push({y: parseInt(i.total, 10), label: i.month, indexLabel: "\u2193 lowest", markerColor: "DarkSlateGrey", markerType: "cross"})
+                    }
+                    else {
+                        arr.push({y: parseInt(i.total, 10), label: i.month})
+                    }
+                }              
+            })
+            return JSON.stringify(arr)        
+        }
+
+        function getMax(arrOfObj)
+        {
+            let tempArr = [];
+            arrOfObj.forEach(i => {
+                if(i.sum) tempArr.push(i.sum)
+                else if(i.total) tempArr.push(i.total)
+            })
+
+            let max = Math.max(tempArr)
+            //console.log("Max is: ",tempArr);
+            return max;
+        }
+
+        function getMin(arrOfObj){
+            let tempArr = []
+            arrOfObj.forEach(i => {
+                if(i.sum) tempArr.push(i.sum)
+                else if(i.total) tempArr.push(i.total)
+            })
+
+            let min = Math.min(tempArr)
+            //console.log("Min is: ", min)
+            return min
+        }
+
+        function buildPieData(obj){
+            let max = getMax(obj) //get the max value in the object
+            //console.log("your maxx", max)
+            let arr = []
+            //console.log("udi",obj)
+
+            obj.forEach(i => {
+                if (!i.sum) {
+                    arr.push({y:0, name: i.source})
+                }else{
+                    if(i.sum == max){
+                        arr.push({y: parseInt(i.sum, 10), name: i.source, exploded: true})
+                    }
+                    else{
+                        arr.push({y: parseInt(i.sum, 10), name: i.source})
+                    }
+                }
+            })            
+            return JSON.stringify(arr)
+        }
+    })
+    
+    
+</script>

@@ -24,7 +24,7 @@ if(isset($_POST['signin']))
     else
     {
         $admin = "<a maito='georgefx.creativecompany@gmail.com'>Admin</a>";
-        echo '<script>alert("Sorry Account Suspened. Please contact the admin for more info")</script>';
+        echo '<script>alert("Sorry Account Suspened. Please contact the '.$admin.' for more info")</script>';
     }
 }
 if(isset($_GET['logout']))

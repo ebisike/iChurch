@@ -3,7 +3,7 @@
     require ('../shared/_topbar.php');
 ?>
 
-<div class="pt-1 pl-3 pr-3">
+<div class="pt-1 pl-3 pr-3 m-2">
     <div class="card o-hidden border-0 shadow-lg my-5">
     <div class="card-body p-0">
     <!-- Nested Row within Card Body -->
@@ -32,7 +32,7 @@
                     </datalist>                
             </div>
             <div class="form-group">
-                <textarea name="descriptions" id="" cols="15" rows="5" class="form-control" placeholder="Enter Description">                    
+                <textarea name="descriptions" id="desc" cols="15" rows="5" class="form-control" placeholder="Enter Description">                    
                 </textarea>                
             </div>
             <div class="form-group">
@@ -50,7 +50,9 @@
     </div>
 </div>
 </div>
-
+<script>
+document.getElementById('desc').value = "";
+</script>
 <?php
     require ('../shared/_footer.php');
 ?>

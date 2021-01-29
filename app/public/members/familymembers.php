@@ -19,7 +19,7 @@
                 <form class="user" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>" method="post">
                     <div class="form-group">
                         <select name="cordinatorId" id="cordinator" class="form-control searchuser">
-                            <option value="">Pick a Co-ordinator for the Fellowship Cell</option>
+                            <option value="">Pick a tree branch</option>
                         </select>
                     </div>                    
                 </form>

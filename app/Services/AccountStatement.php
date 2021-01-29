@@ -39,28 +39,37 @@
             /**************************************************************** */
                 #1
             /***************************************************************** */
-            $sql = "SELECT SUM(amount) AS credit FROM transactions
-                    WHERE transactiontype = 1 AND transactiondate < '{$this->startDate}' AND orgId = '{$this->orgId}'";
-            //var_dump($sql);
+            // $sql = "SELECT SUM(amount) AS credit FROM transactions
+            //         WHERE transactiontype = 1 AND transactiondate < '{$this->startDate}' AND orgId = '{$this->orgId}'";
+            // //var_dump($sql);
+
+            // $stmt = DB::DBInstance()->query($sql);
+            // $result = $stmt->getResults();
+            // $TotalCredit = $result['credit'];
+            // //echo 'credit= '.$TotalCredit.'<br>';
+            // /**************************************************************** */
+            //     #2
+            // /***************************************************************** */
+            // $sql = "SELECT sum(amount) AS debit FROM transactions
+            //         WHERE transactiontype = 0 AND transactiondate < '{$this->startDate}' AND orgId = '{$this->endDate}'";
+            // $stmt = DB::DBInstance()->query($sql);
+            // $result = $stmt->getResults();
+            // $TotalDebit = $result['debit'];
+            //echo 'debit= '.$TotalDebit.'<br>';
+            $TotalCredit = 0;
+            $TotalDebit = 0;
+            $sql = "SELECT amount, transactiontype FROM transactions
+                    WHERE transactiondate < '{$this->startDate}' AND orgId = '{$this->orgId}'";
 
             $stmt = DB::DBInstance()->query($sql);
-            $result = $stmt->getResults();
-            $TotalCredit = $result['credit'];
-            //echo 'credit= '.$TotalCredit.'<br>';
-            /**************************************************************** */
-                #2
-            /***************************************************************** */
-            $sql = "SELECT sum(amount) AS debit FROM transactions
-                    WHERE transactiontype = 0 AND transactiondate < '{$this->startDate}' AND orgId = '{$this->endDate}'";
-            $stmt = DB::DBInstance()->query($sql);
-            $result = $stmt->getResults();
-            $TotalDebit = $result['debit'];
-            //echo 'debit= '.$TotalDebit.'<br>';
+            while ($result = $stmt->getResults()) {
+                # code...
+                $result['transactiontype'] ? $TotalCredit += $result['amount'] : $TotalDebit += $result['amount'];
+            }
 
 
             #3.
-            $diff =  $TotalCredit - $TotalDebit;
-            //$sign = ($TotalCredit > $TotalDebit) ? "" : "-";
+            $diff =  $TotalCredit - $TotalDebit;            
             return $diff;
         }
 
@@ -120,6 +129,8 @@
                 }
                 array_push($data, $temp);
             }
+
+        
             //var_dump($data);
             return $data;
         }

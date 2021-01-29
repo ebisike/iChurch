@@ -57,8 +57,37 @@ class AdminUser
         $run = DB::DBInstance()->query($sql);
         if($run)
         {
-            $this->renewSubscription($orgId, 0);
-            return true;
+            //next we decide if the user has made any previous subscription request or not
+            $subscription = new Subscriptions();
+            $subscriptionRequests = $subscription->getSubscriptions($orgId);
+            
+            if(count($subscriptionRequests) > 0)
+            {
+                $paymentPackageId = null; //set the payment package id to null
+
+                //inside the loop, we look for the first instace of the subscription request that has its subscription treated.
+                //then set its payment package id to our variable.
+
+                foreach ($subscriptionRequests as $key => $value) {
+                    if($value['isTreated']){
+                        $paymentPackageId = $value['paymentpackageId'];                        
+                        break;
+                    }
+                }
+
+                //create a new instance of the payment package
+                $paymentPackage = new PaymentPackages();
+                $package = $paymentPackage->getPackage($paymentPackageId);
+                
+                //now we renew the subscription and assign the last used package for the user.
+                $this->renewSubscription($orgId, $package['duration']);
+                return true;
+            }
+            else
+            {
+                $this->renewSubscription($orgId, 0);
+                return true;
+            }            
         }
         return false;
     }

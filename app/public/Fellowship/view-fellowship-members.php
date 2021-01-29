@@ -17,10 +17,20 @@
     }
 ?>
 
-<div class="p-3">
-<a href="add_house_fellowship.php" class="btn btn-primary p-1 font-weight-bold"> <i class="fa fa-plus fa-1x bg-primary p-1 text-white"></i> Add House Fellowship</a>
-<a href="assignmembers.php" class="btn btn-info p-1 font-weight-bold"> <i class="fa fa-plus fa-1x bg-info p-1 text-white"></i> Add Members to House Fellowship</a>
-</div>
+<?php
+    if(!$userRoleRegular)
+    {
+        echo 
+        '
+            <div class="p-3">
+                <a href="add_house_fellowship.php" class="btn btn-primary p-1 font-weight-bold"> <i
+                        class="fa fa-plus fa-1x bg-primary p-1 text-white"></i> Add House Fellowship</a>
+                <a href="assignmembers.php" class="btn btn-info p-1 font-weight-bold"> <i
+                        class="fa fa-plus fa-1x bg-info p-1 text-white"></i> Add Members to House Fellowship</a>
+            </div>
+        ';
+    }
+?>
 
 
 <!-- DataTales Example -->

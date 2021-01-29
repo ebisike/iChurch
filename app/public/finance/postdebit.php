@@ -33,7 +33,7 @@
                     </datalist>                
             </div>
             <div class="form-group">
-                <textarea name="descriptions" id="" cols="15" rows="5" class="form-control" placeholder="Enter Description">                    
+                <textarea name="descriptions" id="desc" cols="15" rows="5" class="form-control" placeholder="Enter Description">                    
                 </textarea>                
             </div>
             <div class="form-group">
@@ -51,7 +51,9 @@
     </div>
 </div>
 </div>
-
+<script>
+document.querySelector('#desc').value = "";
+</script>
 <?php
     require ('../shared/_footer.php');
 ?>

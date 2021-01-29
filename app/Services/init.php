@@ -30,6 +30,7 @@ include 'PaymentPackages.php';
 include 'SeedPaymentPackages.php';
 include 'Calendar.php';
 include 'QuickActions.php';
+include 'Reports.php';
 
 $db = new DB();
 $validate = new InputValidation();

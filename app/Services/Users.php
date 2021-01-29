@@ -204,7 +204,7 @@ class Users
             $sql = "UPDATE users SET                
                     firstName = '{$values['firstName']}',
                     lastName = '{$values['lastName']}',
-                    passwords = '{$values['passwords']}',
+                    /* passwords = '{$values['passwords']}', */
                     imagepath = '$imageName'
                     WHERE orgId = '{$values['orgId']}' AND  Id = '{$values['id']}'";
         }
@@ -216,7 +216,7 @@ class Users
                     firstName = '{$values['firstName']}',
                     lastName = '{$values['lastName']}',
                     username = '{$values['username']}',
-                    passwords = '{$values['passwords']}',
+                    /* passwords = '{$values['passwords']}', */
                     imagepath = '$imageName'
                     WHERE orgId = '{$values['orgId']}' AND  Id = '{$values['id']}'";
             }
