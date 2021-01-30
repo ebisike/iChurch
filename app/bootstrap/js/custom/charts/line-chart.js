@@ -1,7 +1,7 @@
-function revenueLineChart() {
-    var x = document.getElementById('fintec-report-revenue').value
+function revenueLineChart(dataPoint) {
+    //var x = document.getElementById('fintec-report-revenue').value
     var titleTag = document.getElementById('fintec-report-title-revenue').value
-    let y = JSON.parse(x);
+    let y = JSON.parse(dataPoint);
     console.log("from chart", y)
 
     var chart = new CanvasJS.Chart("chartContainer", {
@@ -34,10 +34,10 @@ function revenueLineChart() {
     chart.render();
 }
 
-function expenditureLineChart() {
-    var x = document.getElementById('fintec-report-expenditure').value
+function expenditureLineChart(dataPoint) {
+    //var x = document.getElementById('fintec-report-expenditure').value
     var titleTag = document.getElementById('fintec-report-title-expenditure').value
-    let y = JSON.parse(x);
+    let y = JSON.parse(dataPoint);
     console.log("from chart expenditure", y)
 
     var chart = new CanvasJS.Chart("exchartContainer", {

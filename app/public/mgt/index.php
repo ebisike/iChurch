@@ -373,6 +373,7 @@
 <!-- SCRIPT TAG FOR GET REPORTS -->
 <script src="../../bootstrap/js/custom/charts/line-chart.js"></script>
 <script src="../../bootstrap/js/custom/charts/pie-chart.js"></script>
+<script src="../../bootstrap/js/custom/charts/chartDataFunctions.js"></script>
 
 <script>
     $(document).ready(function(){
@@ -385,7 +386,6 @@
         title2.value = "Expenditure graph for the year"
         
 
-        let arr = [];
         $.ajax({
             method: "GET",
             url: "../api/reports.php?lineChart",
@@ -395,8 +395,8 @@
                 //console.log(reportObj)
                 let graphData = buildLineChartData(reportObj)
                 //console.log("ertyujh", graphData)
-                v.setAttribute('value', graphData)
-                revenueLineChart()
+                //v.setAttribute('value', graphData)
+                revenueLineChart(graphData)
                 
             },
             error: function(resp){
@@ -411,9 +411,10 @@
                 let respObj = JSON.parse(resp)
                 //console.log("gotten",respObj)
                 let graphData = buildPieData(respObj)
-                w.setAttribute('value', graphData)
-                console.log(w)
-                revenuePieChart()
+                //w.setAttribute('value', graphData)
+                console.log("You data" + graphData)
+                //console.log(w)
+                revenuePieChart(graphData)
             }
         })
 
@@ -427,8 +428,8 @@
                 let reportObj = JSON.parse(resp);
                 //console.log("Expenditure", reportObj)
                 let obj = buildLineChartData(reportObj)
-                expenditureGraphDiv.setAttribute('value', obj)
-                expenditureLineChart()
+                //expenditureGraphDiv.setAttribute('value', obj)
+                expenditureLineChart(obj)
 
             },
             error: function(resp){
@@ -442,87 +443,17 @@
             url: "../api/reports.php?expensePieGraph",
             success: function(resp){
                 let reportObj = JSON.parse(resp);
-                console.log("Expenditure Pie", reportObj)
+                //console.log("Expenditure Pie", reportObj)
                 let obj = buildPieData(reportObj)
-                expenditurePieDiv.setAttribute('value', obj)
-                console.log(expenditurePieDiv)
-                expenditurePieChart()
+                //expenditurePieDiv.setAttribute('value', obj)
+                //console.log(expenditurePieDiv)
+                expenditurePieChart(obj)
 
             },
             error: function(resp){
                 alert('Failed to get data for graph')
             }
-        })
-
-        function buildLineChartData(obj){
-            if(!obj) return 
-            let max = getMax(obj);
-            let min = getMin(obj)
-            let arr = [];
-
-            obj.forEach(i => {
-                if(!i.total){
-                    arr.push({y: 0, label: i.month})                    
-                }else{
-                    if(i.total == max) {
-                        arr.push({y: parseInt(i.total, 10), label: i.month, indexLabel: "\u2191 highest", markerColor: "red", markerType: "triangle"})
-                    }
-                    else if(i.total == min){
-                        arr.push({y: parseInt(i.total, 10), label: i.month, indexLabel: "\u2193 lowest", markerColor: "DarkSlateGrey", markerType: "cross"})
-                    }
-                    else {
-                        arr.push({y: parseInt(i.total, 10), label: i.month})
-                    }
-                }              
-            })
-            return JSON.stringify(arr)        
-        }
-
-        function getMax(arrOfObj)
-        {
-            let tempArr = [];
-            arrOfObj.forEach(i => {
-                if(i.sum) tempArr.push(i.sum)
-                else if(i.total) tempArr.push(i.total)
-            })
-
-            let max = Math.max(tempArr)
-            //console.log("Max is: ",tempArr);
-            return max;
-        }
-
-        function getMin(arrOfObj){
-            let tempArr = []
-            arrOfObj.forEach(i => {
-                if(i.sum) tempArr.push(i.sum)
-                else if(i.total) tempArr.push(i.total)
-            })
-
-            let min = Math.min(tempArr)
-            //console.log("Min is: ", min)
-            return min
-        }
-
-        function buildPieData(obj){
-            let max = getMax(obj) //get the max value in the object
-            //console.log("your maxx", max)
-            let arr = []
-            //console.log("udi",obj)
-
-            obj.forEach(i => {
-                if (!i.sum) {
-                    arr.push({y:0, name: i.source})
-                }else{
-                    if(i.sum == max){
-                        arr.push({y: parseInt(i.sum, 10), name: i.source, exploded: true})
-                    }
-                    else{
-                        arr.push({y: parseInt(i.sum, 10), name: i.source})
-                    }
-                }
-            })            
-            return JSON.stringify(arr)
-        }
+        })        
     })
     
     

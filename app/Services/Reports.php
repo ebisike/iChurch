@@ -31,7 +31,7 @@ class Reports
         {
             # code...
             $sql = "SELECT SUM(amount) AS totalCredit FROM transactions
-                WHERE MONTH(systemdate) = '{$key}'
+                WHERE MONTH(transactiondate) = '{$key}'
                 AND YEAR(systemdate) = '{$this->currentYear}'
                 AND transactiontype = 1
                 AND orgId = '{$_SESSION['orgId']}'";
@@ -85,7 +85,7 @@ class Reports
             # code...
             $sql = "SELECT SUM(amount) as totalDebit
                     FROM transactions
-                    WHERE MONTH(systemdate) = '{$key}'
+                    WHERE MONTH(transactiondate) = '{$key}'
                     AND YEAR(systemdate) = '{$this->currentYear}'
                     AND transactiontype = 0
                     AND orgId = '{$_SESSION['orgId']}'";
