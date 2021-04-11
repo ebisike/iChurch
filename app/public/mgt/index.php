@@ -4,7 +4,7 @@
 
     #unset form data sessions
     unset($_SESSION['lastId']);
-    unset($_SESSION['familyId']);
+    unset($_SESSION['familyId']);   
 
 ?>
 <!-- Begin Page Content -->

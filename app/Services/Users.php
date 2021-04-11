@@ -189,7 +189,7 @@ class Users
 
             if(in_array($fileType, $allowedFileType)){
                 if(move_uploaded_file($_FILES['file']['tmp_name'], $targetFilePath)){
-                        //echo 'moved';
+                        echo "<script>alert('The type of image being uploaded is very!!! allowed.')</script>";
                 }
             }else{
                 echo "<script>alert('The type of image being uploaded is not allowed. Please Choose a different Image.')</script>";

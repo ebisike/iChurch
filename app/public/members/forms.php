@@ -257,7 +257,7 @@
                                 </div>
                                 <div class="form-group" id="baptised">
                                     <label>Date of Baptism *</label>
-                                    <input type="date" class="form-control form-control-user datefield" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Marriage Date..." required name="baptismDate">                            
+                                    <input type="date" class="form-control form-control-user datefield" aria-describedby="emailHelp" placeholder="Enter Baptism Date..." name="baptismDate">                            
                                 </div>                                
                                 <div class="form-group">
                                     <label>Group *</label>
@@ -283,7 +283,7 @@
                                 </div>
                                 <div class="form-group" id="confirmed">
                                     <label>Date of Confirmation *</label>
-                                    <input type="date" class="form-control form-control-user datefield" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Marriage Date..." name="confirmationDate">                            
+                                    <input type="date" class="form-control form-control-user datefield" aria-describedby="emailHelp" placeholder="Enter Marriage Date..." name="confirmationDate">                            
                                 </div>
                             </div>
                         </div><hr>

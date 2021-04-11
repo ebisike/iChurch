@@ -285,7 +285,7 @@
                     <!-- <button class="btn btn-primary shadow" type="submit" name="updateUser">
                         <i class="fas fa-paper-plane fa-sm"></i>
                     </button> -->
-                    <input type="submit" class="btn btn-primary btn-user btn-block" name="updateUsers" value="update user">
+                    <input type="submit" class="btn btn-primary btn-user btn-block" name="updateUserProfile" value="update user">
 
                 </form>
             </div>

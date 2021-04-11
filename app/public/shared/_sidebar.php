@@ -1,7 +1,7 @@
 <?php
     require ('../../Services/init.php');
     include ('../../web/controllers/accounthandler.php');
-    include ('../../web/controllers/usermanagement.php');
+    require ('../../web/controllers/usermanagement.php');
     include ('../../web/controllers/administrationController.php');
     include ('../../web/controllers/formshandler.php');
     include ('../../web/controllers/finance-handlers.php');

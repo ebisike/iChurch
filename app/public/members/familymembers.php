@@ -75,7 +75,7 @@
             method: "GET",
             url: "ajax/gettreebranches.php?id=<?php echo $_SESSION['orgId']?>",            
             success: function(resp){
-                //console.log(JSON.parse(resp))
+                console.log(JSON.parse(resp))
 
                 load(JSON.parse(resp), cordinator)
             },
